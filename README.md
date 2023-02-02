@@ -1,0 +1,2 @@
+# EQUIPO2INGSOFTWARE
+proyecto
