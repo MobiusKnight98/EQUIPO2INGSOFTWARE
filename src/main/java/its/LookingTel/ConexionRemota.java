@@ -23,9 +23,9 @@ public class ConexionRemota {
     public static void main(String args[]) {
 
         final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
-        final String DB_URL = "jdbc:mysql://u0rizaxdds8yj8xi:rw09pvWAGYemMtYXnibq@btlluled4yj9dzrnewj8-mysql.services.clever-cloud.com:3306/btlluled4yj9dzrnewj8";
-        final String DB_USERNAME = "u0rizaxdds8yj8xi";
-        final String DB_PASSWORD = "rw09pvWAGYemMtYXnibq";
+        final String DB_URL = "";
+        final String DB_USERNAME = "";
+        final String DB_PASSWORD = "";
         Connection conn = null;
 
         try {
