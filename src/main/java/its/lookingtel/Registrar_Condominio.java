@@ -15,8 +15,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.text.AbstractDocument;
+
 
 
 /**
@@ -44,7 +45,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jComboBox2.setBackground(Color.white);
         jCheckBox1.setBackground(Color.white);
         jButton1.setBackground(Color.white);
-     
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         displaylogos();
     }
 
@@ -139,6 +140,11 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(671, 490));
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
         jLabel2.setText("Registrar Condominio");
@@ -578,6 +584,11 @@ public class Registrar_Condominio extends javax.swing.JFrame {
          }
          
     }//GEN-LAST:event_jTextField1FocusLost
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosed
 
     /**
          * @param args the command line arguments
