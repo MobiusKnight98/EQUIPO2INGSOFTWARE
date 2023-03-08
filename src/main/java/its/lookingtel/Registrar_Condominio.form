@@ -417,6 +417,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextField4FocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>

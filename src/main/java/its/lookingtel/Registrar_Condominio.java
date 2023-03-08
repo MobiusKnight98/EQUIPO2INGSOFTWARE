@@ -18,18 +18,17 @@ import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
-
 /**
  *
  * @author Guest Mode
  */
 public class Registrar_Condominio extends javax.swing.JFrame {
-    
-    
- static final String lettersandnumbers = "^[a-zA-Z0-9]*$";
- static final String ValidName = "^[A-Z][a-z]+\\s[A-Z][a-z]+$";
- static String jTextField1text="";
+
+    static final String lettersandnumbers = "^[a-zA-Z0-9]*$";
+    static final String ValidName = "^[A-Z][a-z]+\\s[A-Z][a-z]+$";
+    static String jTextField1text = "";
+
+
     /*
      * Creates new form Login_Administrador
      */
@@ -252,6 +251,11 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         jTextField4.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField4FocusLost(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jLabel9.setText("Dirección:");
@@ -563,13 +567,13 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             //  System.out.println(Arrays.toString(selectedfile.getName().split(".")));
             String filepath = selectedfile.getAbsolutePath();
             System.out.println(filepath);
-            
-              // Create an ImageIcon from the image
+
+            // Create an ImageIcon from the image
             ImageIcon icon_condominio = new ImageIcon(filepath);
             Image image = icon_condominio.getImage();
-            Image scaledImage_condominio = image.getScaledInstance(jPanel1.getWidth(),jPanel1.getHeight(),Image.SCALE_SMOOTH);
+            Image scaledImage_condominio = image.getScaledInstance(jPanel1.getWidth(), jPanel1.getHeight(), Image.SCALE_SMOOTH);
             ImageIcon scaledImageIcon_condominio = new ImageIcon(scaledImage_condominio);
-         
+
             // Set the icon on the JLabel
             jLabel5.setIcon(scaledImageIcon_condominio);
         }
@@ -577,12 +581,16 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
         // TODO add your handling code here:
-         if(!jTextField1.getText().matches(ValidName)){
-             JOptionPane jo = new JOptionPane();
-             jo.setMessage("sds");
-             jTextField1.setText("");
-         }
-         
+
+        if (!jTextField1.getText().matches(ValidName)) {
+
+            jTextField1.setText("");
+            jLabel3.setForeground(Color.red);
+            return;
+        }
+        jLabel3.setForeground(Color.black);
+
+
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -590,9 +598,23 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_formWindowClosed
 
+    private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
+        // TODO add your handling code here:
+
+        if (!jTextField4.getText().matches(ValidName)) {
+
+            jTextField4.setText("");
+            jLabel9.setForeground(Color.red);
+            return;
+
+        }
+        jLabel9.setForeground(Color.black);
+
+    }//GEN-LAST:event_jTextField4FocusLost
+
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
