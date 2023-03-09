@@ -3,16 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package its.LookingTel;
+package its.lookingtel;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
@@ -20,29 +15,30 @@ import java.util.Arrays;
  */
 public class Conexion_Remota {
 
-    public static void main(String args[]) {
+    static Connection Conectar_BD() {
 
         final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
         final String DB_URL = System.getenv("MYSQL_CLEVERCLOUD_URL");
         final String DB_USERNAME = System.getenv("MYSQL_CLEVERCLOUD_USERNAME");
         final String DB_PASSWORD = System.getenv("MYSQL_CLEVERCLOUD_PASSWORD");
         Connection conn = null;
-     
-        
-        
-
         try {
 
             Class.forName(DB_DRIVER);
             conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
             if (conn == null) {
-                System.out.print("Error on connection");
-                return;
+                System.out.println("Error en la conexion");
+                return conn;
             }
-            System.out.println("Succesfully connected :)");
-            System.out.println();
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.print(ex);
+        }
+        System.out.println("Succesfully Connected");
+        return conn;
+    }
+}
 
-            /*
+    /*
             
             / TABLA UBICACION /
             
@@ -132,27 +128,4 @@ INSERT INTO RESERVACIONES (Id_Condominio,Id_Usuario,No_Personas,Dias_Estadia,Fec
                     + " VALUES ('Jose Campos','enriquehernandez.pereyra@gmail.com','CAHE980311')
             
             
-             */
-           // Statement st = conn.createStatement();
-
-          //  st.execute("""
-                   //    INSERT INTO RESERVACIONES (Id_Condominio,Id_Usuario,No_Personas,Dias_Estadia,Fecha_Reservacion,Fecha_Llegada,Fecha_Partida,Costo_Total) VALUES (1,2,13,45,NOW(),DATE_ADD(NOW(),INTERVAL 10 DAY),DATE_ADD(NOW(),INTERVAL 55 DAY),30000);
-                   //    """);            
-            //ResultSet rs = st.executeQuery("");
-
-            //rs.close();
-          //  st.close();
-            //conn.close();
-            // ResultSetMetaData rsmd = rs.getMetaData();
-            //  String output = rsmd.getColumnName(1) + " " + rsmd.getColumnName(2) + " " + rsmd.getColumnName(3) + " " + rsmd.getColumnName(4) + "\n";
-
-            //    while (rs.next()) {
-            //    output += rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " ";
-            //   }
-            //  System.out.print(output);
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.print(ex);
-        }
-    }
-
-}
+           */

@@ -3,21 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package its.LookingTel;
+package its.lookingtel;
 
-import java.util.ArrayList;
+import java.sql.Connection;
 
 /**
  *
  * @author Guest Mode
  */
-public class Querys {
+public abstract class Querys {
     
     // Gestionar Usuario
     
-     void IniciarSesion(String correo_electronico,String contraseña){
-         
+     void IniciarSesion(String correo_electronico, String contraseña,Connection conn){
+      
      }
+     
+     /*
     
      void Registrarse_Usuario(Usuario usuario){
          
@@ -118,6 +120,6 @@ public class Querys {
           
       }
     
-    
+    */
     
 }
