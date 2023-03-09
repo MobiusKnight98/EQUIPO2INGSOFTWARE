@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -17,6 +18,8 @@ import javax.swing.ImageIcon;
  * @author Guest Mode
  */
 public class Login_Administrador extends javax.swing.JFrame {
+    
+   public static Connection conn;
 
     /*
      * Creates new form Login_Administrador
@@ -27,9 +30,10 @@ public class Login_Administrador extends javax.swing.JFrame {
         jPanel1.setBackground(Color.white);
         jPanel2.setBackground(Color.white);
         jButton1.setBackground(Color.white);
+        conn = Conexion_Remota.Conectar_BD();
         displaylogos();
     }
-    
+
     private void displaylogos() {
         try {
             // Load the image from the URL
@@ -37,7 +41,7 @@ public class Login_Administrador extends javax.swing.JFrame {
             URL lookingtel = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/lookingtel.png");
             Image user_pic_image = ImageIO.read(user_pic);
             Image lookingtel_image = ImageIO.read(lookingtel);
-            
+
             Image scaledImage_userpic = user_pic_image.getScaledInstance(jPanel1.getWidth(),
                     jPanel1.getHeight(),
                     Image.SCALE_SMOOTH);
@@ -48,7 +52,6 @@ public class Login_Administrador extends javax.swing.JFrame {
             // Create an ImageIcon from the image
             ImageIcon icon_userpic = new ImageIcon(scaledImage_userpic);
             ImageIcon icon_lookingtel = new ImageIcon(scaledImage_lookingtel);
-            
 
             // Set the icon on the JLabel
             jLabel5.setIcon(icon_userpic);
@@ -236,7 +239,7 @@ public class Login_Administrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here: 
         this.dispose();
         Menu_Principal menu = new Menu_Principal();
         menu.setVisible(true);
@@ -244,9 +247,18 @@ public class Login_Administrador extends javax.swing.JFrame {
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
-        this.dispose();
-        Gestion_Administrativa pantalla_gestion_usuarios = new Gestion_Administrativa();
-        pantalla_gestion_usuarios.setVisible(true);
+        //this.dispose();
+        Gestion_Administrativa pantalla_gestion = new Gestion_Administrativa();
+        try {
+            Administrador admin = new Administrador();
+            admin.IniciarSesion("test", "sdada",conn);
+            this.dispose();
+            pantalla_gestion.setVisible(true);
+        } catch (Exception ex) {
+             System.out.println(ex.toString());
+        }
+
+
     }//GEN-LAST:event_jButton1MousePressed
 
     /**
