@@ -21,13 +21,15 @@ import javax.swing.JOptionPane;
  */
 public abstract class Administrador extends Querys {
 
-    static boolean IniciarSesion(String correo_electronico, String contraseña, Connection conn) {
+    static boolean IniciarSesion(String correo_electronico, String contraseña) {
+
+        Connection conn = Conexion_Remota.Conectar_BD();
 
         if (conn == null) {
             JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
             return false;
         }
-        boolean statuslogin=false;
+        boolean statuslogin = false;
         try {
             // Statement st = conn.createStatement();
             //st.execute("""
@@ -36,18 +38,22 @@ public abstract class Administrador extends Querys {
             PreparedStatement statement = conn.prepareStatement("SELECT Email,Contraseña FROM ADMINISTRADORES WHERE Email=?");
             statement.setString(1, correo_electronico);
             ResultSet rs = statement.executeQuery();
-            ResultSetMetaData rsmd = rs.getMetaData();
-            System.out.println(rsmd.getColumnName(1));
-            
+            //ResultSetMetaData rsmd = rs.getMetaData();
+            //System.out.println(rsmd.getColumnName(1));
+
             try {
                 rs.next();
                 System.out.println(rs.getString(1));
-                statuslogin=true;
+                if (contraseña.equals(rs.getString(2))) {
+                    statuslogin = true;
+                }
             } catch (Exception ex) {
-                System.out.println("no existe el usuario");
-                statuslogin=false;
+                System.out.println("no existe el correo electronico proporcionado");
             }
 
+            if (!statuslogin) {
+                System.out.println("La contraseña es incorrecta");
+            }
             //while(rs.next()){
             //  System.out.println(rs.getString(1));
             // }
@@ -62,7 +68,7 @@ public abstract class Administrador extends Querys {
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
-       return statuslogin;
+        return statuslogin;
     }
 
 }
