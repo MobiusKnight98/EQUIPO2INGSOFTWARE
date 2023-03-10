@@ -6,6 +6,7 @@
 package its.lookingtel;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -18,30 +19,40 @@ import javax.swing.JOptionPane;
  *
  * @author Guest Mode
  */
-public class Administrador extends Querys {
-    
-    @Override
-    void IniciarSesion(String correo_electronico, String contraseña, Connection conn) {
-     
-        
+public abstract class Administrador extends Querys {
+
+    static boolean IniciarSesion(String correo_electronico, String contraseña, Connection conn) {
+
         if (conn == null) {
             JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
-            return;
+            return false;
         }
-
+        boolean statuslogin=false;
         try {
-            Statement st = conn.createStatement();
+            // Statement st = conn.createStatement();
             //st.execute("""
             //    INSERT INTO RESERVACIONES (Id_Condominio,Id_Usuario,No_Personas,Dias_Estadia,Fecha_Reservacion,Fecha_Llegada,Fecha_Partida,Costo_Total) VALUES (1,2,13,45,NOW(),DATE_ADD(NOW(),INTERVAL 10 DAY),DATE_ADD(NOW(),INTERVAL 55 DAY),30000);
             //    """);
-            ResultSet rs = st.executeQuery("SELECT * FROM ADMINISTRADORES");
+            PreparedStatement statement = conn.prepareStatement("SELECT Email,Contraseña FROM ADMINISTRADORES WHERE Email=?");
+            statement.setString(1, correo_electronico);
+            ResultSet rs = statement.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
             System.out.println(rsmd.getColumnName(1));
-            while(rs.next()){
+            
+            try {
+                rs.next();
                 System.out.println(rs.getString(1));
+                statuslogin=true;
+            } catch (Exception ex) {
+                System.out.println("no existe el usuario");
+                statuslogin=false;
             }
+
+            //while(rs.next()){
+            //  System.out.println(rs.getString(1));
+            // }
             rs.close();
-            st.close();
+            statement.close();
             conn.close();
             //  String output = rsmd.getColumnName(1) + " " + rsmd.getColumnName(2) + " " + rsmd.getColumnName(3) + " " + rsmd.getColumnName(4) + "\n";
             //    while (rs.next()) { 
@@ -50,10 +61,8 @@ public class Administrador extends Querys {
             //  System.out.print(output);
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            // close the connection brou
         }
-
+       return statuslogin;
     }
 
 }

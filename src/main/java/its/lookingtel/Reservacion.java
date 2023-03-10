@@ -9,6 +9,6 @@ package its.lookingtel;
  *
  * @author Guest Mode
  */
-public class Reservacion extends Querys {
+public abstract class Reservacion extends Querys {
     
 }

@@ -9,7 +9,7 @@ package its.lookingtel;
  *
  * @author Guest Mode
  */
-public class Usuario extends Querys {
+public abstract class Usuario extends Querys {
     
     
     int edad;
@@ -21,6 +21,12 @@ public class Usuario extends Querys {
         this.nombre = nombre;
         
         
+    }
+    
+    boolean IniciarSesion(String correo, String contra){
+        
+        
+        return true;
     }
     
    

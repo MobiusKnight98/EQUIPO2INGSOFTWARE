@@ -15,9 +15,10 @@ public abstract class Querys {
     
     // Gestionar Usuario
     
-     void IniciarSesion(String correo_electronico, String contraseña,Connection conn){
+    abstract boolean IniciarSesion();
+    
+    abstract boolean test();
       
-     }
      
      /*
     

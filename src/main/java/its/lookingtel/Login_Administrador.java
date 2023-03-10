@@ -18,8 +18,8 @@ import javax.swing.ImageIcon;
  * @author Guest Mode
  */
 public class Login_Administrador extends javax.swing.JFrame {
-    
-   public static Connection conn;
+
+    public static Connection conn;
 
     /*
      * Creates new form Login_Administrador
@@ -108,6 +108,11 @@ public class Login_Administrador extends javax.swing.JFrame {
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -249,17 +254,18 @@ public class Login_Administrador extends javax.swing.JFrame {
         // TODO add your handling code here:
         //this.dispose();
         Gestion_Administrativa pantalla_gestion = new Gestion_Administrativa();
-        try {
-            Administrador admin = new Administrador();
-            admin.IniciarSesion("test", "sdada",conn);
-            this.dispose();
-            pantalla_gestion.setVisible(true);
-        } catch (Exception ex) {
-             System.out.println(ex.toString());
+        if(!Administrador.IniciarSesion("test", "sdada", conn)){
+            return;
         }
+        this.dispose();
+        pantalla_gestion.setVisible(true);
 
 
     }//GEN-LAST:event_jButton1MousePressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -9,7 +9,7 @@ package its.lookingtel;
  *
  * @author Guest Mode
  */
-public class Condominio extends Querys {
+public abstract class Condominio extends Querys {
     
    
     
