@@ -6,6 +6,7 @@
 package its.lookingtel;
 
 import java.sql.*;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -15,6 +16,8 @@ import javax.swing.JOptionPane;
  * @author Guest Mode
  */
 public abstract class Administrador extends Querys {
+    
+   
 
     static boolean IniciarSesion(String correo_electronico, String contraseña) {
 

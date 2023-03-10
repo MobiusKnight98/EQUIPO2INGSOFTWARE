@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -101,11 +102,6 @@ public class Login_Administrador extends javax.swing.JFrame {
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -246,20 +242,17 @@ public class Login_Administrador extends javax.swing.JFrame {
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
-        //this.dispose();
+      
         Gestion_Administrativa pantalla_gestion = new Gestion_Administrativa();
-        if (!Administrador.IniciarSesion(jTextField1.getText(),jPasswordField1.getText())) {
+        if (!Administrador.IniciarSesion(jTextField1.getText(), jPasswordField1.getText())) {
             return;
         }
-        this.dispose();
         pantalla_gestion.setVisible(true);
-
-
+        NewClass.correo2 = "Logeado";
+        pantalla_gestion.setCorreoLabel("Logeado");
+        this.dispose();
+        
     }//GEN-LAST:event_jButton1MousePressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
