@@ -5,12 +5,7 @@
  */
 package its.lookingtel;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -46,13 +41,13 @@ public abstract class Administrador extends Querys {
                 System.out.println(rs.getString(1));
                 if (contraseña.equals(rs.getString(2))) {
                     statuslogin = true;
+                    return statuslogin;
                 }
-            } catch (Exception ex) {
-                System.out.println("no existe el correo electronico proporcionado");
-            }
+                JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "La contraseña introducida es incorrecta", 0);
 
-            if (!statuslogin) {
-                System.out.println("La contraseña es incorrecta");
+            } 
+            catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Correo electronico invalido", "No existe el correo electronico proporcionado", 0);
             }
             //while(rs.next()){
             //  System.out.println(rs.getString(1));
