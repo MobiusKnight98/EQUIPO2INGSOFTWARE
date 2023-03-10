@@ -17,7 +17,7 @@ public abstract class Querys {
     
     abstract boolean IniciarSesion();
     
-    abstract boolean test();
+  
       
      
      /*
@@ -71,7 +71,7 @@ public abstract class Querys {
      }
      Condominio Consultar_Condominio_Admin(String CIF){
          
-            
+             
             return new Condominio();
          
      }
@@ -87,7 +87,7 @@ public abstract class Querys {
      void Actualizar_Condominio_Admin(String CIF){
          
      }
-     void Actualizar_Condominio_Admin(int Id){
+     void Actualizar_Condominio_Admin(int Id){ 
          
      }
      
