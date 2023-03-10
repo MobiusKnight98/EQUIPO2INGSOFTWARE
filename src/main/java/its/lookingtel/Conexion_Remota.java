@@ -14,6 +14,8 @@ import java.sql.SQLException;
  * @author Guest Mode
  */
 public class Conexion_Remota {
+    
+   
 
     static Connection Conectar_BD() {
 
