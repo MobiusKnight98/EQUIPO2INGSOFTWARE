@@ -5,7 +5,7 @@
  */
 package its.lookingtel;
 
-import java.sql.Connection;
+
 
 /**
  *
