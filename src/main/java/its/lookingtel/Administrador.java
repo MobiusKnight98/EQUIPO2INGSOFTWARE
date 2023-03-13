@@ -16,18 +16,17 @@ import javax.swing.JOptionPane;
  * @author Guest Mode
  */
 public abstract class Administrador extends Querys {
-    
-   
+
+    public static String correo_electronico;
 
     static boolean IniciarSesion(String correo_electronico, String contraseña) {
 
-        Connection conn = Conexion_Remota.Conectar_BD();
-
+        Connection conn = Conexion_Remota.Conectar_BD();boolean statuslogin = false;
         if (conn == null) {
             JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
-            return false;
+            return statuslogin;
         }
-        boolean statuslogin = false;
+ 
         try {
             // Statement st = conn.createStatement();
             //st.execute("""
@@ -38,18 +37,16 @@ public abstract class Administrador extends Querys {
             ResultSet rs = statement.executeQuery();
             //ResultSetMetaData rsmd = rs.getMetaData();
             //System.out.println(rsmd.getColumnName(1));
-
             try {
                 rs.next();
-                System.out.println(rs.getString(1));
                 if (contraseña.equals(rs.getString(2))) {
                     statuslogin = true;
+                    Administrador.correo_electronico = rs.getString(1);
                     return statuslogin;
                 }
                 JOptionPane.showMessageDialog(null, "Contraseña incorrecta", "La contraseña introducida es incorrecta", 0);
 
-            } 
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Correo electronico invalido", "No existe el correo electronico proporcionado", 0);
             }
             //while(rs.next()){

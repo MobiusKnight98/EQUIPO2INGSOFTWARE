@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
@@ -19,7 +20,8 @@ import javax.swing.ImageIcon;
  * @author Guest Mode
  */
 public class Login_Administrador extends javax.swing.JFrame {
-
+    
+   
     /*
      * Creates new form Login_Administrador
      */
@@ -31,6 +33,8 @@ public class Login_Administrador extends javax.swing.JFrame {
         jButton1.setBackground(Color.white);
         displaylogos();
     }
+    
+   
 
     private void displaylogos() {
         try {
@@ -248,9 +252,9 @@ public class Login_Administrador extends javax.swing.JFrame {
             return;
         }
         pantalla_gestion.setVisible(true);
-        NewClass.correo2 = "Logeado";
-        pantalla_gestion.setCorreoLabel("Logeado");
         this.dispose();
+       
+        
         
     }//GEN-LAST:event_jButton1MousePressed
 
