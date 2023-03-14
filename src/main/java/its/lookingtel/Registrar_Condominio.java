@@ -26,8 +26,9 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
     static final String lettersandnumbers = "^[a-zA-Z0-9]*$";
     static final String ValidName = "^[A-Z][a-z]+\\s[A-Z][a-z]+$";
-    static String jTextField1text = "";
-
+    static final String numbersonly = "^[0-9]+$";
+    static final String capitallettersandnumbers = "^[A-Z0-9]+$";
+    static String jTextField5text = "";
 
     /*
      * Creates new form Login_Administrador
@@ -238,6 +239,11 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         jTextField2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField2FocusLost(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jLabel4.setText("CIF:");
@@ -358,6 +364,16 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         jTextField5.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jTextField5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField5FocusLost(evt);
+            }
+        });
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField5KeyPressed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jLabel12.setText("Precio x Noche:");
@@ -538,11 +554,11 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        if(jTextField1.getText().isEmpty()){
-            JOptionPane.showMessageDialog(null,"No se puede Registrar Existen Campos Vacios","Error",0);
+
+        if (jTextField1.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se puede Registrar Existen Campos Vacios", "Error", 0);
         }
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
@@ -606,7 +622,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
     private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
         // TODO add your handling code here:
 
-        if (!jTextField4.getText().matches(ValidName)) {
+        if (!jTextField4.getText().matches(lettersandnumbers)) {
 
             jTextField4.setText("");
             jLabel9.setForeground(Color.red);
@@ -616,6 +632,52 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jLabel9.setForeground(Color.black);
 
     }//GEN-LAST:event_jTextField4FocusLost
+
+    private void jTextField5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusLost
+        // TODO add your handling code here:
+        if (!jTextField5.getText().matches(numbersonly)) {
+
+            jTextField5.setText("");
+            jLabel12.setForeground(Color.red);
+            return;
+
+        }
+        jLabel12.setForeground(Color.black);
+    }//GEN-LAST:event_jTextField5FocusLost
+
+    private void jTextField5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyPressed
+        // TODO add your handling code here:
+
+        if (jTextField5.getText().length() > 4) {
+            jTextField5.setText(jTextField5text);
+            return;
+        }
+        jTextField5text = jTextField5.getText();
+    }//GEN-LAST:event_jTextField5KeyPressed
+
+    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
+        // TODO add your handling code here:
+
+        // validate the data type
+        if (!jTextField2.getText().matches(capitallettersandnumbers)) {
+
+            jTextField2.setText("");
+            jLabel4.setForeground(Color.red);
+            System.out.println("regular doesnt match");
+            return;
+
+        }
+
+        // validate the length
+        if (jTextField2.getText().length() < 10 || jTextField2.getText().length() > 10) {
+            jTextField2.setText("");
+            jLabel4.setForeground(Color.red);
+            System.out.println("length doesnt match");
+            return;
+        }
+
+        jLabel4.setForeground(Color.black);
+    }//GEN-LAST:event_jTextField2FocusLost
 
     /**
      * @param args the command line arguments
