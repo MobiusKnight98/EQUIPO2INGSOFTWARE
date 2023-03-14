@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+its\LookingTel\Administrador.class
+its\LookingTel\Querys.class
+=======
 its\lookingtel\Gestion_Administrativa$13.class
 its\lookingtel\Login_Administrador$3.class
 its\lookingtel\Registrar_Usuario$10.class
@@ -65,3 +69,4 @@ its\lookingtel\Registrar_Usuario$13.class
 its\lookingtel\Registrar_Condominio$11.class
 its\lookingtel\Conexion_Remota.class
 its\lookingtel\Gestion_Administrativa$7.class
+>>>>>>> master
