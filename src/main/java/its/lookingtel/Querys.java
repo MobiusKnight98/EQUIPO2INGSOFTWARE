@@ -5,7 +5,7 @@
  */
 package its.lookingtel;
 
-import java.sql.Connection;
+
 
 /**
  *
@@ -15,9 +15,10 @@ public abstract class Querys {
     
     // Gestionar Usuario
     
-     void IniciarSesion(String correo_electronico, String contraseña,Connection conn){
+    abstract boolean IniciarSesion();
+    
+  
       
-     }
      
      /*
     
@@ -70,7 +71,7 @@ public abstract class Querys {
      }
      Condominio Consultar_Condominio_Admin(String CIF){
          
-            
+             
             return new Condominio();
          
      }
@@ -86,7 +87,7 @@ public abstract class Querys {
      void Actualizar_Condominio_Admin(String CIF){
          
      }
-     void Actualizar_Condominio_Admin(int Id){
+     void Actualizar_Condominio_Admin(int Id){ 
          
      }
      

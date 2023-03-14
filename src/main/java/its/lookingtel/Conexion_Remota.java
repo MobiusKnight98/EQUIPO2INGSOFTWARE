@@ -14,6 +14,8 @@ import java.sql.SQLException;
  * @author Guest Mode
  */
 public class Conexion_Remota {
+    
+   
 
     static Connection Conectar_BD() {
 
@@ -23,7 +25,6 @@ public class Conexion_Remota {
         final String DB_PASSWORD = System.getenv("MYSQL_CLEVERCLOUD_PASSWORD");
         Connection conn = null;
         try {
-
             Class.forName(DB_DRIVER);
             conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
             if (conn == null) {

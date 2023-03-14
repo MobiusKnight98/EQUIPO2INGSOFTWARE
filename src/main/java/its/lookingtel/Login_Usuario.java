@@ -263,8 +263,8 @@ public class Login_Usuario extends javax.swing.JFrame {
         //this.dispose();
         Gestion_Administrativa pantalla_gestion = new Gestion_Administrativa();
         try {
-            Administrador admin = new Administrador();
-            admin.IniciarSesion("test", "sdada",conn);
+            
+            Administrador.IniciarSesion("test","Test");
             this.dispose();
             pantalla_gestion.setVisible(true);
         } catch (Exception ex) {

@@ -6,9 +6,9 @@
 package its.lookingtel;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -23,6 +23,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Guest Mode
  */
 public class Gestion_Administrativa extends javax.swing.JFrame {
+
 
     public Gestion_Administrativa() {
         initComponents();
@@ -67,6 +68,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         displaylogos();
 
     }
+
+   
 
     private void displaylogos() {
         try {
@@ -254,6 +257,11 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         setTitle("Gestion Administrativa");
         setPreferredSize(new java.awt.Dimension(866, 605));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
         jLabel4.setText("Gestionar Usuarios");
@@ -580,6 +588,11 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField9.setAlignmentX(0.9F);
         jTextField9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jTextField9.setMargin(new java.awt.Insets(12, 6, 2, 6));
+        jTextField9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField9KeyTyped(evt);
+            }
+        });
 
         jLabel21.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel21.setText("Filtrar Por:");
@@ -1438,7 +1451,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleDescription("");
@@ -1533,9 +1546,23 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
         // TODO add your handling code here:
-           Registrar_Condominio pantalla_registrar_condominio = new Registrar_Condominio();
+        Registrar_Condominio pantalla_registrar_condominio = new Registrar_Condominio();
         pantalla_registrar_condominio.setVisible(true);
     }//GEN-LAST:event_jButton3MousePressed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        
+        jTextField4.setText(Administrador.correo_electronico);
+
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jTextField9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField9KeyTyped
+        // TODO add your handling code here:
+        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+            System.out.println("Enter was pressed");
+        }
+    }//GEN-LAST:event_jTextField9KeyTyped
 
     /**
      * @param args the command line arguments
