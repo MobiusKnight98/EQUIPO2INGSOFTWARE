@@ -117,6 +117,9 @@
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="label" type="java.lang.String" value="USUARIOS"/>
       </Properties>
+      <Events>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MousePressed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

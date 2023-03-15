@@ -261,16 +261,16 @@ public class Login_Usuario extends javax.swing.JFrame {
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
         //this.dispose();
-        Gestion_Administrativa pantalla_gestion = new Gestion_Administrativa();
-        try {
+       //Gestion_Administrativa pantalla_gestion = new Gestion_Administrativa();
+       //Objeto para mostrar los condominios
+        if (!Usuario.IniciarSesion(textField2.getText(), jPasswordField1.getText())) {
+            System.out.print("No se puede iniciar sesion");
+            return;
             
-            Administrador.IniciarSesion("test","Test");
-            this.dispose();
-            pantalla_gestion.setVisible(true);
-        } catch (Exception ex) {
-             System.out.println(ex.toString());
         }
-
+        System.out.print("Login Exitoso");
+        //pantalla_gestion.setVisible(true);
+        this.dispose();
 
     }//GEN-LAST:event_jButton1MousePressed
 
