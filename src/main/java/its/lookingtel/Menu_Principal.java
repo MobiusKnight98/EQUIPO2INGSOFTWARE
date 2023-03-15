@@ -98,6 +98,11 @@ public class Menu_Principal extends javax.swing.JFrame {
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jButton2.setFocusable(false);
         jButton2.setLabel("USUARIOS");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton2MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,6 +145,17 @@ public class Menu_Principal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
+        // TODO add your handling code here:
+        Login_Usuario ad = new Login_Usuario();
+        ad.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2MousePressed
+
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt){
+        
+    }
     /**
      * @param args the command line arguments
      */

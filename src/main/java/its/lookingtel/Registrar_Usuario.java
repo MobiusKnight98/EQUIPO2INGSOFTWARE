@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -35,14 +34,14 @@ public class Registrar_Usuario extends javax.swing.JFrame {
     public Registrar_Usuario() {
         initComponents();
         getContentPane().setBackground(Color.white);
-        
+
         jPanel2.setBackground(Color.white);
         jPanel3.setBackground(Color.white);
-   
+
         jPanel5.setBackground(Color.white);
         jComboBox1.setBackground(Color.white);
         jComboBox2.setBackground(Color.white);
-        
+
         jButton1.setBackground(Color.white);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         displaylogos();
@@ -51,39 +50,18 @@ public class Registrar_Usuario extends javax.swing.JFrame {
     private void displaylogos() {
         try {
             // Load the image from the URL
-            URL condominio = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/user_pic.png");
             URL lookingtel = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/lookingtel.png");
-            URL close_button = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/close_button.png");
-            URL add_button = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/add_button.png");
-            Image condominio_image = ImageIO.read(condominio);
             Image lookingtel_image = ImageIO.read(lookingtel);
-            Image close_button_image = ImageIO.read(close_button);
-            Image add_button_image = ImageIO.read(add_button);
 
-            Image scaledImage_condominio = condominio_image.getScaledInstance(jPanel1.getWidth(),
-                    jPanel1.getHeight(),
-                    Image.SCALE_SMOOTH);
             Image scaledImage_lookingtel = lookingtel_image.getScaledInstance(jPanel2.getWidth(),
                     jPanel2.getHeight(),
                     Image.SCALE_SMOOTH);
-            Image scaledImage_close_button_image = close_button_image.getScaledInstance(jPanel3.getWidth(),
-                    jPanel3.getHeight(),
-                    Image.SCALE_SMOOTH);
-            Image scaledImage_add_button_image = add_button_image.getScaledInstance(jPanel5.getWidth(),
-                    jPanel5.getHeight(),
-                    Image.SCALE_SMOOTH);
 
             // Create an ImageIcon from the image
-            ImageIcon icon_userpic = new ImageIcon(scaledImage_condominio);
             ImageIcon icon_lookingtel = new ImageIcon(scaledImage_lookingtel);
-            ImageIcon icon_close_button = new ImageIcon(scaledImage_close_button_image);
-            ImageIcon icon_add_button = new ImageIcon(scaledImage_add_button_image);
 
             // Set the icon on the JLabel
-            jLabel5.setIcon(icon_userpic);
             jLabel6.setIcon(icon_lookingtel);
-            jLabel7.setIcon(icon_close_button);
-            jLabel13.setIcon(icon_add_button);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -495,14 +473,6 @@ public class Registrar_Usuario extends javax.swing.JFrame {
             String filepath = selectedfile.getAbsolutePath();
             System.out.println(filepath);
 
-            // Create an ImageIcon from the image
-            ImageIcon icon_condominio = new ImageIcon(filepath);
-            Image image = icon_condominio.getImage();
-            Image scaledImage_condominio = image.getScaledInstance(jPanel1.getWidth(), jPanel1.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon scaledImageIcon_condominio = new ImageIcon(scaledImage_condominio);
-
-            // Set the icon on the JLabel
-            jLabel5.setIcon(scaledImageIcon_condominio);
         }
     }//GEN-LAST:event_jPanel5MouseClicked
 
