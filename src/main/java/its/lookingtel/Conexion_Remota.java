@@ -95,7 +95,7 @@ public class Conexion_Remota {
   / TABLA RESERVACIONES /
         
             
-   CREATE TABLE RESERVACIONES (\n" +
+   CREATE TABLE RESERVACIONES (\n" + 
 "    Id INT(2) AUTO_INCREMENT PRIMARY KEY, \n" +
 "    Id_Condominio INT(2) UNIQUE,\n" +
 "    Id_Usuario INT(2),\n" +
