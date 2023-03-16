@@ -10,7 +10,11 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.5.0:exec</goal>
             </goals>
             <properties>
+<<<<<<< Updated upstream
                 <exec.args>--enable-preview -classpath %classpath its.lookingtel.Menu_Principal</exec.args>
+=======
+                <exec.args>--enable-preview -classpath %classpath its.lookingtel.Login_Usuario</exec.args>
+>>>>>>> Stashed changes
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
@@ -24,7 +28,11 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.5.0:exec</goal>
             </goals>
             <properties>
+<<<<<<< Updated upstream
                 <exec.args>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address} --enable-preview -classpath %classpath its.lookingtel.Menu_Principal</exec.args>
+=======
+                <exec.args>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address} --enable-preview -classpath %classpath its.lookingtel.Login_Usuario</exec.args>
+>>>>>>> Stashed changes
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
             </properties>
@@ -39,7 +47,11 @@
                 <goal>org.codehaus.mojo:exec-maven-plugin:1.5.0:exec</goal>
             </goals>
             <properties>
+<<<<<<< Updated upstream
                 <exec.args>--enable-preview -classpath %classpath its.lookingtel.Menu_Principal</exec.args>
+=======
+                <exec.args>--enable-preview -classpath %classpath its.lookingtel.Login_Usuario</exec.args>
+>>>>>>> Stashed changes
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
