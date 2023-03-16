@@ -8,6 +8,7 @@ package its.lookingtel;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,10 +32,11 @@ public class Conexion_Remota {
                 System.out.println("Error en la conexion");
                 return conn;
             }
+            System.out.println("Succesfully Connected");
         } catch (ClassNotFoundException | SQLException ex) {
-            System.out.print(ex);
+            JOptionPane.showMessageDialog(null,"No se pudo establecer la conexion con la base de datos","Error", 0);
         }
-        System.out.println("Succesfully Connected");
+        
         return conn;
     }
 }
