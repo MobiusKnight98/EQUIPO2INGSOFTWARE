@@ -259,7 +259,8 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             jLabel13.setIcon(icon_add_button);
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+           // ex.printStackTrace();
+          JOptionPane.showMessageDialog(null,"No se pueden mostrar las imagenes","Error",0);
         }
     }
 
