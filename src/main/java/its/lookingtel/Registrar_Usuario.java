@@ -59,23 +59,21 @@ public class Registrar_Usuario extends javax.swing.JFrame {
     public Registrar_Usuario() {
 
         initComponents();
-
+        jLabel2.requestFocusInWindow();
         jLabel14.setVisible(false);
         jLabel18.setVisible(false);
 
-        
-
         jLabel16.setVisible(false);
-    
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         getContentPane().setBackground(Color.white);
-        
+
         jPanel2.setBackground(Color.white);
         jPanel3.setBackground(Color.white);
-        
+
         jComboBox1.setBackground(Color.white);
         jComboBox2.setBackground(Color.white);
-        
+
         jButton1.setBackground(Color.white);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         displaylogos();
@@ -84,9 +82,9 @@ public class Registrar_Usuario extends javax.swing.JFrame {
     private void registrar_condominio(int key, ArrayList<String> services) {
 
         String nombre_condominio = jTextField1.getText();
-       
+
         int habitaciones_condominio = Integer.valueOf((String) jComboBox2.getSelectedItem());
-       
+
         int ubicacion_condominio = key;
         String cif_condominio = jTextField2.getText();
         String stringifiedservices = "";
@@ -139,9 +137,9 @@ public class Registrar_Usuario extends javax.swing.JFrame {
             System.out.println(nombre_condominio);
             System.out.println(cif_condominio);
             System.out.println(habitaciones_condominio);
-          
+
             System.out.println(score);
-           
+
             System.out.println(stringifiedservices);
             System.out.println(url);
 
@@ -229,30 +227,24 @@ public class Registrar_Usuario extends javax.swing.JFrame {
             Image close_button_image = ImageIO.read(close_button);
             Image add_button_image = ImageIO.read(add_button);
 
-          
             Image scaledImage_lookingtel = lookingtel_image.getScaledInstance(jPanel2.getWidth(),
                     jPanel2.getHeight(),
                     Image.SCALE_SMOOTH);
             Image scaledImage_close_button_image = close_button_image.getScaledInstance(jPanel3.getWidth(),
                     jPanel3.getHeight(),
                     Image.SCALE_SMOOTH);
-           
 
             // Create an ImageIcon from the image
-           
             ImageIcon icon_lookingtel = new ImageIcon(scaledImage_lookingtel);
             ImageIcon icon_close_button = new ImageIcon(scaledImage_close_button_image);
-            
 
             // Set the icon on the JLabel
-            
             jLabel6.setIcon(icon_lookingtel);
             jLabel7.setIcon(icon_close_button);
-            
 
         } catch (IOException ex) {
-           // ex.printStackTrace();
-          JOptionPane.showMessageDialog(null,"No se pueden mostrar las imagenes","Error",0);
+            // ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "No se pueden mostrar las imagenes", "Error", 0);
         }
     }
 
@@ -307,7 +299,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         jPasswordField2 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Registrar Condominio");
+        setTitle("Registrar Usuario");
         setForeground(new java.awt.Color(255, 255, 0));
         setLocation(new java.awt.Point(123, 123));
         setPreferredSize(new java.awt.Dimension(500, 550));
@@ -701,9 +693,9 @@ public class Registrar_Usuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
+                        .addGap(41, 41, 41)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -794,14 +786,12 @@ public class Registrar_Usuario extends javax.swing.JFrame {
 
     private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
         // TODO add your handling code here:
-          
-        
-        
+
         if (jTextField2.getText().isEmpty()) {
             jTextField2.setForeground(Color.gray);
             jTextField2.setText("RISA123CY1");
         }
-       
+
 
     }//GEN-LAST:event_jTextField2FocusLost
 
@@ -814,16 +804,8 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         // verificamos que los textfields cumplan con la longitud y los caracteres posibles
         passedstatuses.add(validate(jTextField1, 0, 0, ValidName, jLabel3, true, jLabel14));
 
-       
-
-       
-
         passedstatuses.add(validate(jTextField2, 10, 10, capitallettersandnumbers, jLabel4, false, jLabel16));
 
-        
-
-        
-       
         // obtenemos la llave primaria de la ubicacion en base al pais,estado y ciudad que es el valor
         String location = (String) jComboBox1.getSelectedItem();
         int key = 0;
@@ -896,7 +878,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
 
     private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
         // TODO add your handling code here:
-            if (jTextField2.getText().equals("RISA123CY1")) {
+        if (jTextField2.getText().equals("RISA123CY1")) {
             jTextField2.setForeground(Color.black);
             jTextField2.setText("");
         }
