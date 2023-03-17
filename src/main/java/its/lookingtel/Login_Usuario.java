@@ -304,14 +304,11 @@ public class Login_Usuario extends javax.swing.JFrame {
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
         // TODO add your handling code here:
-<<<<<<< HEAD
+
         //Recuperar_Contraseña ad = new Recuperar_Contraseña();
         //ad.setVisible(true);
         //this.dispose();
-=======
-        Recuperar_Contraseña rc = new Recuperar_Contraseña();
-        rc.setVisible(true);
->>>>>>> master
+
     }//GEN-LAST:event_jButton2MousePressed
 
     private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
