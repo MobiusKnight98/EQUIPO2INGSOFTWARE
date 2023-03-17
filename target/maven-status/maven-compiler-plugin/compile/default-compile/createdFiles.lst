@@ -11,22 +11,13 @@ its\LookingTel\Reservacion.class
 its\LookingTel\Gestion_Administrativa$15.class
 its\LookingTel\Registrar_Condominio$5.class
 its\LookingTel\Gestion_Administrativa$3.class
-<<<<<<< Updated upstream
-its\LookingTel\Recuperar_Contraseña.class
-=======
->>>>>>> Stashed changes
 its\LookingTel\Registrar_Condominio$13.class
 its\LookingTel\Registrar_Condominio$9.class
 its\LookingTel\Registrar_Condominio$2.class
-its\LookingTel\Registrar_Usuario$8.class
 its\LookingTel\Registrar_Condominio$10.class
 its\LookingTel\Registrar_Usuario$7.class
 its\LookingTel\Registrar_Condominio$6.class
 its\LookingTel\Condominio.class
-<<<<<<< Updated upstream
-=======
-its\LookingTel\Recuperar_Contraseña$5.class
->>>>>>> Stashed changes
 its\LookingTel\Registrar_Condominio$17.class
 its\LookingTel\Gestion_Administrativa$5.class
 its\LookingTel\Login_Usuario$1.class
@@ -36,66 +27,38 @@ its\LookingTel\Gestion_Administrativa$10.class
 its\LookingTel\Login_Administrador$2.class
 its\LookingTel\Gestion_Administrativa$16.class
 its\LookingTel\Gestion_Administrativa$2.class
-<<<<<<< Updated upstream
-=======
-its\LookingTel\Recuperar_Contraseña$2.class
->>>>>>> Stashed changes
 its\LookingTel\Registrar_Condominio$14.class
 its\LookingTel\Registrar_Usuario$4.class
 its\LookingTel\Registrar_Condominio$3.class
 its\LookingTel\Gestion_Administrativa$13.class
 its\LookingTel\Menu_Principal.class
 its\LookingTel\Registrar_Condominio$11.class
-<<<<<<< Updated upstream
-=======
-its\LookingTel\Recuperar_Contraseña$4.class
->>>>>>> Stashed changes
 its\LookingTel\Gestion_Administrativa$1.class
 its\LookingTel\Login_Administrador.class
 its\LookingTel\Registrar_Usuario$6.class
 its\LookingTel\Registrar_Usuario$3.class
 its\LookingTel\Menu_Principal$2.class
-<<<<<<< Updated upstream
 its\LookingTel\Login_Usuario$6.class
-its\LookingTel\Gestion_Administrativa$8.class
-its\LookingTel\Recuperar_Contraseña$1.class
-its\LookingTel\Gestion_Administrativa.class
-its\LookingTel\Registrar_Condominio$7.class
-its\LookingTel\Login_Administrador$1.class
-=======
 its\LookingTel\Gestion_Administrativa$8.class
 its\LookingTel\Gestion_Administrativa.class
 its\LookingTel\Registrar_Condominio$7.class
 its\LookingTel\Login_Administrador$1.class
 its\LookingTel\Registrar_Condominio$18.class
->>>>>>> Stashed changes
 its\LookingTel\Registrar_Condominio$15.class
 its\LookingTel\Gestion_Administrativa$17.class
 its\LookingTel\Login_Usuario$3.class
 its\LookingTel\Registrar_Usuario.class
-<<<<<<< Updated upstream
-=======
-its\LookingTel\Recuperar_Contraseña$3.class
->>>>>>> Stashed changes
 its\LookingTel\Gestion_Administrativa$12.class
 its\LookingTel\Registrar_Condominio$4.class
 its\LookingTel\Registrar_Usuario$5.class
 its\LookingTel\Gestion_Administrativa$14.class
-<<<<<<< Updated upstream
 its\LookingTel\Login_Usuario$5.class
-=======
->>>>>>> Stashed changes
 its\LookingTel\Registrar_Condominio$1.class
 its\LookingTel\Registrar_Usuario$2.class
 its\LookingTel\Conexion_Remota.class
 its\LookingTel\Usuario.class
 its\LookingTel\Administrador.class
 its\LookingTel\Registrar_Condominio$12.class
-<<<<<<< Updated upstream
-=======
-its\LookingTel\Registrar_Usuario$10.class
->>>>>>> Stashed changes
-its\LookingTel\Registrar_Usuario$9.class
 its\LookingTel\Login_Administrador$3.class
 its\LookingTel\Registrar_Condominio$8.class
 its\LookingTel\Gestion_Administrativa$4.class
