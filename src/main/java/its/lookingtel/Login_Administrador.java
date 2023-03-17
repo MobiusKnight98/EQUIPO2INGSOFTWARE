@@ -15,6 +15,7 @@ import java.sql.Connection;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+
 /**
  *
  * @author Guest Mode
@@ -27,6 +28,7 @@ public class Login_Administrador extends javax.swing.JFrame {
      */
     public Login_Administrador() {
         initComponents();
+        jLabel2.requestFocusInWindow();
         getContentPane().setBackground(Color.white);
         jPanel1.setBackground(Color.white);
         jPanel2.setBackground(Color.white);
@@ -103,6 +105,7 @@ public class Login_Administrador extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton1.setText("Iniciar Sesion");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
@@ -224,12 +227,12 @@ public class Login_Administrador extends javax.swing.JFrame {
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(jLabel3)
-                    .addContainerGap(492, Short.MAX_VALUE)))
+                    .addContainerGap(420, Short.MAX_VALUE)))
         );
 
         getAccessibleContext().setAccessibleName("");
