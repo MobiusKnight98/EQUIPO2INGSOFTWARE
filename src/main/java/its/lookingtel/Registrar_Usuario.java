@@ -5,43 +5,13 @@
  */
 package its.lookingtel;
 
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 /**
  *
  * @author Guest Mode
  */
 public class Registrar_Usuario extends javax.swing.JFrame {
 
+<<<<<<< HEAD
     static final String lettersandnumbers = "^[a-zA-Z0-9]*$";
     static final String ValidName = "^[A-Z][a-záéíóúñ]+\\s[A-Z][a-záéíóúñ]+\\s[A-Z][a-záéíóúñ]+$";
     //[A-Z][a-z]+\\s[A-Z][a-z]+\\s[A-Z][a-z]+
@@ -55,10 +25,14 @@ public class Registrar_Usuario extends javax.swing.JFrame {
 
     /*
      * Creates new form Login_Administrador
+=======
+    /**
+     * Creates new form Registrar_Usuario
+>>>>>>> master
      */
     public Registrar_Usuario() {
-
         initComponents();
+<<<<<<< HEAD
 
         jLabel14.setVisible(false);
         jLabel18.setVisible(false);
@@ -254,6 +228,8 @@ public class Registrar_Usuario extends javax.swing.JFrame {
            // ex.printStackTrace();
           JOptionPane.showMessageDialog(null,"No se pueden mostrar las imagenes","Error",0);
         }
+=======
+>>>>>>> master
     }
 
     /**
@@ -264,6 +240,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+<<<<<<< HEAD
         java.awt.GridBagConstraints gridBagConstraints;
 
         jLabel2 = new javax.swing.JLabel();
@@ -659,11 +636,16 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jLayeredPane10.add(jPasswordField2, gridBagConstraints);
+=======
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+>>>>>>> master
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -746,13 +728,19 @@ public class Registrar_Usuario extends javax.swing.JFrame {
                     .addGap(236, 236, 236)
                     .addComponent(jLayeredPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(269, Short.MAX_VALUE)))
+=======
+            .addGap(0, 400, Short.MAX_VALUE)
         );
-
-        getAccessibleContext().setAccessibleName("");
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+>>>>>>> master
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         // TODO add your handling code here:
         this.dispose();
@@ -890,6 +878,8 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTextField2FocusGained
 
+=======
+>>>>>>> master
     /**
      * @param args the command line arguments
      */
@@ -916,9 +906,6 @@ public class Registrar_Usuario extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Registrar_Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -929,6 +916,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
@@ -965,5 +953,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+=======
+>>>>>>> master
     // End of variables declaration//GEN-END:variables
 }
