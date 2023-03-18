@@ -43,11 +43,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Registrar_Condominio extends javax.swing.JFrame {
 
     static final String lettersandnumbers = "^[a-zA-Z0-9]*$";
-    static final String ValidName = "^[A-Z][a-záéíóúñ]+\\s[A-Z][a-záéíóúñ]+\\s[A-Z][a-záéíóúñ]+$";
+    static final String ValidName = "^[A-Z][a-záéíóúñ]+\\s*([ ][A-Z][a-záéíóúñ]+)*$";
     //[A-Z][a-z]+\\s[A-Z][a-z]+\\s[A-Z][a-z]+
     static final String numbersonly = "^[0-9]+$";
     static final String capitallettersandnumbers = "^[A-Z0-9]+$";
-    static final String direccion = "^[A-Z][a-záéíóúñ]+\\s[a-záéíóúñA-Z0-9,-]\\s*$";
+    static final String direccion = "^[A-Z][#,a-záéíóúñA-Z.()/0-9 ]+$";
     static String picture = "";
     static String picturepath = "";
     static int score = 0;
@@ -1049,6 +1049,9 @@ public class Registrar_Condominio extends javax.swing.JFrame {
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
         this.dispose();
+        score = 0;
+        picture ="";
+        picturepath="";
     }//GEN-LAST:event_formWindowClosed
 
     private void jTextField5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusLost
@@ -1084,7 +1087,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         // verificamos que los textfields cumplan con la longitud y los caracteres posibles
         passedstatuses.add(validate(jTextField1.getText(), 0, 0, ValidName, jLabel3, true, jLabel14));
 
-        passedstatuses.add(validate(jTextArea1.getText(), 0, 0, direccion, jLabel9, true, jLabel18));
+        passedstatuses.add(validate(jTextArea1.getText(), 10, 64, direccion, jLabel9, false, jLabel18));
 
         passedstatuses.add(validate(jTextField5.getText(), 2, 3, numbersonly, jLabel12, false, jLabel20));
 
