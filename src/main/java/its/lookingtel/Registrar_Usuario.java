@@ -179,10 +179,10 @@ public class Registrar_Usuario extends javax.swing.JFrame {
 
     }
 
-    private static boolean validate(JTextField jtxt, int minlength, int maxlength, String regular_exp, JLabel lbl, boolean ignore_length, JLabel errorlblmsg) {
+     private static boolean validate(String text, int minlength, int maxlength, String regular_exp, JLabel lbl, boolean ignore_length, JLabel errorlblmsg) {
 
         // validate the data type
-        if (!jtxt.getText().matches(regular_exp)) {
+        if (!text.matches(regular_exp)) {
 
             // jtxt.setText("");
             lbl.setForeground(Color.red);
@@ -200,7 +200,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         }
 
         // validate the length
-        if (jtxt.getText().length() < minlength || jtxt.getText().length() > maxlength) {
+        if (text.length() < minlength || text.length() > maxlength) {
             //  jtxt.setText("");
             lbl.setForeground(Color.red);
             System.out.println("longitud muy corta o muy larga");
@@ -214,7 +214,6 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         return true;
 
     }
-
     private void displaylogos() {
         try {
             // Load the image from the URL
@@ -802,9 +801,9 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         ArrayList<String> services = new ArrayList<String>();
 
         // verificamos que los textfields cumplan con la longitud y los caracteres posibles
-        passedstatuses.add(validate(jTextField1, 0, 0, ValidName, jLabel3, true, jLabel14));
+        passedstatuses.add(validate(jTextField1.getText(), 0, 0, ValidName, jLabel3, true, jLabel14));
 
-        passedstatuses.add(validate(jTextField2, 10, 10, capitallettersandnumbers, jLabel4, false, jLabel16));
+        passedstatuses.add(validate(jTextField2.getText(), 10, 10, capitallettersandnumbers, jLabel4, false, jLabel16));
 
         // obtenemos la llave primaria de la ubicacion en base al pais,estado y ciudad que es el valor
         String location = (String) jComboBox1.getSelectedItem();
