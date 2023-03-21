@@ -6,6 +6,15 @@
 package its.lookingtel;
 
 import java.awt.Color;
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 /**
@@ -14,14 +23,20 @@ import javax.swing.WindowConstants;
  */
 public class Recuperar_Contraseña extends javax.swing.JFrame {
 
+    Usuario user;
+
     public Recuperar_Contraseña() {
 
+        user = new Usuario();
         initComponents();
-         jLabel3.requestFocusInWindow();
+        Correo_Electronico.setName("Correo Electronico");
+        Confirmar_Correo_Electronico.setName("Confirmar Correo Electronico");
+        jLabel3.requestFocusInWindow();
         getContentPane().setBackground(Color.white);
         jButton1.setBackground(Color.WHITE);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         jPanel1.setBackground(Color.white);
+
     }
 
     /**
@@ -38,8 +53,8 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        Correo_Electronico = new javax.swing.JTextField();
+        Confirmar_Correo_Electronico = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -68,36 +83,37 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
         gridBagConstraints.gridy = 0;
         jPanel1.add(jLabel5, gridBagConstraints);
 
-        jTextField1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("enriquehernandez.pereyra@gmail.com");
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jTextField1.setPreferredSize(new java.awt.Dimension(140, 22));
-        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+        Correo_Electronico.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        Correo_Electronico.setForeground(new java.awt.Color(102, 102, 102));
+        Correo_Electronico.setText("enriquehernandez.pereyra@gmail.com");
+        Correo_Electronico.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        Correo_Electronico.setPreferredSize(new java.awt.Dimension(140, 22));
+        Correo_Electronico.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField1FocusGained(evt);
+                Correo_ElectronicoFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField1FocusLost(evt);
+                Correo_ElectronicoFocusLost(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        jPanel1.add(jTextField1, gridBagConstraints);
+        jPanel1.add(Correo_Electronico, gridBagConstraints);
+        Correo_Electronico.getAccessibleContext().setAccessibleName("");
 
-        jTextField2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField2.setText("enriquehernandez.pereyra@gmail.com");
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jTextField2.setPreferredSize(new java.awt.Dimension(140, 22));
-        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+        Confirmar_Correo_Electronico.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        Confirmar_Correo_Electronico.setForeground(new java.awt.Color(102, 102, 102));
+        Confirmar_Correo_Electronico.setText("enriquehernandez.pereyra@gmail.com");
+        Confirmar_Correo_Electronico.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        Confirmar_Correo_Electronico.setPreferredSize(new java.awt.Dimension(140, 22));
+        Confirmar_Correo_Electronico.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField2FocusGained(evt);
+                Confirmar_Correo_ElectronicoFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField2FocusLost(evt);
+                Confirmar_Correo_ElectronicoFocusLost(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -105,7 +121,8 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
-        jPanel1.add(jTextField2, gridBagConstraints);
+        jPanel1.add(Confirmar_Correo_Electronico, gridBagConstraints);
+        Confirmar_Correo_Electronico.getAccessibleContext().setAccessibleName("s");
 
         jButton1.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
         jButton1.setText("Enviar Contraseña");
@@ -147,47 +164,120 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+    private void Correo_ElectronicoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Correo_ElectronicoFocusLost
         // TODO add your handling code here:
-        
-        if(jTextField1.getText().isEmpty()){
-            jTextField1.setText("enriquehernandez.pereyra@gmail.com");
-            jTextField1.setForeground(Color.gray);
-        }
-        
-    }//GEN-LAST:event_jTextField1FocusLost
 
-    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
-        // TODO add your handling code here:
-         if(jTextField1.getText().equals("enriquehernandez.pereyra@gmail.com")){
-            jTextField1.setText("");
-            jTextField1.setForeground(Color.black);
+        if (Correo_Electronico.getText().isEmpty()) {
+            Correo_Electronico.setText("enriquehernandez.pereyra@gmail.com");
+            Correo_Electronico.setForeground(Color.gray);
         }
-        
-    }//GEN-LAST:event_jTextField1FocusGained
 
-    private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
-        // TODO add your handling code here:
-          if(jTextField2.getText().equals("enriquehernandez.pereyra@gmail.com")){
-            jTextField2.setText("");
-            jTextField2.setForeground(Color.black);
-        }
-    }//GEN-LAST:event_jTextField2FocusGained
+    }//GEN-LAST:event_Correo_ElectronicoFocusLost
 
-    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
+    private void Correo_ElectronicoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Correo_ElectronicoFocusGained
         // TODO add your handling code here:
-           if(jTextField2.getText().isEmpty()){
-            jTextField2.setText("enriquehernandez.pereyra@gmail.com");
-            jTextField2.setForeground(Color.gray);
+        if (Correo_Electronico.getText().equals("enriquehernandez.pereyra@gmail.com")) {
+            Correo_Electronico.setText("");
+            Correo_Electronico.setForeground(Color.black);
         }
-    }//GEN-LAST:event_jTextField2FocusLost
+
+    }//GEN-LAST:event_Correo_ElectronicoFocusGained
+
+    private void Confirmar_Correo_ElectronicoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Confirmar_Correo_ElectronicoFocusGained
+        // TODO add your handling code here:
+        if (Confirmar_Correo_Electronico.getText().equals("enriquehernandez.pereyra@gmail.com")) {
+            Confirmar_Correo_Electronico.setText("");
+            Confirmar_Correo_Electronico.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_Confirmar_Correo_ElectronicoFocusGained
+
+    private void Confirmar_Correo_ElectronicoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Confirmar_Correo_ElectronicoFocusLost
+        // TODO add your handling code here:
+        if (Confirmar_Correo_Electronico.getText().isEmpty()) {
+            Confirmar_Correo_Electronico.setText("enriquehernandez.pereyra@gmail.com");
+            Confirmar_Correo_Electronico.setForeground(Color.gray);
+        }
+    }//GEN-LAST:event_Confirmar_Correo_ElectronicoFocusLost
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
-        if(jTextField1.getText().equals(jTextField2.getText())){
-            System.out.println("Sending mail");
+
+        //validate que el correo electronico no sea el place holder
+        List<Boolean> statuses = new ArrayList<Boolean>();
+
+        statuses.add(ValidatePlaceHolder(Correo_Electronico));
+        statuses.add(ValidatePlaceHolder(Confirmar_Correo_Electronico));
+
+        if (statuses.contains(false)) {
+            return;
         }
+
+        // validar que el correo electronico introducido sea valido
+        statuses.add(ValidateMail(Correo_Electronico));
+        statuses.add(ValidateMail(Confirmar_Correo_Electronico));
+
+        if (statuses.contains(false)) {
+            return;
+        }
+
+        // validate that both mail are equal
+        statuses.add(ValidateMailEquality(Correo_Electronico, Confirmar_Correo_Electronico));
+
+        if (statuses.contains(false)) {
+            return;
+        }
+
+        // validar que el correo electronico exista en la BD
+        String data[] = user.Recuperar_Contraseña_Usuario(Correo_Electronico.getText());
+
+        if (data[0] == null) {
+            return;
+        }
+
+        // enviar el mail
+         SendEmail.enviar_correo(data);
+
     }//GEN-LAST:event_jButton1MousePressed
+    boolean ValidatePlaceHolder(JTextField jtxt) {
+        if (jtxt.getText().equals(("enriquehernandez.pereyra@gmail.com")) || jtxt.getText().isEmpty()) {
+            jtxt.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
+            return false;
+        }
+        
+        
+        jtxt.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
+        jtxt.repaint();
+        return true;
+    }
+
+    boolean ValidateMail(JTextField jtxt) {
+
+        if (!jtxt.getText().matches("^[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$")) {
+            jtxt.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
+            JOptionPane.showMessageDialog(null, "El correo electronico introducido no es valido en " + jtxt.getName() + ": " + jtxt.getText(), "Error", 0);
+            return false;
+        }
+        
+        jtxt.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
+        jtxt.repaint();
+        return true;
+    }
+
+    boolean ValidateMailEquality(JTextField jtxt, JTextField jtxt2) {
+        if (!jtxt.getText().equals(jtxt2.getText())) {
+            jtxt.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
+            jtxt2.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
+            JOptionPane.showMessageDialog(null, "Los correos electronicos no concuerdan", "Error", 0);
+            
+            return false;
+        }
+
+        jtxt.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
+        jtxt2.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
+        jtxt.repaint();
+        jtxt2.repaint();
+        return true;
+    }
 
     /**
      * @param args the command line arguments
@@ -226,12 +316,12 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Confirmar_Correo_Electronico;
+    private javax.swing.JTextField Correo_Electronico;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

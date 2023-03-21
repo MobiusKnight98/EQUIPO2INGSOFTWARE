@@ -28,10 +28,6 @@ public class Conexion_Remota {
         try {
             Class.forName(DB_DRIVER);
             conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-            if (conn == null) {
-                System.out.println("Error en la conexion");
-                return conn;
-            }
             System.out.println("Succesfully Connected");
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null,"No se pudo establecer la conexion con la base de datos","Error", 0);

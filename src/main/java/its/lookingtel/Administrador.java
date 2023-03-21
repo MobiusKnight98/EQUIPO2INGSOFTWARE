@@ -6,7 +6,6 @@
 package its.lookingtel;
 
 import java.sql.*;
-import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -15,11 +14,12 @@ import javax.swing.JOptionPane;
  *
  * @author Guest Mode
  */
-public abstract class Administrador extends Querys {
+public class Administrador extends Querys {
 
     public static String correo_electronico;
-
-    static boolean IniciarSesion(String correo_electronico, String contraseña) {
+    
+    @Override
+    public boolean IniciarSesion(String correo_electronico, String contraseña) {
 
         Connection conn = Conexion_Remota.Conectar_BD();boolean statuslogin = false;
         if (conn == null) {
@@ -64,6 +64,11 @@ public abstract class Administrador extends Querys {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
         return statuslogin;
+    }
+
+    @Override
+    String [] Recuperar_Contraseña_Usuario(String correo_electronico) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

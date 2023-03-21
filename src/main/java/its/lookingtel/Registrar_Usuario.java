@@ -371,6 +371,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         jButton1.setText("Registrar");
         jButton1.setAlignmentY(3.0F);
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButton1MousePressed(evt);
@@ -458,7 +459,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
 
         jTextArea1.setColumns(17);
         jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(30);
+        jTextArea1.setRows(5);
         jTextArea1.setTabSize(5);
         jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jTextArea1.setMargin(new java.awt.Insets(0, 0, 0, 0));
@@ -554,7 +555,6 @@ public class Registrar_Usuario extends javax.swing.JFrame {
 
         jPasswordField1.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         jPasswordField1.setForeground(new java.awt.Color(153, 153, 153));
-        jPasswordField1.setText("jPasswordField1");
         jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jPasswordField1.setMinimumSize(new java.awt.Dimension(7, 24));
         jPasswordField1.setPreferredSize(new java.awt.Dimension(200, 24));
@@ -673,7 +673,6 @@ public class Registrar_Usuario extends javax.swing.JFrame {
 
         jPasswordField2.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         jPasswordField2.setForeground(new java.awt.Color(153, 153, 153));
-        jPasswordField2.setText("jPasswordField1");
         jPasswordField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jPasswordField2.setMinimumSize(new java.awt.Dimension(7, 24));
         jPasswordField2.setPreferredSize(new java.awt.Dimension(200, 24));
