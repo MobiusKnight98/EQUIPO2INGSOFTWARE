@@ -13,6 +13,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,13 +21,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendEmail {
 
-    public static void main(String args[]) {
-
-        // Recipient's email ID needs to be mentioned.
-        String to = "enriquehernandez.pereyra@gmail.com";
-
-        // Sender's email ID needs to be mentioned
-        String from = "fucker@gmail.com";
+    public static void enviar_correo(String[] data) {
 
         // Assuming you are sending email from through gmails smtp
         String host = "smtp.gmail.com";
@@ -52,28 +47,28 @@ public class SendEmail {
         });
 
         // Used to debug SMTP issues
-        session.setDebug(true);
+        session.setDebug(true) ;
 
         try {
             // Create a default MimeMessage object.
             MimeMessage message = new MimeMessage(session);
 
             // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
+            message.setFrom(new InternetAddress("enriquehernandez.pereyra@gmail.com"));
 
             // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(data[0]));
 
             // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
+            message.setSubject("LookingTel Recuperacion de contraseña");
 
             // Now set the actual message
-            message.setText("8===D");
-
+            message.setText("Hola Cliente su contraseña es: "+data[1]);
             System.out.println("sending...");
             // Send message
             Transport.send(message);
             System.out.println("Sent message successfully....");
+            JOptionPane.showMessageDialog(null, "Contraseña enviada satisfactoriamente al correo electronico proporcionado","Success",1);
         } catch (MessagingException mex) {
             mex.printStackTrace();
         }

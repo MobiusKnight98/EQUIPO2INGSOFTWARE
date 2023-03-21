@@ -11,23 +11,23 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
 
 /**
  *
  * @author Guest Mode
  */
 public class Login_Administrador extends javax.swing.JFrame {
-    
-   
+
+    Administrador admin;
+
     /*
      * Creates new form Login_Administrador
      */
     public Login_Administrador() {
         initComponents();
+        admin = new Administrador();
         jLabel2.requestFocusInWindow();
         getContentPane().setBackground(Color.white);
         jPanel1.setBackground(Color.white);
@@ -35,8 +35,6 @@ public class Login_Administrador extends javax.swing.JFrame {
         jButton1.setBackground(Color.white);
         displaylogos();
     }
-    
-   
 
     private void displaylogos() {
         try {
@@ -99,7 +97,6 @@ public class Login_Administrador extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
         jLabel2.setText("Panel Administrador");
 
-        jPasswordField1.setText("jPasswordField1");
         jPasswordField1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
 
         jButton1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -249,16 +246,15 @@ public class Login_Administrador extends javax.swing.JFrame {
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
-      
+
         Gestion_Administrativa pantalla_gestion = new Gestion_Administrativa();
-        if (!Administrador.IniciarSesion(jTextField1.getText(), jPasswordField1.getText())) {
+        if (!admin.IniciarSesion(jTextField1.getText(), jPasswordField1.getText())) {
             return;
         }
         pantalla_gestion.setVisible(true);
         this.dispose();
-       
-        
-        
+
+
     }//GEN-LAST:event_jButton1MousePressed
 
     /**

@@ -70,7 +70,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jLabel21.setVisible(false);
 
         getContentPane().setBackground(Color.white);
-        jPanel1.setBackground(Color.white);
+       
         jPanel2.setBackground(Color.white);
         jPanel3.setBackground(Color.white);
         jPanel4.setBackground(Color.white);
@@ -233,8 +233,8 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             Image close_button_image = ImageIO.read(close_button);
             Image add_button_image = ImageIO.read(add_button);
 
-            Image scaledImage_condominio = condominio_image.getScaledInstance(jPanel1.getWidth(),
-                    jPanel1.getHeight(),
+            Image scaledImage_condominio = condominio_image.getScaledInstance(jLayeredPane6.getWidth(),
+                    jLayeredPane6.getHeight(),
                     Image.SCALE_SMOOTH);
             Image scaledImage_lookingtel = lookingtel_image.getScaledInstance(jPanel2.getWidth(),
                     jPanel2.getHeight(),
@@ -245,18 +245,20 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             Image scaledImage_add_button_image = add_button_image.getScaledInstance(jPanel5.getWidth(),
                     jPanel5.getHeight(),
                     Image.SCALE_SMOOTH);
+            
+           
 
             // Create an ImageIcon from the image
             ImageIcon icon_userpic = new ImageIcon(scaledImage_condominio);
             ImageIcon icon_lookingtel = new ImageIcon(scaledImage_lookingtel);
             ImageIcon icon_close_button = new ImageIcon(scaledImage_close_button_image);
-            ImageIcon icon_add_button = new ImageIcon(scaledImage_add_button_image);
+          ImageIcon icon_add_button = new ImageIcon(scaledImage_add_button_image);
 
             // Set the icon on the JLabel
             jLabel5.setIcon(icon_userpic);
             jLabel6.setIcon(icon_lookingtel);
             jLabel7.setIcon(icon_close_button);
-            jLabel13.setIcon(icon_add_button);
+           jLabel13.setIcon(icon_add_button);
 
         } catch (IOException ex) {
            // ex.printStackTrace();
@@ -307,9 +309,8 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLayeredPane6 = new javax.swing.JLayeredPane();
-        jLabel21 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLayeredPane7 = new javax.swing.JLayeredPane();
@@ -326,7 +327,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         setTitle("Registrar Condominio");
         setForeground(new java.awt.Color(255, 255, 0));
         setLocation(new java.awt.Point(123, 123));
-        setPreferredSize(new java.awt.Dimension(800, 570));
+        setPreferredSize(new java.awt.Dimension(850, 580));
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -395,6 +396,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jButton1.setText("Registrar");
         jButton1.setAlignmentY(0.0F);
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setMargin(new java.awt.Insets(22, 22, 25, 22));
         jButton1.setPreferredSize(new java.awt.Dimension(69, 50));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -694,8 +696,15 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jLayeredPane5.add(jLabel17, gridBagConstraints);
 
         java.awt.GridBagLayout jLayeredPane6Layout = new java.awt.GridBagLayout();
-        jLayeredPane6Layout.columnWidths = new int[] {200};
+        jLayeredPane6Layout.columnWidths = new int[] {0};
         jLayeredPane6.setLayout(jLayeredPane6Layout);
+
+        jLabel5.setPreferredSize(new java.awt.Dimension(300, 200));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 0);
+        jLayeredPane6.add(jLabel5, gridBagConstraints);
 
         jLabel21.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 51, 51));
@@ -706,40 +715,9 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(0, 53, 0, 0);
         jLayeredPane6.add(jLabel21, gridBagConstraints);
 
-        jLabel5.setBackground(new java.awt.Color(255, 204, 153));
-        jLabel5.setForeground(new java.awt.Color(51, 255, 51));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 251, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 196, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        jLayeredPane6.add(jPanel1, gridBagConstraints);
-
-        jPanel5.setPreferredSize(new java.awt.Dimension(40, 40));
+        jPanel5.setPreferredSize(new java.awt.Dimension(46, 40));
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel5MouseClicked(evt);
@@ -753,21 +731,17 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE))
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(0, 65, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 8, 0, 0);
         jLayeredPane6.add(jPanel5, gridBagConstraints);
 
         java.awt.GridBagLayout jLayeredPane7Layout = new java.awt.GridBagLayout();
@@ -862,17 +836,15 @@ public class Registrar_Condominio extends javax.swing.JFrame {
                             .addComponent(jLayeredPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLayeredPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(39, Short.MAX_VALUE))
+                            .addComponent(jLayeredPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(118, 118, 118)
@@ -892,17 +864,6 @@ public class Registrar_Condominio extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLayeredPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLayeredPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -911,7 +872,17 @@ public class Registrar_Condominio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLayeredPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLayeredPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLayeredPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLayeredPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1024,7 +995,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
                 // Create an ImageIcon from the image
                 ImageIcon icon_condominio = new ImageIcon(filepath);
                 Image image = icon_condominio.getImage();
-                Image scaledImage_condominio = image.getScaledInstance(jPanel1.getWidth(), jPanel1.getHeight(), Image.SCALE_SMOOTH);
+                Image scaledImage_condominio = image.getScaledInstance(jLayeredPane6.getWidth(), jLayeredPane6.getHeight(), Image.SCALE_SMOOTH);
                 ImageIcon scaledImageIcon_condominio = new ImageIcon(scaledImage_condominio);
 
                 // Set the icon on the JLabel
@@ -1305,7 +1276,6 @@ public class Registrar_Condominio extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane7;
     private javax.swing.JLayeredPane jLayeredPane8;
     private javax.swing.JLayeredPane jLayeredPane9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

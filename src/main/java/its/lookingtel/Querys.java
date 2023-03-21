@@ -15,19 +15,18 @@ public abstract class Querys {
     
     // Gestionar Usuario
     
-    abstract boolean IniciarSesion();
+    abstract boolean IniciarSesion(String correo_electronico, String contraseña);
     
   
-      
-     
+    abstract String [] Recuperar_Contraseña_Usuario(String correo_electronico);
+    
+  
      /*
     
      void Registrarse_Usuario(Usuario usuario){
          
      }
-     void Recuperar_Contraseña_Usuario(String correo_electronico){
-         
-     }
+     
      
      Usuario Consultar_Usuario(int Id){
          
@@ -61,18 +60,6 @@ public abstract class Querys {
          
          
          return new ArrayList<Condominio>();
-         
-     }
-     Condominio Consultar_Condominio_Admin(int Id){
-         
-         
-            return new Condominio();
-         
-     }
-     Condominio Consultar_Condominio_Admin(String CIF){
-         
-             
-            return new Condominio();
          
      }
      void Registrar_Condominio_Admin(Condominio condomnio){

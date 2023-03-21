@@ -12,10 +12,15 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -23,9 +28,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Guest Mode
  */
 public class Gestion_Administrativa extends javax.swing.JFrame {
-
+    
+    Condominio cond;
 
     public Gestion_Administrativa() {
+        cond = new Condominio();
         initComponents();
         getContentPane().setBackground(Color.white);
         jTabbedPane1.setBackground(Color.white);
@@ -47,9 +54,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jComboBox5.setBackground(Color.white);
         jComboBox9.setBackground(Color.white);
         jComboBox14.setBackground(Color.white);
-        jComboBox10.setBackground(Color.white);
-        jComboBox11.setBackground(Color.white);
-        jComboBox12.setBackground(Color.white);
         jComboBox13.setBackground(Color.white);
         jComboBox16.setBackground(Color.white);
         jComboBox17.setBackground(Color.white);
@@ -68,8 +72,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         displaylogos();
 
     }
-
-   
 
     private void displaylogos() {
         try {
@@ -178,9 +180,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jComboBox9 = new javax.swing.JComboBox<>();
         jLabel27 = new javax.swing.JLabel();
-        jComboBox10 = new javax.swing.JComboBox<>();
-        jComboBox11 = new javax.swing.JComboBox<>();
-        jComboBox12 = new javax.swing.JComboBox<>();
         jLabel28 = new javax.swing.JLabel();
         jTextField12 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -205,6 +204,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -588,6 +588,14 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField9.setAlignmentX(0.9F);
         jTextField9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jTextField9.setMargin(new java.awt.Insets(12, 6, 2, 6));
+        jTextField9.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField9FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField9FocusLost(evt);
+            }
+        });
         jTextField9.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField9KeyTyped(evt);
@@ -647,27 +655,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
         jLabel27.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel27.setText("Fecha Registro:");
-
-        jComboBox10.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jComboBox10.setAutoscrolls(true);
-        jComboBox10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox10.setEnabled(false);
-        jComboBox10.setPreferredSize(new java.awt.Dimension(57, 28));
-
-        jComboBox11.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox11.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        jComboBox11.setAutoscrolls(true);
-        jComboBox11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox11.setEnabled(false);
-        jComboBox11.setPreferredSize(new java.awt.Dimension(57, 28));
-
-        jComboBox12.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox12.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1923", "1924", "1925", "1926", "1927" }));
-        jComboBox12.setAutoscrolls(true);
-        jComboBox12.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox12.setEnabled(false);
-        jComboBox12.setPreferredSize(new java.awt.Dimension(57, 28));
 
         jLabel28.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel28.setText("Puntaje:");
@@ -854,6 +841,10 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
         );
 
+        jFormattedTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/MM/dd"))));
+        jFormattedTextField1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -891,12 +882,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                         .addGap(47, 47, 47)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel27)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel29)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -908,7 +893,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                                     .addComponent(jLabel31)
                                     .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel32)
-                            .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
@@ -959,12 +945,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                         .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1552,17 +1535,104 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
+
         jTextField4.setText(Administrador.correo_electronico);
 
     }//GEN-LAST:event_formWindowOpened
 
     private void jTextField9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField9KeyTyped
         // TODO add your handling code here:
-        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
-            System.out.println("Enter was pressed");
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+
+            //validate que el CIF o Id no sea el place holder
+            List<Boolean> statuses = new ArrayList<Boolean>();
+
+            statuses.add(ValidatePlaceHolder(jTextField9));
+
+            if (statuses.contains(false)) {
+                jTextField9.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
+                return;
+            }
+
+            // validar que el CIF o ID sea valido
+            statuses.add(ValidateCIFOrID(jTextField9));
+
+            if (statuses.contains(false)) {
+                jTextField9.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
+                return;
+            }
+
+            jTextField9.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
+
+            //validar que el CIF o ID exista en la BD
+            
+        cond.Consultar_Condominio_Admin(jTextField9.getText());
+
+      
+            
         }
+
     }//GEN-LAST:event_jTextField9KeyTyped
+    boolean ValidatePlaceHolder(JTextField jtxt) {
+        return !(jtxt.getText().equals(("Id Condominio o CIF")) || jtxt.getText().isEmpty());
+    }
+
+    boolean ValidateCIFOrID(JTextField jtxt) {
+
+        //validamos la longitud del ID
+        // si contiene letras y numeros la longitud debe de ser menor a 11
+        // si contiene numeros la longiutd debe de ser menor a 3
+        try {
+            Integer.parseInt(jtxt.getText());
+            return HandleID(jtxt.getText());
+        } catch (Exception ex) {
+            return HandleCIF(jtxt.getText());
+        }
+
+    }
+
+    boolean HandleCIF(String text) {
+
+       
+        if (!text.matches("^[A-Z0-9]+$")) {
+            JOptionPane.showMessageDialog(null, "El CIF no es valido. Solo se aceptan:\n - Letras mayusculas con numeros sin espacios", "Error", 0);
+            return false;
+        }
+         if (text.length() <10 || text.length() > 10) {
+
+            JOptionPane.showMessageDialog(null, "El CIF es demasiado corto o demasiado largo\n - Longitud requerida 10 caracteres", "Error", 0);
+            return false;
+        }
+
+        return true;
+
+    }
+
+    boolean HandleID(String text) {
+        if (text.length() > 2) {
+            JOptionPane.showMessageDialog(null, "El Id es demasiado largo", "Error", 0);
+            return false;
+        }
+        return true;
+    }
+
+
+    private void jTextField9FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField9FocusGained
+        // TODO add your handling code here:
+        if (jTextField9.getText().equals("Id Condominio o CIF")) {
+            jTextField9.setText("");
+            jTextField9.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jTextField9FocusGained
+
+    private void jTextField9FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField9FocusLost
+        // TODO add your handling code here:
+        if (jTextField9.getText().isEmpty()) {
+            jTextField9.setText("Id Condominio o CIF");
+            jTextField9.setForeground(Color.gray);
+        }
+        jTextField9.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
+    }//GEN-LAST:event_jTextField9FocusLost
 
     /**
      * @param args the command line arguments
@@ -1616,9 +1686,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JComboBox<String> jComboBox10;
-    private javax.swing.JComboBox<String> jComboBox11;
-    private javax.swing.JComboBox<String> jComboBox12;
     private javax.swing.JComboBox<String> jComboBox13;
     private javax.swing.JComboBox<String> jComboBox14;
     private javax.swing.JComboBox<String> jComboBox16;
@@ -1638,6 +1705,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox7;
     private javax.swing.JComboBox<String> jComboBox8;
     private javax.swing.JComboBox<String> jComboBox9;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
