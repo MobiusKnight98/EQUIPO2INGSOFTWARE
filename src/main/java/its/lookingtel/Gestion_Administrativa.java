@@ -11,13 +11,24 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -28,8 +39,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Guest Mode
  */
 public class Gestion_Administrativa extends javax.swing.JFrame {
-    
+
     Condominio cond;
+    HashMap<Integer, String> Ubicacion = new HashMap<Integer, String>();
 
     public Gestion_Administrativa() {
         cond = new Condominio();
@@ -70,6 +82,123 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jSpinner1.setBackground(Color.white);
         jSpinner2.setBackground(Color.white);
         displaylogos();
+
+    }
+
+    void GetUbications() {
+        Connection conn = Conexion_Remota.Conectar_BD();
+        try {
+            // Statement st = conn.createStatement();
+            //st.execute("""
+            //    INSERT INTO RESERVACIONES (Id_Condominio,Id_Usuario,No_Personas,Dias_Estadia,Fecha_Reservacion,Fecha_Llegada,Fecha_Partida,Costo_Total) VALUES (1,2,13,45,NOW(),DATE_ADD(NOW(),INTERVAL 10 DAY),DATE_ADD(NOW(),INTERVAL 55 DAY),30000);
+            //    """);
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM UBICATION");
+            ResultSet rs = statement.executeQuery();
+            //ResultSetMetaData rsmd = rs.getMetaData();
+            //System.out.println(rsmd.getColumnName(1));
+            while (rs.next()) {
+
+                int Id = rs.getInt(1);
+                String Pais = rs.getString(2);
+                String Estado = rs.getString(3);
+                String Ciudad = rs.getString(4);
+                Ubicacion.put(Id, Pais + "/" + Estado + "/" + Ciudad);
+
+                jComboBox14.addItem(Pais + "/" + Estado + "/" + Ciudad);
+                jComboBox2.addItem(Pais + "/" + Estado + "/" + Ciudad);
+            }
+
+            rs.close();
+            statement.close();
+            conn.close();
+            //  String output = rsmd.getColumnName(1) + " " + rsmd.getColumnName(2) + " " + rsmd.getColumnName(3) + " " + rsmd.getColumnName(4) + "\n";
+            //    while (rs.next()) { 
+            //    output += rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3) + " " + rs.getString(4) + " ";
+            //   }
+            //  System.out.print(output);
+        } catch (SQLException ex) {
+            Logger.getLogger(Gestion_Administrativa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void MostrarCondominio(Condominio condominio) {
+
+        jTextField6.setText(String.valueOf(condominio.getId()));
+        jTextField10.setText(condominio.getNombre());
+        jTextField11.setText(String.valueOf(condominio.getPrecio_x_noche()));
+        jComboBox9.setSelectedIndex(condominio.getStatus());
+        jTextField13.setText(condominio.getCIF());
+        jFormattedTextField1.setText(String.valueOf(condominio.getFecha_Registro()));
+        jTextArea2.setText(condominio.getDireccion());
+        jTextField12.setText(condominio.getScore() + "%");
+        jComboBox13.setSelectedItem(String.valueOf(condominio.getNo_Habitaciones()));
+        String[] servicios = condominio.getServicios().split(",");
+        List<String> services = Arrays.asList(servicios);
+
+        if (services.contains("Agua")) {
+            jCheckBox1.setSelected(true);
+        }
+        if (services.contains("Gas")) {
+            jCheckBox4.setSelected(true);
+        }
+        if (services.contains("Internet")) {
+            jCheckBox5.setSelected(true);
+        }
+        if (services.contains("Luz")) {
+            jCheckBox3.setSelected(true);
+        }
+        if (services.contains("Cocina")) {
+            jCheckBox7.setSelected(true);
+        }
+        if (services.contains("Televisión")) {
+            jCheckBox6.setSelected(true);
+        }
+
+        URL imagencond = null;
+        try {
+            String test = "https://lookingtel.cellar-c2.services.clever-cloud.com/18131220%20JC.png";
+            imagencond = new URL(test);
+            Image condominio_image = ImageIO.read(imagencond);
+            System.out.println(condominio.getImage_lugar());
+
+            Image scaledImage_condominio = condominio_image.getScaledInstance(jPanel6.getWidth(),
+                    jPanel6.getHeight(),
+                    Image.SCALE_SMOOTH);
+
+            ImageIcon icon_userpic = new ImageIcon(scaledImage_condominio);
+
+            jLabel7.setIcon(icon_userpic);
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Gestion_Administrativa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Gestion_Administrativa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    void ClearChanges() {
+        jTextField6.setText("");
+        jTextField10.setText("");
+        jTextField11.setText("");
+        jComboBox9.setSelectedIndex(-1);
+        jTextField13.setText("");
+        jFormattedTextField1.setText("");
+        jTextArea2.setText("");
+        jTextField12.setText("");
+        jComboBox13.setSelectedItem("");
+
+        jCheckBox1.setSelected(false);
+
+        jCheckBox4.setSelected(false);
+
+        jCheckBox5.setSelected(false);
+
+        jCheckBox3.setSelected(false);
+
+        jCheckBox7.setSelected(false);
+
+        jCheckBox6.setSelected(false);
 
     }
 
@@ -412,6 +541,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField8.setAlignmentX(0.9F);
         jTextField8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jTextField8.setFocusable(false);
         jTextField8.setMargin(new java.awt.Insets(12, 6, 2, 6));
 
         jLabel20.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -619,7 +749,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField6.setAlignmentX(0.9F);
         jTextField6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jTextField6.setEnabled(false);
+        jTextField6.setFocusable(false);
         jTextField6.setMargin(new java.awt.Insets(12, 6, 2, 6));
 
         jLabel23.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -630,6 +760,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField10.setAlignmentX(0.9F);
         jTextField10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jTextField10.setFocusable(false);
         jTextField10.setMargin(new java.awt.Insets(12, 6, 2, 6));
 
         jLabel24.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -643,15 +774,17 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField11.setAlignmentX(0.9F);
         jTextField11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jTextField11.setFocusable(false);
         jTextField11.setMargin(new java.awt.Insets(12, 6, 2, 6));
 
         jLabel26.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel26.setText("Status:");
 
         jComboBox9.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "No Disponible" }));
+        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Disponible", "Disponible" }));
         jComboBox9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         jComboBox9.setEnabled(false);
+        jComboBox9.setFocusable(false);
 
         jLabel27.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel27.setText("Fecha Registro:");
@@ -664,7 +797,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField12.setAlignmentX(0.9F);
         jTextField12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jTextField12.setEnabled(false);
+        jTextField12.setFocusable(false);
         jTextField12.setMargin(new java.awt.Insets(12, 6, 2, 6));
 
         jTextArea2.setColumns(1);
@@ -674,6 +807,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextArea2.setRows(5);
         jTextArea2.setTabSize(1);
         jTextArea2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jTextArea2.setFocusable(false);
         jScrollPane2.setViewportView(jTextArea2);
 
         jLabel29.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -684,7 +818,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField13.setAlignmentX(0.9F);
         jTextField13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jTextField13.setEnabled(false);
+        jTextField13.setFocusable(false);
         jTextField13.setMargin(new java.awt.Insets(12, 6, 2, 6));
 
         jLabel30.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -696,9 +830,13 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jComboBox13.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jComboBox13.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10+" }));
         jComboBox13.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jComboBox13.setEnabled(false);
+        jComboBox13.setFocusable(false);
 
         jComboBox14.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jComboBox14.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jComboBox14.setEnabled(false);
+        jComboBox14.setFocusable(false);
 
         jLabel32.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel32.setText("Ubicación:");
@@ -706,9 +844,13 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jLabel33.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel33.setText("Servicios Incluidos:");
 
+        jPanel5.setFocusable(false);
+
         jCheckBox1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jCheckBox1.setText("Agua");
         jCheckBox1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jCheckBox1.setEnabled(false);
+        jCheckBox1.setFocusable(false);
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox1ActionPerformed(evt);
@@ -718,6 +860,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jCheckBox3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jCheckBox3.setText("Luz");
         jCheckBox3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jCheckBox3.setEnabled(false);
+        jCheckBox3.setFocusable(false);
         jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox3ActionPerformed(evt);
@@ -727,6 +871,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jCheckBox4.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jCheckBox4.setText("Gas");
         jCheckBox4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jCheckBox4.setEnabled(false);
+        jCheckBox4.setFocusable(false);
         jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox4ActionPerformed(evt);
@@ -736,6 +882,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jCheckBox5.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jCheckBox5.setText("Internet");
         jCheckBox5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jCheckBox5.setEnabled(false);
+        jCheckBox5.setFocusable(false);
         jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox5ActionPerformed(evt);
@@ -745,6 +893,13 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jCheckBox6.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jCheckBox6.setText("Televisión");
         jCheckBox6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jCheckBox6.setEnabled(false);
+        jCheckBox6.setFocusable(false);
+        jCheckBox6.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jCheckBox6FocusLost(evt);
+            }
+        });
         jCheckBox6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox6ActionPerformed(evt);
@@ -754,6 +909,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jCheckBox7.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jCheckBox7.setText("Cocina");
         jCheckBox7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jCheckBox7.setEnabled(false);
+        jCheckBox7.setFocusable(false);
         jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox7ActionPerformed(evt);
@@ -822,6 +979,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jLabel34.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel34.setText("Imagen del lugar:");
 
+        jPanel9.setFocusable(false);
         jPanel9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel9MouseClicked(evt);
@@ -829,6 +987,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         });
 
         jLabel36.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel36.setEnabled(false);
+        jLabel36.setFocusable(false);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -842,8 +1002,14 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         );
 
         jFormattedTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/MM/dd"))));
+        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        jFormattedTextField1.setFocusable(false);
         jFormattedTextField1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextField1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -893,8 +1059,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                                     .addComponent(jLabel31)
                                     .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel32)
-                            .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
@@ -1464,6 +1630,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
         jLabel4.setText("Gestionar" + " " + jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()));
+        ClearChanges();
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -1536,7 +1703,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
 
-        jTextField4.setText(Administrador.correo_electronico);
+        GetUbications();
+
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -1565,19 +1733,32 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             jTextField9.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
 
             //validar que el CIF o ID exista en la BD
-            
-        cond.Consultar_Condominio_Admin(jTextField9.getText());
+            Condominio resultado = null;
+            try {
 
-      
-            
+                resultado = cond.Consultar_Condominio_Admin(jTextField9.getText());
+                System.out.println(resultado.getFecha_Registro());
+
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(null, "Error al buscar condominio", "Error", 0);
+            } catch (SQLException ex) {
+                Logger.getLogger(Gestion_Administrativa.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            if (resultado != null) {
+                MostrarCondominio(resultado);
+            }
+
         }
 
     }//GEN-LAST:event_jTextField9KeyTyped
-    boolean ValidatePlaceHolder(JTextField jtxt) {
+    boolean ValidatePlaceHolder(JTextField jtxt
+    ) {
         return !(jtxt.getText().equals(("Id Condominio o CIF")) || jtxt.getText().isEmpty());
     }
 
-    boolean ValidateCIFOrID(JTextField jtxt) {
+    boolean ValidateCIFOrID(JTextField jtxt
+    ) {
 
         //validamos la longitud del ID
         // si contiene letras y numeros la longitud debe de ser menor a 11
@@ -1591,14 +1772,14 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     }
 
-    boolean HandleCIF(String text) {
+    boolean HandleCIF(String text
+    ) {
 
-       
         if (!text.matches("^[A-Z0-9]+$")) {
             JOptionPane.showMessageDialog(null, "El CIF no es valido. Solo se aceptan:\n - Letras mayusculas con numeros sin espacios", "Error", 0);
             return false;
         }
-         if (text.length() <10 || text.length() > 10) {
+        if (text.length() < 10 || text.length() > 10) {
 
             JOptionPane.showMessageDialog(null, "El CIF es demasiado corto o demasiado largo\n - Longitud requerida 10 caracteres", "Error", 0);
             return false;
@@ -1608,7 +1789,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     }
 
-    boolean HandleID(String text) {
+    boolean HandleID(String text
+    ) {
         if (text.length() > 2) {
             JOptionPane.showMessageDialog(null, "El Id es demasiado largo", "Error", 0);
             return false;
@@ -1633,6 +1815,15 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         }
         jTextField9.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
     }//GEN-LAST:event_jTextField9FocusLost
+
+    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+
+    private void jCheckBox6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jCheckBox6FocusLost
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jCheckBox6FocusLost
 
     /**
      * @param args the command line arguments
