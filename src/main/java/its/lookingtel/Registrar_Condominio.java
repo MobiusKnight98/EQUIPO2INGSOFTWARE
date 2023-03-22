@@ -160,7 +160,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
             int statusprocess = statement.executeUpdate();
             if (statusprocess == 1) {
-                JOptionPane.showMessageDialog(null, "Condominio Registrado Satisfactoriamente Codigo de Salida 1", "Sucess", 1);
+                JOptionPane.showMessageDialog(null, "Condominio Registrado Satisfactoriamente Codigo de Salida 1", "Success", 1);
                 return;
             }
 
