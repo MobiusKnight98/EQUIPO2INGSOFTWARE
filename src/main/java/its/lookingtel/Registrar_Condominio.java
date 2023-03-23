@@ -101,35 +101,13 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         stringifiedservices = stringifiedservices.substring(0, stringifiedservices.length() - 1);
 
         // hacer el el nombre de la imagen que sea el nombre del condominio y eliminar espacios en blanco
-        picture = nombre_condominio.replaceAll("\\s+", "") + "." + picture.substring(picture.lastIndexOf(".") + 1);
+        picture = cif_condominio + "." + picture.substring(picture.lastIndexOf(".") + 1);
         System.out.println(picture);
 
-        try {
-
-            List<String> command = new ArrayList<>();
-            command.add("cmd.exe");
-            command.add("/c");
-            command.add("aws s3api put-object --bucket lookingtel --key " + "\"" + picture + "\"" + " --body " + "\"" + picturepath + "\"" + " --acl public-read --endpoint-url https://cellar-c2.services.clever-cloud.com");
-
-            // command.add("aws s3api list-objects --bucket lookingtel --endpoint-url https://cellar-c2.services.clever-cloud.com");
-            //  aws s3api put-object --bucket lookingtel --key" + " " + "\"" + picture + "\"" + " " + "--body" + " " + "\"" + picturepath + "\"" + " --acl public-read --endpoint-url https://cellar-c2.services.clever-cloud.com
-            System.out.println(command);
-            ProcessBuilder builder = new ProcessBuilder(command);
-            builder.redirectErrorStream(true);
-            Process process = builder.start();
-            InputStream inputStream = process.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+      
 
         String url = "https://lookingtel.cellar-c2.services.clever-cloud.com/" + picture;
-        System.out.println(url);
+        System.out.println("Output picture path: "+url);
 
         // Creamos el query
         Connection conn = Conexion_Remota.Conectar_BD();
@@ -166,13 +144,16 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             statement.setString(9, url);
 
             int statusprocess = statement.executeUpdate();
+            
+            
             if (statusprocess == 1) {
                 JOptionPane.showMessageDialog(null, "Condominio Registrado Satisfactoriamente Codigo de Salida 1", "Success", 1);
+                InsertPictureAtCellar();
                 return;
             }
 
             JOptionPane.showMessageDialog(null, "No se pudo registrar condominio Codigo de Error 0", "Error", 0);
-            DeletePictureFromCellar();
+            
             //ResultSetMetaData rsmd = rs.getMetaData();
             //System.out.println(rsmd.getColumnName(1))
             statement.close();
@@ -186,7 +167,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "El CIF actual ya existe no se puede registrar condominio", "Error", 0);
 
-            DeletePictureFromCellar();
+           
 
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
@@ -194,14 +175,14 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
     }
 
-    void DeletePictureFromCellar() {
+    void InsertPictureAtCellar() {
 
         try {
 
             List<String> command = new ArrayList<>();
             command.add("cmd.exe");
             command.add("/c");
-            command.add("aws s3api delete-object --bucket lookingtel --key " + "\"" + picture + "\"" + " --endpoint-url https://cellar-c2.services.clever-cloud.com");
+            command.add("aws s3api put-object --bucket lookingtel --key " + "\"" + picture + "\"" + " --body " + "\"" + picturepath + "\"" + " --acl public-read --endpoint-url https://cellar-c2.services.clever-cloud.com");
 
             // command.add("aws s3api list-objects --bucket lookingtel --endpoint-url https://cellar-c2.services.clever-cloud.com");
             //  aws s3api put-object --bucket lookingtel --key" + " " + "\"" + picture + "\"" + " " + "--body" + " " + "\"" + picturepath + "\"" + " --acl public-read --endpoint-url https://cellar-c2.services.clever-cloud.com
@@ -1078,6 +1059,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
+        
         this.dispose();
         score = 0;
         picture = "";

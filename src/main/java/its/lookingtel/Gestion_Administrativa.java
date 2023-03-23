@@ -45,8 +45,10 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     HashMap<Integer, String> Ubicacion = new HashMap<Integer, String>();
     URL imagen_condominio;
     String tracktab = "Usuarios";
+    Registrar_Condominio pantalla_registrar_condominio;
 
     public Gestion_Administrativa() {
+        pantalla_registrar_condominio = new Registrar_Condominio();
         cond = new Condominio();
         initComponents();
         getContentPane().setBackground(Color.white);
@@ -1639,6 +1641,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
         // TODO add your handling code here:
+        pantalla_registrar_condominio.dispose();
         this.dispose();
         Login_Administrador pantalla_login_administrador = new Login_Administrador();
         pantalla_login_administrador.setVisible(true);
@@ -1729,7 +1732,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
         // TODO add your handling code here:
-        Registrar_Condominio pantalla_registrar_condominio = new Registrar_Condominio();
+        
         pantalla_registrar_condominio.setVisible(true);
     }//GEN-LAST:event_jButton3MousePressed
 

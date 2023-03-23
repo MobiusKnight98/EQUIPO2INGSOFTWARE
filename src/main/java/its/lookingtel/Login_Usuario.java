@@ -20,11 +20,17 @@ import javax.swing.ImageIcon;
 public class Login_Usuario extends javax.swing.JFrame {
 
     Usuario user;
+    Menu_Principal menu;
+    Registrar_Usuario regusu;
+    Recuperar_Contraseña ad;
 
     /*
      * Creates new form Login_Administrador
      */
     public Login_Usuario() {
+        menu = new Menu_Principal();
+        regusu = new Registrar_Usuario();
+        ad = new Recuperar_Contraseña();
         initComponents();
         user = new Usuario();
         jLabel2.requestFocusInWindow();
@@ -303,7 +309,8 @@ public class Login_Usuario extends javax.swing.JFrame {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here: 
         this.dispose();
-        Menu_Principal menu = new Menu_Principal();
+        ad.dispose();
+        regusu.dispose();
         menu.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
@@ -325,7 +332,7 @@ public class Login_Usuario extends javax.swing.JFrame {
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
         // TODO add your handling code here:
 
-        Recuperar_Contraseña ad = new Recuperar_Contraseña();
+        
         ad.setVisible(true);
 
 
@@ -333,19 +340,19 @@ public class Login_Usuario extends javax.swing.JFrame {
 
     private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
         // TODO add your handling code here:
-        Registrar_Usuario regusu = new Registrar_Usuario();
+
         regusu.setVisible(true);
     }//GEN-LAST:event_jButton3MousePressed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        Recuperar_Contraseña ad = new Recuperar_Contraseña();
+        
 //        ad.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
         // TODO add your handling code here:
-        if(jTextField1.getText().equals("enriquehernandez.pereyra@gmail.com")){
+        if (jTextField1.getText().equals("enriquehernandez.pereyra@gmail.com")) {
             jTextField1.setText("");
             jTextField1.setForeground(Color.black);
         }
@@ -353,7 +360,7 @@ public class Login_Usuario extends javax.swing.JFrame {
 
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
         // TODO add your handling code here:
-        if(jTextField1.getText().isEmpty()){
+        if (jTextField1.getText().isEmpty()) {
             jTextField1.setText("enriquehernandez.pereyra@gmail.com");
             jTextField1.setForeground(Color.gray);
         }

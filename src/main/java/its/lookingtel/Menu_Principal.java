@@ -17,17 +17,22 @@ import javax.swing.ImageIcon;
  * @author Guest Mode
  */
 public class Menu_Principal extends javax.swing.JFrame {
+   
 
     /**
      * Creates new form Menu_Principal
      */
     public Menu_Principal() {
+
         initComponents();
+       
         getContentPane().setBackground(Color.white);
         jPanel2.setBackground(Color.white);
         jButton1.setBackground(Color.white);
         jButton2.setBackground(Color.white);
         displaylogo();
+
+        
     }
 
     private void displaylogo() {
@@ -67,6 +72,11 @@ public class Menu_Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -142,22 +152,27 @@ public class Menu_Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Login_Administrador ad = new Login_Administrador();
-        ad.setVisible(true);
+Login_Administrador ad = new Login_Administrador();
+   ad.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
         // TODO add your handling code here:
-        Login_Usuario ad = new Login_Usuario();
-        ad.setVisible(true);
+        Login_Usuario us = new Login_Usuario();
+        us.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton2MousePressed
 
-    
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt){
-        
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+
     }
+
     /**
      * @param args the command line arguments
      */
