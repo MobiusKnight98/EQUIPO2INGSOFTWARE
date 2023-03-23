@@ -58,7 +58,8 @@ public class Condominio extends Querys {
 
     Condominio Consultar_Condominio_Admin(String CIForId) throws SQLException {
 
-        Connection conn = Conexion_Remota.Conectar_BD();PreparedStatement statement;
+        Connection conn = Conexion_Remota.Conectar_BD();
+        PreparedStatement statement;
         try {
 
             Integer.parseInt(CIForId);
@@ -72,15 +73,15 @@ public class Condominio extends Querys {
 
         }
 
-        ResultSet rs = null;Condominio condominio = null;
+        ResultSet rs = null;
+        Condominio condominio = null;
         try {
             rs = statement.executeQuery();
             rs.next();
             condominio = new Condominio(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5),
                     Date.valueOf(rs.getString(6)), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getInt(12));
-        } 
-        catch (SQLException ex) {
-
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "El CIF o Id proporcionado no existe", "Error", 0);
         }
 
         rs.close();
@@ -108,91 +109,48 @@ public class Condominio extends Querys {
         return Id;
     }
 
-    public void setId(int Id) {
-        this.Id = Id;
-    }
-
     public String getNombre() {
         return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getCIF() {
         return CIF;
     }
 
-    public void setCIF(String CIF) {
-        this.CIF = CIF;
-    }
-
     public int getScore() {
         return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
     }
 
     public Date getFecha_Registro() {
         return Fecha_Registro;
     }
 
-    public void setFecha_Registro(Date Fecha_Registro) {
-        this.Fecha_Registro = Fecha_Registro;
-    }
-
     public int getNo_Habitaciones() {
         return No_Habitaciones;
-    }
-
-    public void setNo_Habitaciones(int No_Habitaciones) {
-        this.No_Habitaciones = No_Habitaciones;
     }
 
     public String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
     public int getPrecio_x_noche() {
         return precio_x_noche;
-    }
-
-    public void setPrecio_x_noche(int precio_x_noche) {
-        this.precio_x_noche = precio_x_noche;
     }
 
     public String getServicios() {
         return servicios;
     }
 
-    public void setServicios(String servicios) {
-        this.servicios = servicios;
-    }
-
     public String getImage_lugar() {
         return image_lugar;
-    }
-
-    public void setImage_lugar(String image_lugar) {
-        this.image_lugar = image_lugar;
     }
 
     public int getStatus() {
         return Status;
     }
 
-    /**
-     * @param Status the Status to set
-     */
-    public void setStatus(int Status) {
-        this.Status = Status;
+    public int getUbicacion() {
+        return Ubicacion;
     }
 
     @Override

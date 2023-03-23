@@ -874,10 +874,10 @@
                                   <Component id="jTextField13" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jLabel27" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel29" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane2" alignment="0" min="-2" pref="221" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane2" alignment="0" pref="221" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -891,7 +891,7 @@
                                   </Group>
                                   <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jFormattedTextField1" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
-                                  <Component id="jComboBox14" alignment="0" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <Component id="jComboBox14" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">

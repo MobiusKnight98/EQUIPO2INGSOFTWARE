@@ -59,7 +59,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
     public Registrar_Condominio() {
 
         initComponents();
-
+        jLabel2.requestFocus();
         jLabel14.setVisible(false);
         jLabel18.setVisible(false);
 
@@ -70,7 +70,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jLabel21.setVisible(false);
 
         getContentPane().setBackground(Color.white);
-       
+
         jPanel2.setBackground(Color.white);
         jPanel3.setBackground(Color.white);
         jPanel4.setBackground(Color.white);
@@ -91,11 +91,18 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         int precio_condominio_noche = Integer.parseInt(jTextField5.getText());
         int ubicacion_condominio = key;
         String cif_condominio = jTextField2.getText();
+
+        // convertir a string los servicios
         String stringifiedservices = "";
         for (String service : services) {
             stringifiedservices += service + ",";
         }
+
         stringifiedservices = stringifiedservices.substring(0, stringifiedservices.length() - 1);
+
+        // hacer el el nombre de la imagen que sea el nombre del condominio y eliminar espacios en blanco
+        picture = nombre_condominio.replaceAll("\\s+", "") + "." + picture.substring(picture.lastIndexOf(".") + 1);
+        System.out.println(picture);
 
         try {
 
@@ -165,7 +172,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             }
 
             JOptionPane.showMessageDialog(null, "No se pudo registrar condominio Codigo de Error 0", "Error", 0);
-
+            DeletePictureFromCellar();
             //ResultSetMetaData rsmd = rs.getMetaData();
             //System.out.println(rsmd.getColumnName(1))
             statement.close();
@@ -179,22 +186,59 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "El CIF actual ya existe no se puede registrar condominio", "Error", 0);
 
+            DeletePictureFromCellar();
+
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    private static boolean validate(String text, int minlength, int maxlength, String regular_exp, JLabel lbl, boolean ignore_length, JLabel errorlblmsg) {
+    void DeletePictureFromCellar() {
+
+        try {
+
+            List<String> command = new ArrayList<>();
+            command.add("cmd.exe");
+            command.add("/c");
+            command.add("aws s3api delete-object --bucket lookingtel --key " + "\"" + picture + "\"" + " --endpoint-url https://cellar-c2.services.clever-cloud.com");
+
+            // command.add("aws s3api list-objects --bucket lookingtel --endpoint-url https://cellar-c2.services.clever-cloud.com");
+            //  aws s3api put-object --bucket lookingtel --key" + " " + "\"" + picture + "\"" + " " + "--body" + " " + "\"" + picturepath + "\"" + " --acl public-read --endpoint-url https://cellar-c2.services.clever-cloud.com
+            System.out.println(command);
+            ProcessBuilder builder = new ProcessBuilder(command);
+            builder.redirectErrorStream(true);
+            Process process = builder.start();
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static boolean validate(String text, int minlength, int maxlength, String regular_exp, JLabel lbl, boolean ignore_length, JLabel errorlblmsg, String placeholder) {
+
+        // validamos el placeholder
+        if (placeholder.equals(text)) {
+            lbl.setForeground(Color.red);
+            errorlblmsg.setVisible(true);
+            errorlblmsg.setText(lbl.getText().substring(0, lbl.getText().length() - 1) + " no puede ser el default");
+            return false;
+        }
 
         // validate the data type
         if (!text.matches(regular_exp)) {
 
             // jtxt.setText("");
             lbl.setForeground(Color.red);
-            System.out.println("expresion regular no concuerda");
             errorlblmsg.setVisible(true);
-            errorlblmsg.setText("Caracteres invalidos introducidos");
+            errorlblmsg.setText("Error " + lbl.getText().substring(0, lbl.getText().length() - 1) + " no valido");
             return false;
 
         }
@@ -209,9 +253,8 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         if (text.length() < minlength || text.length() > maxlength) {
             //  jtxt.setText("");
             lbl.setForeground(Color.red);
-            System.out.println("longitud muy corta o muy larga");
             errorlblmsg.setVisible(true);
-            errorlblmsg.setText("Longitud de texto muy corta o muy larga");
+            errorlblmsg.setText("Longitud de " + lbl.getText() + " muy corta o muy larga");
             return false;
         }
 
@@ -245,24 +288,22 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             Image scaledImage_add_button_image = add_button_image.getScaledInstance(jPanel5.getWidth(),
                     jPanel5.getHeight(),
                     Image.SCALE_SMOOTH);
-            
-           
 
             // Create an ImageIcon from the image
             ImageIcon icon_userpic = new ImageIcon(scaledImage_condominio);
             ImageIcon icon_lookingtel = new ImageIcon(scaledImage_lookingtel);
             ImageIcon icon_close_button = new ImageIcon(scaledImage_close_button_image);
-          ImageIcon icon_add_button = new ImageIcon(scaledImage_add_button_image);
+            ImageIcon icon_add_button = new ImageIcon(scaledImage_add_button_image);
 
             // Set the icon on the JLabel
             jLabel5.setIcon(icon_userpic);
             jLabel6.setIcon(icon_lookingtel);
             jLabel7.setIcon(icon_close_button);
-           jLabel13.setIcon(icon_add_button);
+            jLabel13.setIcon(icon_add_button);
 
         } catch (IOException ex) {
-           // ex.printStackTrace();
-          JOptionPane.showMessageDialog(null,"No se pueden mostrar las imagenes","Error",0);
+            // ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "No se pueden mostrar las imagenes", "Error", 0);
         }
     }
 
@@ -327,7 +368,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         setTitle("Registrar Condominio");
         setForeground(new java.awt.Color(255, 255, 0));
         setLocation(new java.awt.Point(123, 123));
-        setPreferredSize(new java.awt.Dimension(850, 580));
+        setPreferredSize(new java.awt.Dimension(970, 580));
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -413,7 +454,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("José Enrique Campos");
+        jTextField1.setText("Lomas Verdes");
         jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jTextField1.setPreferredSize(new java.awt.Dimension(182, 24));
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -453,7 +494,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jLayeredPane1.add(jLabel14, gridBagConstraints);
 
         java.awt.GridBagLayout jLayeredPane2Layout = new java.awt.GridBagLayout();
-        jLayeredPane2Layout.columnWidths = new int[] {230};
+        jLayeredPane2Layout.columnWidths = new int[] {298};
         jLayeredPane2Layout.rowHeights = new int[] {25, 0, 25};
         jLayeredPane2.setLayout(jLayeredPane2Layout);
 
@@ -466,9 +507,21 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jLayeredPane2.add(jLabel9, gridBagConstraints);
 
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(153, 153, 153));
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
+        jTextArea1.setText("Calle Duraznos, Esquina Manzanos #324");
         jTextArea1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jTextArea1.setPreferredSize(new java.awt.Dimension(250, 96));
+        jTextArea1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextArea1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextArea1FocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -477,7 +530,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel18.setText("Caracteres invalidos introducidos");
+        jLabel18.setText("Longitud de \" + lbl.getText() + \" muy corta o muy larga");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -487,21 +540,21 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jLayeredPane2.add(jLabel18, gridBagConstraints);
 
         java.awt.GridBagLayout jLayeredPane3Layout = new java.awt.GridBagLayout();
-        jLayeredPane3Layout.columnWidths = new int[] {230};
+        jLayeredPane3Layout.columnWidths = new int[] {298};
         jLayeredPane3Layout.rowHeights = new int[] {0, 0, 20};
         jLayeredPane3.setLayout(jLayeredPane3Layout);
 
         jTextField5.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jTextField5.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField5.setText("000");
         jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jTextField5.setPreferredSize(new java.awt.Dimension(50, 24));
         jTextField5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField5FocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField5FocusLost(evt);
-            }
-        });
-        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField5KeyPressed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -521,7 +574,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 51, 51));
-        jLabel20.setText("Caracteres invalidos introducidos");
+        jLabel20.setText("Longitud de \" + lbl.getText() + \" muy corta o muy larga");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -546,7 +599,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         jTextField2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField2.setText("RISA123CY1");
+        jTextField2.setText("CAHE980311");
         jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jTextField2.setPreferredSize(new java.awt.Dimension(80, 23));
         jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -697,6 +750,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         java.awt.GridBagLayout jLayeredPane6Layout = new java.awt.GridBagLayout();
         jLayeredPane6Layout.columnWidths = new int[] {0};
+        jLayeredPane6Layout.rowHeights = new int[] {23, 23, 23};
         jLayeredPane6.setLayout(jLayeredPane6Layout);
 
         jLabel5.setPreferredSize(new java.awt.Dimension(300, 200));
@@ -731,11 +785,11 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -836,22 +890,25 @@ public class Registrar_Condominio extends javax.swing.JFrame {
                             .addComponent(jLayeredPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(39, Short.MAX_VALUE))
-                            .addComponent(jLayeredPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))
+                            .addComponent(jLayeredPane3)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLayeredPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                                .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(118, 118, 118)
-                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(129, 129, 129)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(358, 358, 358)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -873,17 +930,18 @@ public class Registrar_Condominio extends javax.swing.JFrame {
                         .addComponent(jLayeredPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLayeredPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(jLayeredPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(28, 28, 28)
+                            .addComponent(jLayeredPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("");
@@ -966,6 +1024,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
         this.dispose();
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
@@ -1011,7 +1070,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         if (jTextField1.getText().isEmpty()) {
             jTextField1.setForeground(Color.gray);
-            jTextField1.setText("José Enrique Campos");
+            jTextField1.setText("Lomas Verdes");
         }
 
 
@@ -1021,31 +1080,26 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         score = 0;
-        picture ="";
-        picturepath="";
+        picture = "";
+        picturepath = "";
     }//GEN-LAST:event_formWindowClosed
 
     private void jTextField5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusLost
         // TODO add your handling code here:
-
+        if (jTextField5.getText().isEmpty()) {
+            jTextField5.setForeground(Color.gray);
+            jTextField5.setText("000");
+        }
     }//GEN-LAST:event_jTextField5FocusLost
-
-    private void jTextField5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyPressed
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_jTextField5KeyPressed
 
     private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
         // TODO add your handling code here:
-          
-        
-        
+
         if (jTextField2.getText().isEmpty()) {
             jTextField2.setForeground(Color.gray);
-            jTextField2.setText("RISA123CY1");
+            jTextField2.setText("CAHE980311");
         }
-       
+
 
     }//GEN-LAST:event_jTextField2FocusLost
 
@@ -1056,13 +1110,13 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         ArrayList<String> services = new ArrayList<String>();
 
         // verificamos que los textfields cumplan con la longitud y los caracteres posibles
-        passedstatuses.add(validate(jTextField1.getText(), 0, 0, ValidName, jLabel3, true, jLabel14));
+        passedstatuses.add(validate(jTextField1.getText(), 0, 0, ValidName, jLabel3, true, jLabel14, "Lomas Verdes"));
 
-        passedstatuses.add(validate(jTextArea1.getText(), 10, 64, direccion, jLabel9, false, jLabel18));
+        passedstatuses.add(validate(jTextArea1.getText(), 10, 64, direccion, jLabel9, false, jLabel18, "Calle Duraznos, Esquina Manzanos #324"));
 
-        passedstatuses.add(validate(jTextField5.getText(), 2, 3, numbersonly, jLabel12, false, jLabel20));
+        passedstatuses.add(validate(jTextField5.getText(), 2, 3, numbersonly, jLabel12, false, jLabel20, "000"));
 
-        passedstatuses.add(validate(jTextField2.getText(), 10, 10, capitallettersandnumbers, jLabel4, false, jLabel16));
+        passedstatuses.add(validate(jTextField2.getText(), 10, 10, capitallettersandnumbers, jLabel4, false, jLabel16, "CAHE980311"));
 
         // validamos que al menos un solo checkbox haya sido seleccionado 
         boolean atleastone = false, pictureselected = false;
@@ -1186,7 +1240,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
         // TODO add your handling code here:
 
-        if (jTextField1.getText().equals("José Enrique Campos")) {
+        if (jTextField1.getText().equals("Lomas Verdes")) {
             jTextField1.setForeground(Color.black);
             jTextField1.setText("");
         }
@@ -1196,11 +1250,37 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
     private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
         // TODO add your handling code here:
-            if (jTextField2.getText().equals("RISA123CY1")) {
+        if (jTextField2.getText().equals("CAHE980311")) {
             jTextField2.setForeground(Color.black);
             jTextField2.setText("");
         }
     }//GEN-LAST:event_jTextField2FocusGained
+
+    private void jTextField5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusGained
+        // TODO add your handling code here:
+        if (jTextField5.getText().equals("000")) {
+            jTextField5.setForeground(Color.black);
+            jTextField5.setText("");
+        }
+    }//GEN-LAST:event_jTextField5FocusGained
+
+    private void jTextArea1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextArea1FocusGained
+        // TODO add your handling code here:
+
+        if (jTextArea1.getText().equals("Calle Duraznos, Esquina Manzanos #324")) {
+            jTextArea1.setForeground(Color.black);
+            jTextArea1.setText("");
+        }
+    }//GEN-LAST:event_jTextArea1FocusGained
+
+    private void jTextArea1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextArea1FocusLost
+        // TODO add your handling code here:
+
+        if (jTextArea1.getText().isEmpty()) {
+            jTextArea1.setForeground(Color.gray);
+            jTextArea1.setText("Calle Duraznos, Esquina Manzanos #324");
+        }
+    }//GEN-LAST:event_jTextArea1FocusLost
 
     /**
      * @param args the command line arguments
