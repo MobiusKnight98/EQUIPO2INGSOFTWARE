@@ -157,7 +157,7 @@ public class Login_Usuario extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField1.setText("enriquehernandez.pereyra@gmail.com");
+        jTextField1.setText("example@something.com");
         jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -352,7 +352,7 @@ public class Login_Usuario extends javax.swing.JFrame {
 
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
         // TODO add your handling code here:
-        if (jTextField1.getText().equals("enriquehernandez.pereyra@gmail.com")) {
+        if (jTextField1.getText().equals("example@something.com")) {
             jTextField1.setText("");
             jTextField1.setForeground(Color.black);
         }
@@ -361,7 +361,7 @@ public class Login_Usuario extends javax.swing.JFrame {
     private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
         // TODO add your handling code here:
         if (jTextField1.getText().isEmpty()) {
-            jTextField1.setText("enriquehernandez.pereyra@gmail.com");
+            jTextField1.setText("example@something.com");
             jTextField1.setForeground(Color.gray);
         }
     }//GEN-LAST:event_jTextField1FocusLost
