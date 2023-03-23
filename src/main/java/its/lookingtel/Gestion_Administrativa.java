@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -42,6 +43,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     Condominio cond;
     HashMap<Integer, String> Ubicacion = new HashMap<Integer, String>();
+    URL imagen_condominio;
+    String tracktab = "Usuarios";
 
     public Gestion_Administrativa() {
         cond = new Condominio();
@@ -103,7 +106,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                 String Estado = rs.getString(3);
                 String Ciudad = rs.getString(4);
                 Ubicacion.put(Id, Pais + "/" + Estado + "/" + Ciudad);
-
                 jComboBox14.addItem(Pais + "/" + Estado + "/" + Ciudad);
                 jComboBox2.addItem(Pais + "/" + Estado + "/" + Ciudad);
             }
@@ -135,6 +137,15 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         String[] servicios = condominio.getServicios().split(",");
         List<String> services = Arrays.asList(servicios);
 
+        for (Map.Entry<Integer, String> entry : Ubicacion.entrySet()) {
+
+            if (entry.getKey() == condominio.getUbicacion()) {
+                jComboBox14.setSelectedItem((String) entry.getValue());
+                break;
+            }
+
+        }
+
         if (services.contains("Agua")) {
             jCheckBox1.setSelected(true);
         }
@@ -154,12 +165,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             jCheckBox6.setSelected(true);
         }
 
-        URL imagencond = null;
         try {
-            String test = "https://lookingtel.cellar-c2.services.clever-cloud.com/18131220%20JC.png";
-            imagencond = new URL(test);
-            Image condominio_image = ImageIO.read(imagencond);
-            System.out.println(condominio.getImage_lugar());
+            imagen_condominio = new URL(condominio.getImage_lugar());
+            Image condominio_image = ImageIO.read(imagen_condominio);
 
             Image scaledImage_condominio = condominio_image.getScaledInstance(jPanel6.getWidth(),
                     jPanel6.getHeight(),
@@ -181,7 +189,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField6.setText("");
         jTextField10.setText("");
         jTextField11.setText("");
-        jComboBox9.setSelectedIndex(-1);
+        jComboBox9.setSelectedItem("");
         jTextField13.setText("");
         jFormattedTextField1.setText("");
         jTextArea2.setText("");
@@ -200,6 +208,27 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
         jCheckBox6.setSelected(false);
 
+        jComboBox13.setSelectedItem("");
+
+        try {
+
+            imagen_condominio = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/user_pic.png");
+            Image condominio_image = ImageIO.read(imagen_condominio);
+
+            Image scaledImage_condominio = condominio_image.getScaledInstance(jPanel6.getWidth(),
+                    jPanel6.getHeight(),
+                    Image.SCALE_SMOOTH);
+
+            ImageIcon icon_userpic = new ImageIcon(scaledImage_condominio);
+
+            jLabel7.setIcon(icon_userpic);
+
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Gestion_Administrativa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Gestion_Administrativa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     private void displaylogos() {
@@ -208,12 +237,12 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             URL logout_pic = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/logout_icon.png");
             URL lookingtel = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/lookingtel.png");
             URL hr_line = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/hr_line.png");
-            URL condominio = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/user_pic.png");
+            imagen_condominio = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/user_pic.png");
             URL add_button = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/add_button.png");
             Image logout_pic_image = ImageIO.read(logout_pic);
             Image lookingtel_image = ImageIO.read(lookingtel);
             Image hr_line_image = ImageIO.read(hr_line);
-            Image condominio_image = ImageIO.read(condominio);
+            Image condominio_image = ImageIO.read(imagen_condominio);
             Image add_button_image = ImageIO.read(add_button);
 
             Image scaledImage_logoutpic = logout_pic_image.getScaledInstance(45, 50,
@@ -1046,10 +1075,10 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                             .addComponent(jLabel30)
                             .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(47, 47, 47)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel27)
                             .addComponent(jLabel29)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel28)
@@ -1060,7 +1089,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                                     .addComponent(jComboBox13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel32)
                             .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBox14, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(39, 39, 39)
@@ -1630,7 +1659,11 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
         jLabel4.setText("Gestionar" + " " + jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()));
-        ClearChanges();
+
+        if (!jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals(tracktab)) {
+            ClearChanges();
+        }
+
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -1734,13 +1767,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
             //validar que el CIF o ID exista en la BD
             Condominio resultado = null;
+
             try {
-
                 resultado = cond.Consultar_Condominio_Admin(jTextField9.getText());
-                System.out.println(resultado.getFecha_Registro());
-
-            } catch (NullPointerException ex) {
-                JOptionPane.showMessageDialog(null, "Error al buscar condominio", "Error", 0);
             } catch (SQLException ex) {
                 Logger.getLogger(Gestion_Administrativa.class.getName()).log(Level.SEVERE, null, ex);
             }
