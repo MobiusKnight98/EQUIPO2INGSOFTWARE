@@ -12,6 +12,7 @@ import java.net.URL;
 import java.sql.Connection;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -323,9 +324,10 @@ public class Login_Usuario extends javax.swing.JFrame {
             return;
 
         }
-        System.out.print("Login Exitoso");
+       
+        JOptionPane.showMessageDialog(null,"Login Exitoso","Success",1);
         //pantalla_gestion.setVisible(true);
-        this.dispose();
+       // this.dispose();
 
     }//GEN-LAST:event_jButton1MousePressed
 
