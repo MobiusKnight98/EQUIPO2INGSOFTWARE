@@ -21,6 +21,8 @@ import javax.swing.ImageIcon;
 public class Login_Administrador extends javax.swing.JFrame {
 
     Administrador admin;
+    Gestion_Administrativa pantalla_gestion;
+    Menu_Principal menu;
 
     /*
      * Creates new form Login_Administrador
@@ -28,6 +30,8 @@ public class Login_Administrador extends javax.swing.JFrame {
     public Login_Administrador() {
         initComponents();
         admin = new Administrador();
+        pantalla_gestion = new Gestion_Administrativa();
+        menu = new Menu_Principal();
         jLabel2.requestFocusInWindow();
         getContentPane().setBackground(Color.white);
         jPanel1.setBackground(Color.white);
@@ -240,14 +244,13 @@ public class Login_Administrador extends javax.swing.JFrame {
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here: 
         this.dispose();
-        Menu_Principal menu = new Menu_Principal();
+
         menu.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
 
-        Gestion_Administrativa pantalla_gestion = new Gestion_Administrativa();
         if (!admin.IniciarSesion(jTextField1.getText(), jPasswordField1.getText())) {
             return;
         }
