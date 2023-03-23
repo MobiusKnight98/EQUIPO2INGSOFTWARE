@@ -196,8 +196,13 @@ public class Registrar_Usuario extends javax.swing.JFrame {
             lbl.setForeground(Color.red);
             errorlblmsg.setVisible(true);
             errorlblmsg.setText("Longitud de " + lbl.getText().substring(0, lbl.getText().length() - 1) + " muy corta o muy larga");
+            JOptionPane.showMessageDialog(null,"La longitud mininima deben de ser: " + minlength + " caracteres en: "+ lbl.getText().substring(0, lbl.getText().length() - 1)  +"\n"+ 
+                    "La longitud maxima deben de ser: "+ maxlength+ " caracteres en: "+lbl.getText().substring(0, lbl.getText().length() - 1) ,"Aviso",0);
             return false;
         }
+        
+        
+        
 
         lbl.setForeground(Color.black);
         errorlblmsg.setVisible(false);
@@ -225,6 +230,8 @@ public class Registrar_Usuario extends javax.swing.JFrame {
             lbl.setForeground(Color.red);
             errorlblmsg.setVisible(true);
             errorlblmsg.setText("<html> Longitud de <br>" + lbl.getText().substring(0, lbl.getText().length() - 1) + "<br> muy corta o <br> muy larga");
+              JOptionPane.showMessageDialog(null,"La longitud mininima deben de ser: " + minlength + " caracteres en: "+ lbl.getText().substring(0, lbl.getText().length() - 1)  +"\n"+ 
+                    "La longitud maxima deben de ser: "+ maxlength+ " caracteres en: "+lbl.getText().substring(0, lbl.getText().length() - 1) ,"Aviso",0);
             return false;
         }
         

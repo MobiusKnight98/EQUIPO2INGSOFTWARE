@@ -104,10 +104,8 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         picture = cif_condominio + "." + picture.substring(picture.lastIndexOf(".") + 1);
         System.out.println(picture);
 
-      
-
         String url = "https://lookingtel.cellar-c2.services.clever-cloud.com/" + picture;
-        System.out.println("Output picture path: "+url);
+        System.out.println("Output picture path: " + url);
 
         // Creamos el query
         Connection conn = Conexion_Remota.Conectar_BD();
@@ -144,8 +142,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             statement.setString(9, url);
 
             int statusprocess = statement.executeUpdate();
-            
-            
+
             if (statusprocess == 1) {
                 JOptionPane.showMessageDialog(null, "Condominio Registrado Satisfactoriamente Codigo de Salida 1", "Success", 1);
                 InsertPictureAtCellar();
@@ -153,7 +150,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             }
 
             JOptionPane.showMessageDialog(null, "No se pudo registrar condominio Codigo de Error 0", "Error", 0);
-            
+
             //ResultSetMetaData rsmd = rs.getMetaData();
             //System.out.println(rsmd.getColumnName(1))
             statement.close();
@@ -166,8 +163,6 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         } catch (SQLIntegrityConstraintViolationException ex) {
 
             JOptionPane.showMessageDialog(null, "El CIF actual ya existe no se puede registrar condominio", "Error", 0);
-
-           
 
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
@@ -236,6 +231,9 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             lbl.setForeground(Color.red);
             errorlblmsg.setVisible(true);
             errorlblmsg.setText("Longitud de " + lbl.getText() + " muy corta o muy larga");
+            JOptionPane.showMessageDialog(null, "La longitud mininima deben de ser: " + minlength + " caracteres en: " + lbl.getText().substring(0, lbl.getText().length() - 1) + "\n"
+                    + "La longitud maxima deben de ser: " + maxlength + " caracteres en: " + lbl.getText().substring(0, lbl.getText().length() - 1), "Aviso", 0);
+
             return false;
         }
 
@@ -1059,7 +1057,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        
+
         this.dispose();
         score = 0;
         picture = "";

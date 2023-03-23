@@ -6,15 +6,13 @@
 package its.lookingtel;
 
 import java.awt.Color;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+
 import javax.swing.WindowConstants;
 
 /**
@@ -58,7 +56,7 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Recuperar COntraseña");
+        setTitle("Recuperar Contraseña");
         setResizable(false);
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 28)); // NOI18N
@@ -85,7 +83,7 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
 
         Correo_Electronico.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         Correo_Electronico.setForeground(new java.awt.Color(102, 102, 102));
-        Correo_Electronico.setText("enriquehernandez.pereyra@gmail.com");
+        Correo_Electronico.setText("example@something.com");
         Correo_Electronico.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         Correo_Electronico.setPreferredSize(new java.awt.Dimension(140, 22));
         Correo_Electronico.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -105,7 +103,7 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
 
         Confirmar_Correo_Electronico.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         Confirmar_Correo_Electronico.setForeground(new java.awt.Color(102, 102, 102));
-        Confirmar_Correo_Electronico.setText("enriquehernandez.pereyra@gmail.com");
+        Confirmar_Correo_Electronico.setText("example@something.com");
         Confirmar_Correo_Electronico.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         Confirmar_Correo_Electronico.setPreferredSize(new java.awt.Dimension(140, 22));
         Confirmar_Correo_Electronico.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -168,7 +166,7 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         if (Correo_Electronico.getText().isEmpty()) {
-            Correo_Electronico.setText("enriquehernandez.pereyra@gmail.com");
+            Correo_Electronico.setText("example@something.com");
             Correo_Electronico.setForeground(Color.gray);
         }
 
@@ -176,7 +174,7 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
 
     private void Correo_ElectronicoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Correo_ElectronicoFocusGained
         // TODO add your handling code here:
-        if (Correo_Electronico.getText().equals("enriquehernandez.pereyra@gmail.com")) {
+        if (Correo_Electronico.getText().equals("example@something.com")) {
             Correo_Electronico.setText("");
             Correo_Electronico.setForeground(Color.black);
         }
@@ -185,7 +183,7 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
 
     private void Confirmar_Correo_ElectronicoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Confirmar_Correo_ElectronicoFocusGained
         // TODO add your handling code here:
-        if (Confirmar_Correo_Electronico.getText().equals("enriquehernandez.pereyra@gmail.com")) {
+        if (Confirmar_Correo_Electronico.getText().equals("example@something.com")) {
             Confirmar_Correo_Electronico.setText("");
             Confirmar_Correo_Electronico.setForeground(Color.black);
         }
@@ -194,7 +192,7 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
     private void Confirmar_Correo_ElectronicoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Confirmar_Correo_ElectronicoFocusLost
         // TODO add your handling code here:
         if (Confirmar_Correo_Electronico.getText().isEmpty()) {
-            Confirmar_Correo_Electronico.setText("enriquehernandez.pereyra@gmail.com");
+            Confirmar_Correo_Electronico.setText("example@something.com");
             Confirmar_Correo_Electronico.setForeground(Color.gray);
         }
     }//GEN-LAST:event_Confirmar_Correo_ElectronicoFocusLost
@@ -235,16 +233,15 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
         }
 
         // enviar el mail
-         SendEmail.enviar_correo(data);
+        SendEmail.enviar_correo(data);
 
     }//GEN-LAST:event_jButton1MousePressed
     boolean ValidatePlaceHolder(JTextField jtxt) {
-        if (jtxt.getText().equals(("enriquehernandez.pereyra@gmail.com")) || jtxt.getText().isEmpty()) {
+        if (jtxt.getText().equals(("example@something.com")) || jtxt.getText().isEmpty()) {
             jtxt.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
             return false;
         }
-        
-        
+
         jtxt.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
         jtxt.repaint();
         return true;
@@ -257,7 +254,7 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "El correo electronico introducido no es valido en " + jtxt.getName() + ": " + jtxt.getText(), "Error", 0);
             return false;
         }
-        
+
         jtxt.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
         jtxt.repaint();
         return true;
@@ -268,7 +265,7 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
             jtxt.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
             jtxt2.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
             JOptionPane.showMessageDialog(null, "Los correos electronicos no concuerdan", "Error", 0);
-            
+
             return false;
         }
 
