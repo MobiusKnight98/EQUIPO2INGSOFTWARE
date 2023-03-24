@@ -214,7 +214,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             // jtxt.setText("");
             lbl.setForeground(Color.red);
             errorlblmsg.setVisible(true);
-            errorlblmsg.setText("Error " + lbl.getText().substring(0, lbl.getText().length() - 1) + " no valido");
+            errorlblmsg.setText("Error " + lbl.getText().substring(0, lbl.getText().length() - 1) + " no Valido");
             return false;
 
         }
@@ -226,11 +226,11 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         }
 
         // validate the length
-        if (text.length() < minlength || text.length() > maxlength) {
+        if (text.length() < minlength || text.length()-1 > maxlength) {
             //  jtxt.setText("");
             lbl.setForeground(Color.red);
             errorlblmsg.setVisible(true);
-            errorlblmsg.setText("Longitud de " + lbl.getText() + " muy corta o muy larga");
+            errorlblmsg.setText("Longitud de " + lbl.getText() + " invalida");
             JOptionPane.showMessageDialog(null, "La longitud mininima deben de ser: " + minlength + " caracteres en: " + lbl.getText().substring(0, lbl.getText().length() - 1) + "\n"
                     + "La longitud maxima deben de ser: " + maxlength + " caracteres en: " + lbl.getText().substring(0, lbl.getText().length() - 1), "Aviso", 0);
 
@@ -1090,9 +1090,9 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         ArrayList<String> services = new ArrayList<String>();
 
         // verificamos que los textfields cumplan con la longitud y los caracteres posibles
-        passedstatuses.add(validate(jTextField1.getText(), 0, 0, ValidName, jLabel3, true, jLabel14, "Lomas Verdes"));
+        passedstatuses.add(validate(jTextField1.getText(), 5, 45, ValidName, jLabel3, false, jLabel14, "Lomas Verdes"));
 
-        passedstatuses.add(validate(jTextArea1.getText(), 10, 64, direccion, jLabel9, false, jLabel18, "Calle Duraznos, Esquina Manzanos #324"));
+        passedstatuses.add(validate(jTextArea1.getText(), 30, 65, direccion, jLabel9, false, jLabel18, "Calle Duraznos, Esquina Manzanos #324"));
 
         passedstatuses.add(validate(jTextField5.getText(), 2, 3, numbersonly, jLabel12, false, jLabel20, "000"));
 

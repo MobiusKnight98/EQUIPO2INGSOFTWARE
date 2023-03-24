@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,7 +52,7 @@ public class Menu_Principal extends javax.swing.JFrame {
             jLabel1.setIcon(icon);
 
         } catch (IOException ex) {
-            ex.printStackTrace();
+           JOptionPane.showMessageDialog(null,"No se pueden mostrar las imagenes","Error",0);
         }
     }
 

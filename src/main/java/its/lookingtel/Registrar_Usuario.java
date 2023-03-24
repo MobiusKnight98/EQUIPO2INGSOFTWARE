@@ -170,7 +170,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
 
             lbl.setForeground(Color.red);
             errorlblmsg.setVisible(true);
-            errorlblmsg.setText("Porfavor introduce un " + lbl.getText().substring(0, lbl.getText().length() - 1));
+            errorlblmsg.setText("Porfavor introduce  " + lbl.getText().substring(0, lbl.getText().length() - 1));
             return false;
         }
 
@@ -191,11 +191,11 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         }
 
         // validate the length
-        if (text.length() < minlength || text.length() > maxlength) {
+        if (text.length() < minlength || text.length()-1 > maxlength) {
 
             lbl.setForeground(Color.red);
             errorlblmsg.setVisible(true);
-            errorlblmsg.setText("Longitud de " + lbl.getText().substring(0, lbl.getText().length() - 1) + " muy corta o muy larga");
+            errorlblmsg.setText("Longitud de " + lbl.getText().substring(0, lbl.getText().length() - 1) + " invalida");
             JOptionPane.showMessageDialog(null,"La longitud mininima deben de ser: " + minlength + " caracteres en: "+ lbl.getText().substring(0, lbl.getText().length() - 1)  +"\n"+ 
                     "La longitud maxima deben de ser: "+ maxlength+ " caracteres en: "+lbl.getText().substring(0, lbl.getText().length() - 1) ,"Aviso",0);
             return false;
@@ -225,11 +225,11 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         
 
         // validate the length
-        if (text.length() < minlength || text.length() > maxlength) {
+        if (text.length() < minlength || text.length()-1 > maxlength) {
 
             lbl.setForeground(Color.red);
             errorlblmsg.setVisible(true);
-            errorlblmsg.setText("<html> Longitud de <br>" + lbl.getText().substring(0, lbl.getText().length() - 1) + "<br> muy corta o <br> muy larga");
+            errorlblmsg.setText("<html> Longitud de <br>" + lbl.getText().substring(0, lbl.getText().length() - 1) + " invalida</html>");
               JOptionPane.showMessageDialog(null,"La longitud mininima deben de ser: " + minlength + " caracteres en: "+ lbl.getText().substring(0, lbl.getText().length() - 1)  +"\n"+ 
                     "La longitud maxima deben de ser: "+ maxlength+ " caracteres en: "+lbl.getText().substring(0, lbl.getText().length() - 1) ,"Aviso",0);
             return false;
@@ -981,13 +981,13 @@ public class Registrar_Usuario extends javax.swing.JFrame {
         List<Boolean> passedstatuses = new ArrayList<Boolean>();
 
         // verificamos que los textfields cumplan con la longitud y los caracteres posibles
-        passedstatuses.add(validate(jTextField1.getText(), 0, 0, ValidName, jLabel3, true, jLabel14, "Primernombre Segundonombre"));
+        passedstatuses.add(validate(jTextField1.getText(), 5, 45, ValidName, jLabel3, false, jLabel14, "Primernombre Segundonombre"));
 
         passedstatuses.add(validate(jTextField2.getText(), 10, 10, numbersonly, jLabel4, false, jLabel16, "8888888888"));
 
-        passedstatuses.add(validate(jTextField3.getText(), 0, 0, email, jLabel8, true, jLabel19, "ejemplo@gmail.com"));
+        passedstatuses.add(validate(jTextField3.getText(), 5, 50, email, jLabel8, false, jLabel19, "ejemplo@gmail.com"));
 
-        passedstatuses.add(validate(jTextArea1.getText(), 30, 50, direccion, jLabel9, false, jLabel18, "Longitud de direcccion muy corta muy larga"));
+        passedstatuses.add(validate(jTextArea1.getText(), 30, 50, direccion, jLabel9, false, jLabel18, "Boulevard, Calle, #numero"));
 
         passedstatuses.add(validatecontraseña(jPasswordField2.getText(),jPasswordField1.getText(), 10, 15, jLabel15, jLabel20, "<html> Porfavor introduce una <br> contraseña</html>"));
 
