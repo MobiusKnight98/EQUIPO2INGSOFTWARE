@@ -5,9 +5,12 @@
  */
 package its.lookingtel;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.sql.DataSource;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,7 +19,25 @@ import javax.swing.JOptionPane;
  */
 public class Conexion_Remota {
     
+    static DataSource hikaridatasource;
+    
+    // this method is only called once in the intialization of the app
+    
+    public static void HikariConnectionPooling(){
+        
+        HikariConfig hikariconfig = new HikariConfig();
+        hikariconfig.setJdbcUrl(System.getenv("MYSQL_CLEVERCLOUD_URL"));
+        hikariconfig.setUsername(System.getenv("MYSQL_CLEVERCLOUD_USERNAME"));
+        hikariconfig.setPassword(System.getenv("MYSQL_CLEVERCLOUD_PASSWORD"));
+        hikariconfig.setMaximumPoolSize(15);
+        
+        hikaridatasource = new HikariDataSource(hikariconfig);
+        
+    } 
    
+   
+    
+   /*
 
     static Connection Conectar_BD() {
 
@@ -35,6 +56,8 @@ public class Conexion_Remota {
         
         return conn;
     }
+    
+    */
 }
 
     /*
