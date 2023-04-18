@@ -7,12 +7,11 @@ package its.lookingtel;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,23 +23,31 @@ public class Login_Usuario extends javax.swing.JFrame {
     Menu_Principal menu;
     Registrar_Usuario regusu;
     Recuperar_Contraseña ad;
+    Condominios_Usuario pantalla_condominios_usuario;
+    Menu_Principal pantalla_menu_principal;
 
     /*
      * Creates new form Login_Administrador
      */
     public Login_Usuario() {
+        pantalla_condominios_usuario = new Condominios_Usuario();
         menu = new Menu_Principal();
         regusu = new Registrar_Usuario();
         ad = new Recuperar_Contraseña();
         initComponents();
         user = new Usuario();
-        jLabel2.requestFocusInWindow();
         getContentPane().setBackground(Color.white);
         jPanel1.setBackground(Color.white);
         jPanel2.setBackground(Color.white);
         jButton1.setBackground(Color.white);
         jButton3.setBackground(Color.white);
         displaylogos();
+    }
+
+    void captureScreen(Menu_Principal menu) {
+
+        pantalla_menu_principal = menu;
+
     }
 
     private void displaylogos() {
@@ -69,6 +76,22 @@ public class Login_Usuario extends javax.swing.JFrame {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    void ShowMenu() {
+
+        if (!user.IniciarSesion(jTextField1.getText(), jPasswordField1.getText())) {
+            return;
+
+        }
+        pantalla_condominios_usuario.captureScreen(this);
+        this.setVisible(false);
+        regusu.setVisible(false);
+        ad.setVisible(false);
+        jTextField1.setText("example@something.com");
+        jTextField1.setForeground(Color.gray);
+        jPasswordField1.setText(""); 
+        pantalla_condominios_usuario.setVisible(true);
     }
 
     /**
@@ -103,11 +126,23 @@ public class Login_Usuario extends javax.swing.JFrame {
         menu2.setLabel("Edit");
         menuBar1.add(menu2);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Panel Usuario");
         setLocation(new java.awt.Point(123, 123));
         setPreferredSize(new java.awt.Dimension(630, 490));
         setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
         jLabel2.setText("Panel Usuario");
@@ -129,6 +164,9 @@ public class Login_Usuario extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel3MousePressed(evt);
+            }
         });
 
         jLabel5.setBackground(new java.awt.Color(255, 204, 153));
@@ -142,6 +180,11 @@ public class Login_Usuario extends javax.swing.JFrame {
 
         jPasswordField1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jPasswordField1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyTyped(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 102, 153));
@@ -166,6 +209,11 @@ public class Login_Usuario extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField1FocusLost(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
             }
         });
 
@@ -204,7 +252,7 @@ public class Login_Usuario extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,24 +293,21 @@ public class Login_Usuario extends javax.swing.JFrame {
                 jButton3MousePressed(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(198, 198, 198)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addGap(43, 43, 43)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,19 +318,16 @@ public class Login_Usuario extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(165, 165, 165))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(24, 24, 24)
-                    .addComponent(jLabel3)
-                    .addContainerGap(553, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -295,11 +337,6 @@ public class Login_Usuario extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(16, 16, 16)
-                    .addComponent(jLabel3)
-                    .addContainerGap(456, Short.MAX_VALUE)))
         );
 
         getAccessibleContext().setAccessibleName("");
@@ -309,48 +346,36 @@ public class Login_Usuario extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here: 
-        this.dispose();
-        ad.dispose();
-        regusu.dispose();
+        this.setVisible(false);
+        ad.setVisible(false);
+        regusu.setVisible(false);
         menu.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
-        //this.dispose();
-        //Gestion_Administrativa pantalla_gestion = new Gestion_Administrativa();
-        //Objeto para mostrar los condominios
-        if (!user.IniciarSesion(jTextField1.getText(), jPasswordField1.getText())) {
-            return;
 
-        }
-       
-        JOptionPane.showMessageDialog(null,"Login Exitoso","Success",1);
-        //pantalla_gestion.setVisible(true);
-       // this.dispose();
+        ShowMenu();
+
 
     }//GEN-LAST:event_jButton1MousePressed
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
         // TODO add your handling code here:
 
-        
+        this.setEnabled(false);
         ad.setVisible(true);
+        ad.captureScreen(this);
 
 
     }//GEN-LAST:event_jButton2MousePressed
 
     private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
         // TODO add your handling code here:
-
+        this.setEnabled(false);
         regusu.setVisible(true);
+        regusu.captureScreen(this);
     }//GEN-LAST:event_jButton3MousePressed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        
-//        ad.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
         // TODO add your handling code here:
@@ -367,6 +392,41 @@ public class Login_Usuario extends javax.swing.JFrame {
             jTextField1.setForeground(Color.gray);
         }
     }//GEN-LAST:event_jTextField1FocusLost
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        jLabel2.requestFocus();
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        pantalla_menu_principal.setVisible(true);
+        pantalla_menu_principal.requestFocus();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        ad.setVisible(false);
+        regusu.setVisible(false);
+        menu.setVisible(true);
+    }//GEN-LAST:event_jLabel3MousePressed
+
+    private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
+        // TODO add your handling code here:
+   
+        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+             ShowMenu();
+        }
+
+    }//GEN-LAST:event_jPasswordField1KeyTyped
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+          if(evt.getKeyChar() == KeyEvent.VK_ENTER){
+             ShowMenu();
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
 
     /**
      * @param args the command line arguments
@@ -402,6 +462,7 @@ public class Login_Usuario extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login_Usuario().setVisible(true);
+
             }
         });
     }

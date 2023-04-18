@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -17,7 +18,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,7 +29,6 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -46,10 +45,10 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     URL imagen_condominio;
     String tracktab = "Usuarios";
     Registrar_Condominio pantalla_registrar_condominio;
+    Login_Administrador pantalla_login_administrador;
+    Condominio resultado;
 
     public Gestion_Administrativa() {
-        pantalla_registrar_condominio = new Registrar_Condominio();
-        cond = new Condominio();
         initComponents();
         getContentPane().setBackground(Color.white);
         jTabbedPane1.setBackground(Color.white);
@@ -90,9 +89,15 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     }
 
+    public void captureScreen(Login_Administrador login) {
+
+        pantalla_login_administrador = login;
+
+    }
+
     void GetUbications() {
-        Connection conn = Conexion_Remota.Conectar_BD();
-        try {
+
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
             // Statement st = conn.createStatement();
             //st.execute("""
             //    INSERT INTO RESERVACIONES (Id_Condominio,Id_Usuario,No_Personas,Dias_Estadia,Fecha_Reservacion,Fecha_Llegada,Fecha_Partida,Costo_Total) VALUES (1,2,13,45,NOW(),DATE_ADD(NOW(),INTERVAL 10 DAY),DATE_ADD(NOW(),INTERVAL 55 DAY),30000);
@@ -125,23 +130,27 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         }
     }
 
-    void MostrarCondominio(Condominio condominio) {
+    void MostrarCondominio() {
 
-        jTextField6.setText(String.valueOf(condominio.getId()));
-        jTextField10.setText(condominio.getNombre());
-        jTextField11.setText(String.valueOf(condominio.getPrecio_x_noche()));
-        jComboBox9.setSelectedIndex(condominio.getStatus());
-        jTextField13.setText(condominio.getCIF());
-        jFormattedTextField1.setText(String.valueOf(condominio.getFecha_Registro()));
-        jTextArea2.setText(condominio.getDireccion());
-        jTextField12.setText(condominio.getScore() + "%");
-        jComboBox13.setSelectedItem(String.valueOf(condominio.getNo_Habitaciones()));
-        String[] servicios = condominio.getServicios().split(",");
+        jTextField6.setText(String.valueOf(resultado.getId()));
+        jTextField10.setText(resultado.getNombre());
+        jTextField11.setText(String.valueOf(resultado.getPrecio_x_noche()));
+        jComboBox9.setSelectedIndex(resultado.getStatus());
+        jTextField13.setText(resultado.getCIF());
+        jFormattedTextField1.setText(String.valueOf(resultado.getFecha_Registro()));
+        jTextArea2.setText(resultado.getDireccion());
+        System.out.println(String.valueOf(resultado.getScore()));
+        jTextField12.setText(resultado.getScore() + "%");
+        jComboBox13.setSelectedItem(String.valueOf(resultado.getNo_Habitaciones()));
+
+        String[] servicios = resultado.getServicios().split(",");
         List<String> services = Arrays.asList(servicios);
+
+        System.out.println(services);
 
         for (Map.Entry<Integer, String> entry : Ubicacion.entrySet()) {
 
-            if (entry.getKey() == condominio.getUbicacion()) {
+            if (entry.getKey() == resultado.getUbicacion()) {
                 jComboBox14.setSelectedItem((String) entry.getValue());
                 break;
             }
@@ -150,41 +159,62 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
         if (services.contains("Agua")) {
             jCheckBox1.setSelected(true);
+        } else {
+            jCheckBox1.setSelected(false);
         }
+
         if (services.contains("Gas")) {
             jCheckBox4.setSelected(true);
+        } else {
+            jCheckBox4.setSelected(false);
         }
+
         if (services.contains("Internet")) {
             jCheckBox5.setSelected(true);
+        } else {
+            jCheckBox5.setSelected(false);
         }
+
         if (services.contains("Luz")) {
             jCheckBox3.setSelected(true);
+        } else {
+            jCheckBox3.setSelected(false);
         }
+
         if (services.contains("Cocina")) {
             jCheckBox7.setSelected(true);
+        } else {
+            jCheckBox7.setSelected(false);
         }
+
         if (services.contains("Televisión")) {
             jCheckBox6.setSelected(true);
+        } else {
+            jCheckBox6.setSelected(false);
         }
 
-        try {
-            imagen_condominio = new URL(condominio.getImage_lugar());
-            Image condominio_image = ImageIO.read(imagen_condominio);
+    }
 
-            Image scaledImage_condominio = condominio_image.getScaledInstance(jPanel6.getWidth(),
+    void MostrarImagenCondominio() {
+        try {
+
+            imagen_condominio = new URL(resultado.getImage_lugar());
+
+            BufferedImage buffered_condominio_image = ImageIO.read(imagen_condominio);
+
+            Image scaledImage_condominio = buffered_condominio_image.getScaledInstance(jPanel6.getWidth(),
                     jPanel6.getHeight(),
                     Image.SCALE_SMOOTH);
 
-            ImageIcon icon_userpic = new ImageIcon(scaledImage_condominio);
+            ImageIcon icon_condominio = new ImageIcon(scaledImage_condominio);
 
-            jLabel7.setIcon(icon_userpic);
+            jLabel7.setIcon(icon_condominio);
 
         } catch (MalformedURLException ex) {
             Logger.getLogger(Gestion_Administrativa.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(Gestion_Administrativa.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     void ClearChanges() {
@@ -233,7 +263,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     }
 
-    private void displaylogos() {
+    void displaylogos() {
         try {
             // Load the image from the URL
             URL logout_pic = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/logout_icon.png");
@@ -365,6 +395,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -413,11 +444,14 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestion Administrativa");
         setPreferredSize(new java.awt.Dimension(866, 605));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -758,6 +792,12 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             }
         });
         jTextField9.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField9KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField9KeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField9KeyTyped(evt);
             }
@@ -769,9 +809,10 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jButton5.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton5.setText("Borrar Condominio");
         jButton5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton5MousePressed(evt);
             }
         });
 
@@ -786,6 +827,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel23.setText("Id:");
 
+        jTextField10.setEditable(false);
         jTextField10.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField10.setForeground(new java.awt.Color(102, 102, 102));
         jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -1042,6 +1084,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("0");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -1062,7 +1107,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                                 .addComponent(jLabel21)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(72, 72, 72)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(69, 69, 69)))
                         .addGap(16, 16, 16))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1104,7 +1151,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(192, 192, 192))))))
+                                .addGap(209, 209, 209))))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1115,7 +1162,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1556,6 +1604,17 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 204));
         jLabel5.setText("Cerrar Sesión");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel5MousePressed(evt);
+            }
+        });
+
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel6MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -1643,8 +1702,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         // TODO add your handling code here:
         pantalla_registrar_condominio.dispose();
         this.dispose();
-        Login_Administrador pantalla_login_administrador = new Login_Administrador();
         pantalla_login_administrador.setVisible(true);
+
+
     }//GEN-LAST:event_jPanel4MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1654,10 +1714,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
@@ -1732,13 +1788,16 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     private void jButton3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MousePressed
         // TODO add your handling code here:
-        
+
         pantalla_registrar_condominio.setVisible(true);
+        pantalla_registrar_condominio.captureScreen(this);
+        this.setEnabled(false);
     }//GEN-LAST:event_jButton3MousePressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-
+        pantalla_registrar_condominio = new Registrar_Condominio();
+        cond = new Condominio();
         GetUbications();
 
 
@@ -1746,6 +1805,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     private void jTextField9KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField9KeyTyped
         // TODO add your handling code here:
+
         if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
 
             //validate que el CIF o Id no sea el place holder
@@ -1769,18 +1829,25 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             jTextField9.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
 
             //validar que el CIF o ID exista en la BD
-            Condominio resultado = null;
+            resultado = null;
 
             try {
                 resultado = cond.Consultar_Condominio_Admin(jTextField9.getText());
             } catch (SQLException ex) {
-                Logger.getLogger(Gestion_Administrativa.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Condominio no existente", "Error", 0);
             }
 
             if (resultado != null) {
-                MostrarCondominio(resultado);
-            }
 
+                new Thread(() -> {
+
+                    MostrarImagenCondominio();
+
+                }).start();
+
+                MostrarCondominio();
+
+            }
         }
 
     }//GEN-LAST:event_jTextField9KeyTyped
@@ -1856,6 +1923,54 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_jCheckBox6FocusLost
+
+    private void jTextField9KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField9KeyReleased
+        // TODO add your handling code here:
+        jLabel2.setText(String.valueOf(jTextField9.getText().length()));
+        System.out.println("Released key:" + jTextField9.getText().length());
+    }//GEN-LAST:event_jTextField9KeyReleased
+
+    private void jTextField9KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField9KeyPressed
+        // TODO add your handling code here:
+        jLabel2.setText(String.valueOf(jTextField9.getText().length()));
+        System.out.println("Pressed key:" + jTextField9.getText().length());
+    }//GEN-LAST:event_jTextField9KeyPressed
+
+    private void jButton5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MousePressed
+        // TODO add your handling code here:
+        if (jTextField6.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se ha consultado un condominio previamente para borrar", "Error", 0);
+            return;
+        }
+        if (cond.Eliminar_Condominio_Administrador(Integer.valueOf(jTextField6.getText())) == 1) {
+            ClearChanges();
+        }
+    }//GEN-LAST:event_jButton5MousePressed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+
+        pantalla_login_administrador.setVisible(true);
+        pantalla_registrar_condominio.dispose();
+        
+
+    }//GEN-LAST:event_formWindowClosed
+
+    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
+        // TODO add your handling code here:
+
+        pantalla_registrar_condominio.dispose();
+        this.dispose();
+        pantalla_login_administrador.setVisible(true);
+    }//GEN-LAST:event_jLabel6MousePressed
+
+    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+        // TODO add your handling code here:
+
+        pantalla_registrar_condominio.dispose();
+        this.dispose();
+        pantalla_login_administrador.setVisible(true);
+    }//GEN-LAST:event_jLabel5MousePressed
 
     /**
      * @param args the command line arguments
@@ -1940,6 +2055,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;

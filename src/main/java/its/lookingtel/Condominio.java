@@ -58,36 +58,42 @@ public class Condominio extends Querys {
 
     Condominio Consultar_Condominio_Admin(String CIForId) throws SQLException {
 
-        Connection conn = Conexion_Remota.Conectar_BD();
-        PreparedStatement statement;
-        try {
-
-            Integer.parseInt(CIForId);
-            statement = conn.prepareStatement("SELECT * FROM CONDOMINIOS WHERE Id=?");
-            statement.setString(1, CIForId);
-
-        } catch (Exception ex) {
-
-            statement = conn.prepareStatement("SELECT * FROM CONDOMINIOS WHERE CIF=?");
-            statement.setString(1, CIForId);
-
-        }
-
-        ResultSet rs = null;
         Condominio condominio = null;
-        try {
-            rs = statement.executeQuery();
-            rs.next();
-            condominio = new Condominio(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5),
-                    Date.valueOf(rs.getString(6)), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getInt(12));
+
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
+
+            PreparedStatement statement;
+
+            try {
+
+                Integer.parseInt(CIForId);
+                statement = conn.prepareStatement("SELECT * FROM CONDOMINIOS WHERE Id=?");
+                statement.setString(1, CIForId);
+
+            } catch (Exception ex) {
+
+                statement = conn.prepareStatement("SELECT * FROM CONDOMINIOS WHERE CIF=?");
+                statement.setString(1, CIForId);
+
+            }
+
+            ResultSet rs = null;
+
+            try {
+                rs = statement.executeQuery();
+                rs.next();
+                condominio = new Condominio(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+                        Date.valueOf(rs.getString(6)), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getInt(12));
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "El CIF o Id proporcionado no existe", "Error", 0);
+            }
+
+            rs.close();
+            statement.close();
+            conn.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "El CIF o Id proporcionado no existe", "Error", 0);
+            System.out.println("Cannot establish connection");
         }
-
-        rs.close();
-        statement.close();
-        conn.close();
-
 
         /*private int Id;
     private HashMap<Integer, String> Ubicacion;
@@ -103,6 +109,36 @@ public class Condominio extends Querys {
     private int Status;
          */
         return condominio;
+    }
+
+    int Eliminar_Condominio_Administrador(int id) {
+        int status = 0;
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
+
+            PreparedStatement statement = null;
+
+            try {
+
+                statement = conn.prepareStatement("DELETE FROM CONDOMINIOS WHERE Id=?");
+                statement.setInt(1, id);
+                status = statement.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Condominio borrado satisfactoriamente", "Exito", 1);
+
+            } catch (Exception ex) {
+
+                JOptionPane.showMessageDialog(null, "No se pudo borrar el condominio", "Error", 0);
+
+            }
+
+            statement.close();
+            conn.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Cannot establish connection");
+        }
+
+        return status;
+
     }
 
     public int getId() {

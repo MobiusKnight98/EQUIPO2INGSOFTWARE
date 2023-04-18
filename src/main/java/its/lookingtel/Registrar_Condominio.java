@@ -6,6 +6,7 @@
 package its.lookingtel;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -52,6 +53,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
     static String picturepath = "";
     static int score = 0;
     static HashMap<Integer, String> map = new HashMap<Integer, String>();
+    Gestion_Administrativa pantalla_gestion_administrativa;
 
     /*
      * Creates new form Login_Administrador
@@ -83,7 +85,13 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         displaylogos();
     }
 
-    private void registrar_condominio(int key, ArrayList<String> services) {
+    void captureScreen(Gestion_Administrativa screen) {
+
+        pantalla_gestion_administrativa = screen;
+
+    }
+
+    private void registrar_condominio(int key, ArrayList<String> services) throws IOException {
 
         String nombre_condominio = jTextField1.getText();
         String direccion_condominio = jTextArea1.getText();
@@ -108,17 +116,16 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         System.out.println("Output picture path: " + url);
 
         // Creamos el query
-        Connection conn = Conexion_Remota.Conectar_BD();
-        if (conn == null) {
-            JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
-            return;
-        }
-
-        try {
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
             //Statement st = conn.createStatement();
             //st.execute("""
             //    INSERT INTO RESERVACIONES (Id_Condominio,Id_Usuario,No_Personas,Dias_Estadia,Fecha_Reservacion,Fecha_Llegada,Fecha_Partida,Costo_Total) VALUES (1,2,13,45,NOW(),DATE_ADD(NOW(),INTERVAL 10 DAY),DATE_ADD(NOW(),INTERVAL 55 DAY),30000);
             //    """);
+
+            if (conn == null) {
+                JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
+                return;
+            }
 
             System.out.println(ubicacion_condominio);
             System.out.println(nombre_condominio);
@@ -170,7 +177,32 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
     }
 
-    void InsertPictureAtCellar() {
+    void InsertPictureAtCellar() throws IOException {
+
+        // scale image
+        File initialpicture = new File(picturepath);
+
+        File finalpicture = new File(picturepath);
+
+        BufferedImage originalImage = ImageIO.read(initialpicture);
+
+        BufferedImage resizedImage = new BufferedImage(jLabel5.getWidth(), jLabel5.getHeight(), originalImage.getType());
+
+        Graphics2D g2d = resizedImage.createGraphics();
+
+        // Scale the image to fit the new dimensions
+        double scaleX = (double) jLabel5.getWidth() / originalImage.getWidth();
+        double scaleY = (double) jLabel5.getHeight() / originalImage.getHeight();
+        g2d.scale(scaleX, scaleY);
+
+        // Draw the original image onto the new BufferedImage
+        g2d.drawImage(originalImage, 0, 0, null);
+
+        // Dispose of the Graphics2D object
+        g2d.dispose();
+
+        // Save the new resized image
+        ImageIO.write(resizedImage, picture.substring(picture.lastIndexOf(".") + 1), finalpicture);
 
         try {
 
@@ -211,7 +243,6 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         // validate the data type
         if (!text.matches(regular_exp)) {
 
-            // jtxt.setText("");
             lbl.setForeground(Color.red);
             errorlblmsg.setVisible(true);
             errorlblmsg.setText("Error " + lbl.getText().substring(0, lbl.getText().length() - 1) + " no Valido");
@@ -226,8 +257,8 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         }
 
         // validate the length
-        if (text.length() < minlength || text.length()-1 > maxlength) {
-            //  jtxt.setText("");
+        if (text.length() < minlength || text.length() > maxlength) {
+
             lbl.setForeground(Color.red);
             errorlblmsg.setVisible(true);
             errorlblmsg.setText("Longitud de " + lbl.getText() + " invalida");
@@ -343,13 +374,20 @@ public class Registrar_Condominio extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Condominio");
         setForeground(new java.awt.Color(255, 255, 0));
         setLocation(new java.awt.Point(123, 123));
         setPreferredSize(new java.awt.Dimension(970, 580));
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -578,7 +616,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         jTextField2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField2.setText("CAHE980311");
+        jTextField2.setText("ABCDE12345");
         jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jTextField2.setPreferredSize(new java.awt.Dimension(80, 23));
         jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -859,6 +897,13 @@ public class Registrar_Condominio extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(129, 129, 129)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -875,19 +920,12 @@ public class Registrar_Condominio extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLayeredPane3)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLayeredPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
-                                .addContainerGap())))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(129, 129, 129)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(358, 358, 358)
+                                .addComponent(jLayeredPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+                                .addContainerGap())))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(385, 385, 385))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -899,6 +937,15 @@ public class Registrar_Condominio extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(28, 28, 28)
+                            .addComponent(jLayeredPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -908,19 +955,10 @@ public class Registrar_Condominio extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLayeredPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLayeredPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(28, 28, 28)
-                            .addComponent(jLayeredPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLayeredPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("");
@@ -997,13 +1035,17 @@ public class Registrar_Condominio extends javax.swing.JFrame {
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
         // TODO add your handling code here:
         this.dispose();
+        pantalla_gestion_administrativa.setEnabled(true);
+        pantalla_gestion_administrativa.requestFocus();
 
     }//GEN-LAST:event_jPanel3MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
         this.dispose();
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        pantalla_gestion_administrativa.setEnabled(true);
+        pantalla_gestion_administrativa.requestFocus();
+
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jPanel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseClicked
@@ -1057,7 +1099,10 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-
+        if(pantalla_gestion_administrativa !=null){
+        pantalla_gestion_administrativa.setEnabled(true);
+        pantalla_gestion_administrativa.requestFocus();
+        }
         this.dispose();
         score = 0;
         picture = "";
@@ -1077,7 +1122,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         if (jTextField2.getText().isEmpty()) {
             jTextField2.setForeground(Color.gray);
-            jTextField2.setText("CAHE980311");
+            jTextField2.setText("ABCDE12345");
         }
 
 
@@ -1096,7 +1141,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
         passedstatuses.add(validate(jTextField5.getText(), 2, 3, numbersonly, jLabel12, false, jLabel20, "000"));
 
-        passedstatuses.add(validate(jTextField2.getText(), 10, 10, capitallettersandnumbers, jLabel4, false, jLabel16, "CAHE980311"));
+        passedstatuses.add(validate(jTextField2.getText(), 10, 10, capitallettersandnumbers, jLabel4, false, jLabel16, "ABCDE12345"));
 
         // validamos que al menos un solo checkbox haya sido seleccionado 
         boolean atleastone = false, pictureselected = false;
@@ -1118,7 +1163,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             atleastone = true;
         }
         if (jCheckBox6.isSelected()) {
-            services.add(jCheckBox1.getText());
+            services.add(jCheckBox6.getText());
             atleastone = true;
         }
         if (jCheckBox7.isSelected()) {
@@ -1163,8 +1208,12 @@ public class Registrar_Condominio extends javax.swing.JFrame {
                 break;
             }
         }
-        // handle method registrar condominio
-        registrar_condominio(key, services);
+        try {
+            // handle method registrar condominio
+            registrar_condominio(key, services);
+        } catch (IOException ex) {
+            Logger.getLogger(Registrar_Condominio.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_jButton1MousePressed
@@ -1172,17 +1221,18 @@ public class Registrar_Condominio extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         jTextField3.setText(score + "%");
-        Connection conn = Conexion_Remota.Conectar_BD();
-        if (conn == null) {
-            JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
-            return;
-        }
 
-        try {
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
             // Statement st = conn.createStatement();
             //st.execute("""
             //    INSERT INTO RESERVACIONES (Id_Condominio,Id_Usuario,No_Personas,Dias_Estadia,Fecha_Reservacion,Fecha_Llegada,Fecha_Partida,Costo_Total) VALUES (1,2,13,45,NOW(),DATE_ADD(NOW(),INTERVAL 10 DAY),DATE_ADD(NOW(),INTERVAL 55 DAY),30000);
             //    """);
+
+            if (conn == null) {
+                JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
+                return;
+            }
+
             PreparedStatement statement = conn.prepareStatement("SELECT * FROM UBICATION");
             ResultSet rs = statement.executeQuery();
             //ResultSetMetaData rsmd = rs.getMetaData();
@@ -1230,7 +1280,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
     private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
         // TODO add your handling code here:
-        if (jTextField2.getText().equals("CAHE980311")) {
+        if (jTextField2.getText().equals("ABCDE12345")) {
             jTextField2.setForeground(Color.black);
             jTextField2.setText("");
         }
@@ -1261,6 +1311,11 @@ public class Registrar_Condominio extends javax.swing.JFrame {
             jTextArea1.setText("Calle Duraznos, Esquina Manzanos #324");
         }
     }//GEN-LAST:event_jTextArea1FocusLost
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        // TODO add your handling code here:
+        this.requestFocus();
+    }//GEN-LAST:event_formWindowLostFocus
 
     /**
      * @param args the command line arguments

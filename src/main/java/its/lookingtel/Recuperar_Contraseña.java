@@ -5,6 +5,7 @@
  */
 package its.lookingtel;
 
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import javax.swing.WindowConstants;
 public class Recuperar_Contraseña extends javax.swing.JFrame {
 
     Usuario user;
+    Login_Usuario pantalla_login_usuario;
 
     public Recuperar_Contraseña() {
 
@@ -33,7 +35,14 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
         getContentPane().setBackground(Color.white);
         jButton1.setBackground(Color.WHITE);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
         jPanel1.setBackground(Color.white);
+
+    }
+
+    void captureScreen(Login_Usuario login) {
+
+        pantalla_login_usuario = login;
 
     }
 
@@ -58,6 +67,18 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Recuperar Contraseña");
         setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 28)); // NOI18N
         jLabel3.setText("Recuperar Contraseña");
@@ -236,6 +257,18 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
         SendEmail.enviar_correo(data);
 
     }//GEN-LAST:event_jButton1MousePressed
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        // TODO add your handling code here:
+        this.requestFocus();
+    }//GEN-LAST:event_formWindowLostFocus
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        pantalla_login_usuario.setEnabled(true);
+        pantalla_login_usuario.requestFocus();
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosed
     boolean ValidatePlaceHolder(JTextField jtxt) {
         if (jtxt.getText().equals(("example@something.com")) || jtxt.getText().isEmpty()) {
             jtxt.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));

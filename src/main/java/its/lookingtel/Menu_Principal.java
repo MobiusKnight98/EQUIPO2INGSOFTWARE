@@ -18,22 +18,21 @@ import javax.swing.JOptionPane;
  * @author Guest Mode
  */
 public class Menu_Principal extends javax.swing.JFrame {
-   
+
+    static Login_Usuario us;
+    static Login_Administrador ad;
 
     /**
      * Creates new form Menu_Principal
      */
     public Menu_Principal() {
-
         initComponents();
-       
         getContentPane().setBackground(Color.white);
         jPanel2.setBackground(Color.white);
         jButton1.setBackground(Color.white);
         jButton2.setBackground(Color.white);
         displaylogo();
 
-        
     }
 
     private void displaylogo() {
@@ -52,7 +51,7 @@ public class Menu_Principal extends javax.swing.JFrame {
             jLabel1.setIcon(icon);
 
         } catch (IOException ex) {
-           JOptionPane.showMessageDialog(null,"No se pueden mostrar las imagenes","Error",0);
+            JOptionPane.showMessageDialog(null, "No se pueden mostrar las imagenes", "Error", 0);
         }
     }
 
@@ -153,26 +152,23 @@ public class Menu_Principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-Login_Administrador ad = new Login_Administrador();
-   ad.setVisible(true);
+        ad.setVisible(true);
+        ad.captureScreen(this);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
         // TODO add your handling code here:
-        Login_Usuario us = new Login_Usuario();
         us.setVisible(true);
+        us.captureScreen(this);
         this.dispose();
     }//GEN-LAST:event_jButton2MousePressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
 
+
     }//GEN-LAST:event_formWindowOpened
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-
-    }
 
     /**
      * @param args the command line arguments
@@ -204,7 +200,11 @@ Login_Administrador ad = new Login_Administrador();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                us = new Login_Usuario();
+                ad = new Login_Administrador();
+                Conexion_Remota.HikariConnectionPooling();
                 new Menu_Principal().setVisible(true);
+               
             }
         });
     }
