@@ -8,23 +8,10 @@ package its.lookingtel;
 import java.awt.Color;
 import java.awt.Image;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -32,14 +19,14 @@ import javax.swing.JTextField;
  */
 public class Condominios_Usuario extends javax.swing.JFrame {
 
-    Condominio cond;
+    
     HashMap<Integer, String> Ubicacion = new HashMap<Integer, String>();
     Login_Usuario pantalla_login_usuario;
     ActualizarDatos_Usuario pantalla_actualizardatos_usuario;
 
     public Condominios_Usuario() {
 
-        cond = new Condominio();
+       
         pantalla_actualizardatos_usuario = new ActualizarDatos_Usuario();
         initComponents();
         getContentPane().setBackground(Color.white);

@@ -200,6 +200,7 @@ public class Menu_Principal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                System.out.println("Loading");
                 us = new Login_Usuario();
                 ad = new Login_Administrador();
                 Conexion_Remota.HikariConnectionPooling();
