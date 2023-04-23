@@ -5,15 +5,11 @@
  */
 package its.lookingtel;
 
-import static its.lookingtel.Registrar_Condominio.map;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,21 +18,21 @@ import javax.swing.JOptionPane;
  */
 public class Condominio extends Querys {
 
-    private int Id;
-    private int Ubicacion;
-    private String nombre;
-    private String CIF;
-    private int score;
-    private Date Fecha_Registro;
-    private int No_Habitaciones;
-    private String direccion;
-    private int precio_x_noche;
-    private String servicios;
-    private String image_lugar;
-    private int Status;
-
-    Condominio() {
-
+    public int Id;
+    public  int Ubicacion;
+    public  String nombre;
+    public  String CIF;
+    public  int score;
+    public  Date Fecha_Registro;
+    public  int No_Habitaciones;
+    public  String direccion;
+    public  int precio_x_noche;
+    public  String servicios;
+    public  String image_lugar;
+    public  int Status;
+    
+    Condominio(){
+        
     }
 
     Condominio(int Id, int Ubicacion, String Nombre, String CIF, int score, Date Fecha_Registro, int no_Habitaciones, String direccion,
@@ -56,7 +52,7 @@ public class Condominio extends Querys {
 
     }
 
-    Condominio Consultar_Condominio_Admin(String CIForId) throws SQLException {
+    static Condominio Consultar_Condominio_Admin(String CIForId) throws SQLException {
 
         Condominio condominio = null;
 
@@ -87,7 +83,6 @@ public class Condominio extends Querys {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "El CIF o Id proporcionado no existe", "Error", 0);
             }
-
             rs.close();
             statement.close();
             conn.close();
@@ -141,53 +136,7 @@ public class Condominio extends Querys {
 
     }
 
-    public int getId() {
-        return Id;
-    }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getCIF() {
-        return CIF;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public Date getFecha_Registro() {
-        return Fecha_Registro;
-    }
-
-    public int getNo_Habitaciones() {
-        return No_Habitaciones;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public int getPrecio_x_noche() {
-        return precio_x_noche;
-    }
-
-    public String getServicios() {
-        return servicios;
-    }
-
-    public String getImage_lugar() {
-        return image_lugar;
-    }
-
-    public int getStatus() {
-        return Status;
-    }
-
-    public int getUbicacion() {
-        return Ubicacion;
-    }
 
     @Override
     boolean IniciarSesion(String correo_electronico, String contraseña) {
