@@ -41,6 +41,7 @@ import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Container;
 import java.awt.Graphics2D;
+import java.sql.Date;
 import javax.swing.JLabel;
 
 /**
@@ -182,8 +183,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     }
 
     void MostrarCondominio() {
-        
-        
+
         jTextField6.setText(String.valueOf(cond.Id));
         jTextField10.setText(cond.nombre);
         jTextField11.setText(String.valueOf(cond.precio_x_noche));
@@ -347,6 +347,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
             if (statusprocess == 1) {
                 JOptionPane.showMessageDialog(null, "Condominio Actualizado Satisfactoriamente Codigo de Salida 1", "Success", 1);
+                updateCondominioObject(ubicacion_condominio);
+                cond.image_lugar = url;
+                cond.servicios = stringifiedservices;
                 jButton4.setForeground(Color.black);
                 jButton4.setText("Actualizar Condominio");
                 jTextField9.setEnabled(true);
@@ -373,6 +376,27 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    void updateCondominioObject(int ubicacion_condominio) {
+
+        cond.Id = Integer.valueOf(jTextField6.getText());
+        cond.nombre = jTextField10.getText();
+        cond.precio_x_noche = Integer.valueOf(jTextField11.getText());
+        cond.Status = jComboBox9.getSelectedIndex();
+        cond.CIF = jTextField13.getText();
+        cond.Fecha_Registro = Date.valueOf(jFormattedTextField1.getText());
+        cond.Ubicacion = ubicacion_condominio;
+        cond.score = Integer.valueOf(jTextField12.getText().substring(0, jTextField12.getText().length() - 1));
+        cond.direccion = jTextArea2.getText();
+        
+        if (jComboBox13.getSelectedItem().toString().contains("+")) {
+            cond.No_Habitaciones = Integer.valueOf(jComboBox13.getSelectedItem().toString().substring(0, jComboBox13.getSelectedItem().toString().length() - 1));
+            return;
+        }
+        cond.No_Habitaciones = Integer.valueOf(jComboBox13.getSelectedItem().toString());
+     
+     
     }
 
     void handleCellar(String picture) throws IOException {
@@ -483,9 +507,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jComboBox13.setEnabled(false);
 
         jLabel36.setEnabled(false);
-        
-        new_nombre_imagen ="";
-        picturepath="";
+
+        new_nombre_imagen = "";
+        picturepath = "";
 
         try {
 
