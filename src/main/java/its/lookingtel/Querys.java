@@ -5,39 +5,27 @@
  */
 package its.lookingtel;
 
-
-
 /**
  *
  * @author Guest Mode
  */
 public abstract class Querys {
-    
+
     // Gestionar Usuario
-    
     abstract boolean IniciarSesion(String correo_electronico, String contraseña);
-    
-  
-    abstract String [] Recuperar_Contraseña_Usuario(String correo_electronico);
-    
-  
-     /*
+
+    abstract String[] Recuperar_Contraseña_Usuario(String correo_electronico);
+
+
+
+    /*
     
      void Registrarse_Usuario(Usuario usuario){
          
      }
      
      
-     Usuario Consultar_Usuario(int Id){
-         
-        
-        return new Usuario();
-     }
-     
-     Usuario Consultar_Usuario(String correo_electronico){
-          
-         return new Usuario();
-     }
+
      
      void Borrar_Usuario_Admin(String correo_electronico){
          
@@ -108,6 +96,5 @@ public abstract class Querys {
           
       }
     
-    */
-    
+     */
 }
