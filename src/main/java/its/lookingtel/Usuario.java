@@ -9,7 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.sql.Date;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -319,7 +325,7 @@ public class Usuario extends Querys {
             }
 
             PreparedStatement statement = null;
-           
+
             try {
 
                 statement = conn.prepareStatement("DELETE FROM USERS WHERE Id=?");
@@ -339,8 +345,83 @@ public class Usuario extends Querys {
         } catch (SQLException ex) {
             System.out.println("Cannot establish connection");
         }
-        
+
         return status;
+
+    }
+
+    static void Actualizar_Usuario(Usuario usuario) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(usuario.Fecha_Nacimiento_user_get());
+        String fecha_nacimiento_usuario = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DATE);
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate dateToSubtract = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DATE));
+        long daysdif = ChronoUnit.DAYS.between(dateToSubtract, currentDate);
+        int edad_usuario = ((int) daysdif / 365);
+
+        // Creamos el query
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
+
+            if (conn == null) {
+                JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
+                return;
+            }
+
+            try {
+
+                PreparedStatement statement = conn.prepareStatement("UPDATE USERS SET Id_Ubicacion=?,Nombre=?,Telefono=?,Email=?,Fecha_Nacimiento=?,Edad=?,Direccion=?,Sexo=?,Contraseña=? WHERE Id=?");
+
+                statement.setInt(1, usuario.Ubicacion_user_get());
+                statement.setString(2, usuario.Nombre_user_get());
+                statement.setString(3, usuario.Telefono_user_get());
+                statement.setString(4, usuario.correo_electronico_user_get());
+                statement.setDate(5, Date.valueOf(fecha_nacimiento_usuario));
+                statement.setInt(6, edad_usuario);
+                statement.setString(7, usuario.Direccion_user_get());
+                statement.setString(8, usuario.Sexo_user_get());
+                statement.setString(9, usuario.Contraseña_user_get());
+                statement.setInt(10, usuario.Id_user_get());
+
+                int statusprocess = statement.executeUpdate();
+                System.out.println(usuario.Id_user_get());
+                System.out.println(usuario.Ubicacion_user_get());
+                System.out.println(usuario.Nombre_user_get());
+                System.out.println(usuario.Telefono_user_get());
+                System.out.println(usuario.correo_electronico_user_get());
+                System.out.println(fecha_nacimiento_usuario);
+
+                System.out.println(edad_usuario);
+                System.out.println(usuario.Direccion_user_get());
+                System.out.println(usuario.Sexo_user_get());
+                System.out.println(usuario.Contraseña_user_get());
+
+                if (statusprocess == 1) {
+                    JOptionPane.showMessageDialog(null, "Usuario Actualizado Satisfactoriamente Codigo de Salida 1", "Sucess", 1);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar Usuario Codigo de Error 0", "Error", 0);
+
+                statement.close();
+                conn.close();
+
+            } catch (SQLIntegrityConstraintViolationException ex) {
+
+                if (ex.toString().contains("Email")) {
+                    JOptionPane.showMessageDialog(null, "No se puede actualizar usuario, existe un usuario actual con el mail proporcionado", "Error", 0);
+                    return;
+                }
+                if (ex.toString().contains("Telefono")) {
+                    JOptionPane.showMessageDialog(null, "No se puede actualizar usuario, existe un usuario actual con el telefono proporcionado", "Error", 0);
+
+                }
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
