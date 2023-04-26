@@ -48,6 +48,7 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
     /*
      * Creates new form Login_Administrador
      */
+
     void ClearForm() {
 
         jTextField1.setText("");
@@ -241,7 +242,7 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
                     return;
                 }
 
-                JOptionPane.showMessageDialog(null, "No se pudo registrar Usuario Codigo de Error 0", "Error", 0);
+                JOptionPane.showMessageDialog(null, "No se pudo actualizar Usuario Codigo de Error 0", "Error", 0);
 
                 //ResultSetMetaData rsmd = rs.getMetaData();
                 //System.out.println(rsmd.getColumnName(1))
