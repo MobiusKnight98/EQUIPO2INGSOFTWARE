@@ -29,6 +29,19 @@ public class Usuario extends Querys {
     public static String sexo;
     public static Date fecha_registro;
     public static String contraseña;
+    private int test_id;
+    
+    Usuario(){
+        
+    }
+    
+    Usuario(int test_id){ 
+        this.test_id = test_id;
+    }
+    
+    int Usuario_get_id(){
+        return this.test_id;
+    }
 
     @Override
     boolean IniciarSesion(String correo_electronico, String contraseña) {
@@ -127,6 +140,12 @@ public class Usuario extends Querys {
         }
         return data;
 
+    }
+
+
+
+    static Usuario Consultar_Usuario(String id_o_correo) {
+       return new Usuario(Integer.valueOf(id_o_correo));//To change body of generated methods, choose Tools | Templates.
     }
 
 }
