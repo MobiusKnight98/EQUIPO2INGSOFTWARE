@@ -687,9 +687,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         // validar que se haya cambiado al menos un dato
         
         
-        if(!validar_autenticidad_condominio()){
-            return;
-        }
+        //if(!validar_autenticidad_condominio()){
+        //    return;
+       // }
         
 
         // obtenemos la llave primaria de la ubicacion en base al pais,estado y ciudad que es el valor
@@ -714,7 +714,44 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     }
     
     boolean validar_autenticidad_condominio(){
+        /*
+        List<Boolean> flag_checker = new ArrayList<Boolean>();
+
+        flag_checker.add(cond.nombre.equals(jTextField10.getText()));
+        flag_checker.add(String.valueOf(cond.precio_x_noche).equals(jTextField11.getText()));
+        flag_checker.add(String.valueOf(usuario.Edad_user_get()).equals(jTextField18.getText()));
+        flag_checker.add(String.valueOf(cond.Status).equals(jComboBox9.getSelectedIndex()));
+        flag_checker.add(usuario.Contraseña_user_get().equals(jPasswordField2.getText()));
+        flag_checker.add(usuario.Contraseña_user_get().equals(jPasswordField1.getText()));
+        flag_checker.add(usuario.Direccion_user_get().equals(jTextArea1.getText()));
+        flag_checker.add(String.valueOf(usuario.Ubicacion_user_get()).equals(String.valueOf(key)));
+        flag_checker.add(usuario.Sexo_user_get().equals((String) jComboBox123.getSelectedItem()));
+
+        String date1 = usuario.Fecha_Nacimiento_user_get().toString();
+        String date2 = new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser1.getDate());
+        System.out.println("La fecha del usuario:" + date1);
+        System.out.println("La fecha del textfield:" + date2);
+
+        flag_checker.add(date1.equals(date2));
+
+        System.out.println(flag_checker);
+        if (flag_checker.contains(false)) {
+
+            //Actualizamos Usuario
+            jButton1.setText("Actualizar Usuario");
+            disableFieldsUsuario();
+            Actualizar_Usuario(key);
+            Mostrar_Usuario();
+            jButton11.setEnabled(true);
+            jButton12.setVisible(false);
+            jTextField1.setEnabled(true);
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "No se han modificados cambios, porfavor cambia alguna informacion", "Error", 0);
+
+        return true;
         
+        */
         return true;
     }
 

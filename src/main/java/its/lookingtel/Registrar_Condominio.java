@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -1094,14 +1095,66 @@ public class Registrar_Condominio extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jTextField1FocusLost
+    private void clearFields() throws MalformedURLException, IOException {
+
+        jLabel3.setForeground(Color.black);
+        jTextField1.setText("Lomas Verdes");
+        jLabel14.setVisible(false);
+
+        jLabel4.setForeground(Color.black);
+        jTextField2.setText("ABCDE12345");
+        jLabel16.setVisible(false);
+
+     
+
+        jLabel9.setForeground(Color.black);
+        jTextArea1.setText("");
+        jLabel18.setVisible(false);
+
+        jLabel10.setForeground(Color.black);
+        jCheckBox1.setSelected(false);
+        jCheckBox3.setSelected(false);
+        jCheckBox4.setSelected(false);
+        jCheckBox7.setSelected(false);
+        jCheckBox5.setSelected(false);
+        jCheckBox6.setSelected(false);
+
+        jLabel17.setVisible(false);
+
+        jLabel12.setForeground(Color.black);
+        jTextArea1.setText("Calle Duraznos, Esquina Manzanos #324");
+        jTextField5.setText("000");
+        jLabel20.setVisible(false);
+        jLabel21.setVisible(false);
+
+      
+        URL condominio = new URL("https://lookingtel.cellar-c2.services.clever-cloud.com/user_pic.png");
+        Image condominio_image = ImageIO.read(condominio);
+
+        Image scaledImage_condominio = condominio_image.getScaledInstance(jLayeredPane6.getWidth(),
+                jLayeredPane6.getHeight(),
+                Image.SCALE_SMOOTH);
+
+      
+        ImageIcon icon_userpic = new ImageIcon(scaledImage_condominio);
+
+ 
+        jLabel5.setIcon(icon_userpic);
+
+    }
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        if(pantalla_gestion_administrativa !=null){
-        pantalla_gestion_administrativa.setEnabled(true);
-        pantalla_gestion_administrativa.requestFocus();
+        if (pantalla_gestion_administrativa != null) {
+            pantalla_gestion_administrativa.setEnabled(true);
+            pantalla_gestion_administrativa.requestFocus();
         }
         this.dispose();
+        try {
+            clearFields();
+        } catch (IOException ex) {
+            Logger.getLogger(Registrar_Condominio.class.getName()).log(Level.SEVERE, null, ex);
+        }
         score = 0;
         picture = "";
         picturepath = "";

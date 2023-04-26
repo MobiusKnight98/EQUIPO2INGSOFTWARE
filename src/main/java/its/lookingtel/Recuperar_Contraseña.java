@@ -78,6 +78,9 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
         });
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 28)); // NOI18N
@@ -267,8 +270,21 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
         // TODO add your handling code here:
         pantalla_login_usuario.setEnabled(true);
         pantalla_login_usuario.requestFocus();
+        Correo_Electronico.setText("example@something.com");
+        Correo_Electronico.setForeground(Color.gray);
+        Confirmar_Correo_Electronico.setForeground(Color.gray);
+        Confirmar_Correo_Electronico.setText("example@something.com");
+        jLabel3.requestFocus();
+        Correo_Electronico.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
+        Confirmar_Correo_Electronico.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
         this.dispose();
+        
     }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        jLabel3.requestFocus();
+    }//GEN-LAST:event_formWindowOpened
     boolean ValidatePlaceHolder(JTextField jtxt) {
         if (jtxt.getText().equals(("example@something.com")) || jtxt.getText().isEmpty()) {
             jtxt.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
