@@ -683,6 +683,14 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         if (passedstatuses.contains(false)) {
             return;
         }
+        
+        // validar que se haya cambiado al menos un dato
+        
+        
+        if(!validar_autenticidad_condominio()){
+            return;
+        }
+        
 
         // obtenemos la llave primaria de la ubicacion en base al pais,estado y ciudad que es el valor
         String location = (String) jComboBox14.getSelectedItem();
@@ -703,6 +711,11 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                     .getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    boolean validar_autenticidad_condominio(){
+        
+        return true;
     }
 
     void displaylogos() {
@@ -3406,15 +3419,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         try {
             Calendar cal = jDateChooser1.getCalendar();
             System.out.println(cal.get(Calendar.YEAR));
-
-            if (cal.get(Calendar.YEAR) > 2006) {
-                System.out.println("Fecha fuera de rango");
-                jLabel11.setForeground(Color.red);
-                jLabel17.setText("Fecha Invalida");
-                jLabel17.setVisible(true);
-                return status;
-            }
-
             System.out.println(cal.get(Calendar.MONTH) + 1);
             System.out.println(cal.get(Calendar.DATE));
             LocalDate currentDate = LocalDate.now();
@@ -3422,6 +3426,17 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             System.out.println(ChronoUnit.DAYS.between(dateToSubtract, currentDate));
             long daysdif = ChronoUnit.DAYS.between(dateToSubtract, currentDate);
             System.out.println(daysdif / 365);
+
+            if ((daysdif / 365) < 17) {
+
+                System.out.println("Fecha fuera de rango");
+                jLabel11.setForeground(Color.red);
+                jLabel17.setText("Fecha Invalida");
+                jLabel17.setVisible(true);
+                return status;
+
+            }
+
             jLabel11.setForeground(Color.black);
             jLabel17.setVisible(false);
             status = true;

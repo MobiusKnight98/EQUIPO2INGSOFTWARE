@@ -48,7 +48,6 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
     /*
      * Creates new form Login_Administrador
      */
-
     void ClearForm() {
 
         jTextField1.setText("");
@@ -139,10 +138,10 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
         Usuario.Id_Ubicacion = ubicacion_usuario;
         Usuario.telefono = jTextField2.getText();
         Usuario.correo_electronico = jTextField3.getText();
-        
+
         java.util.Date java_date = jDateChooser1.getDate();
         Usuario.fecha_nacimiento = new java.sql.Date(java_date.getTime());
-      
+
         Usuario.sexo = (String) jComboBox2.getSelectedItem();
         Usuario.direccion = jTextArea1.getText();
         Usuario.contraseña = jPasswordField2.getText();
@@ -365,6 +364,13 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
             System.out.println(ChronoUnit.DAYS.between(dateToSubtract, currentDate));
             long daysdif = ChronoUnit.DAYS.between(dateToSubtract, currentDate);
             System.out.println(daysdif / 365);
+            if ((daysdif / 365) < 17) {
+                jLabel11.setForeground(Color.red);
+                jLabel17.setText("Fecha Invalida");
+                jLabel17.setVisible(true);
+                return status;
+            }
+
             jLabel11.setForeground(Color.black);
             jLabel17.setVisible(false);
             status = true;
@@ -1187,15 +1193,15 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
             // handle method actualizar usuario
             actualizar_usuario(key);
         }
-        
-       jButton4.setEnabled(true);
-        
-       if(!jTextField1.isEditable()){
-           jButton1.setText("Actualizar Datos");
-           return;
-       }
-       jButton1.setText("Salvar Datos");
-       
+
+        jButton4.setEnabled(true);
+
+        if (!jTextField1.isEditable()) {
+            jButton1.setText("Actualizar Datos");
+            return;
+        }
+        jButton1.setText("Salvar Datos");
+
     }//GEN-LAST:event_jButton1MousePressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
