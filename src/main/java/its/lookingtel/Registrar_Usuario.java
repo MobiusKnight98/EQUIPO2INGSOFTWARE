@@ -49,11 +49,41 @@ public class Registrar_Usuario extends javax.swing.JFrame {
      * Creates new form Login_Administrador
      */
     void ClearForm() {
-
-        jTextField1.setText("");
+        jLabel2.requestFocusInWindow();
+        jTextField1.setText("Primernombre Segundonombre");
+        jTextField1.setForeground(Color.gray);
         jLabel14.setVisible(false);
         jLabel3.setForeground(Color.black);
-        jLabel2.requestFocusInWindow();
+
+        jTextField2.setText("8888888888");
+        jTextField2.setForeground(Color.gray);
+        jLabel16.setVisible(false);
+        jLabel4.setForeground(Color.black);
+
+        jTextField3.setText("ejemplo@gmail.com");
+        jTextField3.setForeground(Color.gray);
+        jLabel19.setVisible(false);
+        jLabel8.setForeground(Color.black);
+
+        jDateChooser1.setDate(null);
+
+        jLabel17.setVisible(false);
+        jLabel11.setForeground(Color.black);
+
+        jTextArea1.setText("Boulevard, Calle, #numero");
+        jTextArea1.setForeground(Color.gray);
+        jLabel18.setVisible(false);
+        jLabel9.setForeground(Color.black);
+
+        jPasswordField1.setText("");
+
+        jLabel20.setVisible(false);
+        jLabel15.setForeground(Color.black);
+
+        jPasswordField2.setText("");
+
+        jLabel21.setVisible(false);
+        jLabel10.setForeground(Color.black);
 
     }
 
