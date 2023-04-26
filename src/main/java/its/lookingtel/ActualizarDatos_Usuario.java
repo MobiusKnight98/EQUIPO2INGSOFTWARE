@@ -139,7 +139,10 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
         Usuario.Id_Ubicacion = ubicacion_usuario;
         Usuario.telefono = jTextField2.getText();
         Usuario.correo_electronico = jTextField3.getText();
-        Usuario.fecha_nacimiento = jDateChooser1.getCalendar().getTime();
+        
+        java.util.Date java_date = jDateChooser1.getDate();
+        Usuario.fecha_nacimiento = new java.sql.Date(java_date.getTime());
+      
         Usuario.sexo = (String) jComboBox2.getSelectedItem();
         Usuario.direccion = jTextArea1.getText();
         Usuario.contraseña = jPasswordField2.getText();
