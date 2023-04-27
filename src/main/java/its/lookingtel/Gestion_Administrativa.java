@@ -683,14 +683,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         if (passedstatuses.contains(false)) {
             return;
         }
-        
-        // validar que se haya cambiado al menos un dato
-        
-        
-        //if(!validar_autenticidad_condominio()){
-        //    return;
-       // }
-        
 
         // obtenemos la llave primaria de la ubicacion en base al pais,estado y ciudad que es el valor
         String location = (String) jComboBox14.getSelectedItem();
@@ -703,6 +695,10 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             }
         }
 
+        // validar que se haya cambiado al menos un cambio
+        if (validar_autenticidad_condominio(key, services) == 0) {
+            return;
+        }
         try {
             // handle method registrar condominio
             actualizar_condominio(key, services);
@@ -712,47 +708,40 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         }
 
     }
-    
-    boolean validar_autenticidad_condominio(){
-        /*
+
+    int validar_autenticidad_condominio(int key, ArrayList<String> services) {
+
         List<Boolean> flag_checker = new ArrayList<Boolean>();
 
         flag_checker.add(cond.nombre.equals(jTextField10.getText()));
         flag_checker.add(String.valueOf(cond.precio_x_noche).equals(jTextField11.getText()));
-        flag_checker.add(String.valueOf(usuario.Edad_user_get()).equals(jTextField18.getText()));
-        flag_checker.add(String.valueOf(cond.Status).equals(jComboBox9.getSelectedIndex()));
-        flag_checker.add(usuario.Contraseña_user_get().equals(jPasswordField2.getText()));
-        flag_checker.add(usuario.Contraseña_user_get().equals(jPasswordField1.getText()));
-        flag_checker.add(usuario.Direccion_user_get().equals(jTextArea1.getText()));
-        flag_checker.add(String.valueOf(usuario.Ubicacion_user_get()).equals(String.valueOf(key)));
-        flag_checker.add(usuario.Sexo_user_get().equals((String) jComboBox123.getSelectedItem()));
+        flag_checker.add(String.valueOf(cond.Ubicacion).equals(String.valueOf(key)));
+        flag_checker.add(String.valueOf(cond.Status).equals(String.valueOf(jComboBox9.getSelectedIndex())));
 
-        String date1 = usuario.Fecha_Nacimiento_user_get().toString();
-        String date2 = new SimpleDateFormat("yyyy-MM-dd").format(jDateChooser1.getDate());
-        System.out.println("La fecha del usuario:" + date1);
-        System.out.println("La fecha del textfield:" + date2);
+        System.out.println("El status de disponibilidad del condominio es: " + cond.Status);
+        System.out.println("El status de disponibilidad del combobox es: " + jComboBox9.getSelectedIndex());
 
-        flag_checker.add(date1.equals(date2));
+        // checar el simbolo +
+        String habitaciones_condominio = (String) jComboBox13.getSelectedItem();
+        if (habitaciones_condominio.contains("+")) {
+            habitaciones_condominio = habitaciones_condominio.substring(0, habitaciones_condominio.length() - 1);
+        }
+        flag_checker.add(String.valueOf(cond.No_Habitaciones).equals(habitaciones_condominio));
+        flag_checker.add(cond.direccion.equals(jTextArea2.getText()));
+
+        List<String> listservices1 = services;
+        List<String> listservices2 = new ArrayList<String>(Arrays.asList(cond.servicios.split(",")));
+
+        flag_checker.add(listservices2.equals(listservices1));
 
         System.out.println(flag_checker);
         if (flag_checker.contains(false)) {
 
-            //Actualizamos Usuario
-            jButton1.setText("Actualizar Usuario");
-            disableFieldsUsuario();
-            Actualizar_Usuario(key);
-            Mostrar_Usuario();
-            jButton11.setEnabled(true);
-            jButton12.setVisible(false);
-            jTextField1.setEnabled(true);
-            return;
+            //Actualizamos Condominio
+            return 1;
         }
         JOptionPane.showMessageDialog(null, "No se han modificados cambios, porfavor cambia alguna informacion", "Error", 0);
-
-        return true;
-        
-        */
-        return true;
+        return 0;
     }
 
     void displaylogos() {

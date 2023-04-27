@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -1190,6 +1191,10 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
                 }
             }
 
+            // checar que se haya hecho al menos un cambio
+            if (verificar_autenticidad_usuario(key) == 0) {
+                return;
+            }
             // handle method actualizar usuario
             actualizar_usuario(key);
         }
@@ -1203,6 +1208,40 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
         jButton1.setText("Salvar Datos");
 
     }//GEN-LAST:event_jButton1MousePressed
+
+    private int verificar_autenticidad_usuario(int key) {
+
+        List<Boolean> flag_checker = new ArrayList<Boolean>();
+
+        flag_checker.add(Usuario.nombre.equals(jTextField1.getText()));
+        flag_checker.add(Usuario.telefono.equals(jTextField2.getText()));
+        flag_checker.add(Usuario.correo_electronico.equals(jTextField3.getText()));
+        flag_checker.add(Usuario.contraseña.equals(jPasswordField2.getText()));
+        flag_checker.add(Usuario.contraseña.equals(jPasswordField1.getText()));
+        flag_checker.add(Usuario.direccion.equals(jTextArea1.getText()));
+        flag_checker.add(String.valueOf(Usuario.Id_Ubicacion).equals(String.valueOf(key)));
+        flag_checker.add(Usuario.sexo.equals((String) jComboBox2.getSelectedItem()));
+
+        
+        SimpleDateFormat test = new SimpleDateFormat("yyyy-MM-dd");
+        String date1 = test.format(Usuario.fecha_nacimiento);
+        String date2 = test.format(jDateChooser1.getDate());
+        System.out.println("La fecha del usuario:" + date1);
+        System.out.println("La fecha del textfield:" + date2);
+        
+        flag_checker.add(date1.equals(date2));
+
+        System.out.println(flag_checker);
+
+        if (flag_checker.contains(false)) {
+
+            //Actualizamos Usuario
+            return 1;
+        }
+        JOptionPane.showMessageDialog(null, "No se han modificados cambios, porfavor cambia alguna informacion", "Error", 0);
+        return 0;
+
+    }
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // Popular ubicaciones
