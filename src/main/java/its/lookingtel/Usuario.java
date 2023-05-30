@@ -23,6 +23,8 @@ import javax.swing.JOptionPane;
  * @author Guest Mode
  */
 public class Usuario extends Querys {
+    
+    // perfil usuario
 
     public static int Id;
     public static int Id_Ubicacion;
@@ -35,18 +37,20 @@ public class Usuario extends Querys {
     public static String sexo;
     public static Date fecha_registro;
     public static String contraseña;
+    
+    // consultas de usuarios por admin
 
-    private int Id_user;
-    private int Id_Ubicacion_user;
-    private String nombre_user;
-    private String telefono_user;
-    private Date fecha_nacimiento_user;
-    private int edad_user;
-    private String direccion_user;
-    private String sexo_user;
-    private Date fecha_registro_user;
-    private String contraseña_user;
-    private String correo_electronico_user;
+     int Id_user;
+     int Id_Ubicacion_user;
+     String nombre_user;
+     String telefono_user;
+     Date fecha_nacimiento_user;
+     int edad_user;
+     String direccion_user;
+     String sexo_user;
+     Date fecha_registro_user;
+     String contraseña_user;
+     String correo_electronico_user;
 
     Usuario() {
 

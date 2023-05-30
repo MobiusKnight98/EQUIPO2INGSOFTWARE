@@ -5,11 +5,16 @@
  */
 package its.lookingtel;
 
+import java.awt.Color;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,20 +24,20 @@ import javax.swing.JOptionPane;
 public class Condominio extends Querys {
 
     public int Id;
-    public  int Ubicacion;
-    public  String nombre;
-    public  String CIF;
-    public  int score;
-    public  Date Fecha_Registro;
-    public  int No_Habitaciones;
-    public  String direccion;
-    public  int precio_x_noche;
-    public  String servicios;
-    public  String image_lugar;
-    public  int Status;
-    
-    Condominio(){
-        
+    public int Ubicacion;
+    public String nombre;
+    public String CIF;
+    public int score;
+    public Date Fecha_Registro;
+    public int No_Habitaciones;
+    public String direccion;
+    public int precio_x_noche;
+    public String servicios;
+    public String image_lugar;
+    public int Status;
+
+    Condominio() {
+
     }
 
     Condominio(int Id, int Ubicacion, String Nombre, String CIF, int score, Date Fecha_Registro, int no_Habitaciones, String direccion,
@@ -136,7 +141,72 @@ public class Condominio extends Querys {
 
     }
 
+    static ArrayList<Condominio> getAll() {
 
+        ArrayList<Condominio> condominios = new ArrayList<Condominio>();
+
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
+
+            PreparedStatement statement = conn.prepareStatement("SELECT * FROM CONDOMINIOS WHERE Status=?");
+            statement.setInt(1, 1);
+            ResultSet rs = null;
+
+            try {
+                rs = statement.executeQuery();
+                while (rs.next()) {
+
+                    condominios.add(new Condominio(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5),
+                            Date.valueOf(rs.getString(6)), rs.getInt(7), rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getInt(12)));
+
+                }
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Query mal hecho", "Error", 0);
+            }
+
+            rs.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Cannot establish connection");
+        }
+        for (Condominio cond : condominios) {
+            System.out.println(toString(cond));
+        }
+
+        return condominios;
+
+    }
+
+    public static void Actualizar_Status_Condominio(int Id) {
+
+        // Creamos el query
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
+
+            if (conn == null) {
+                JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
+                return;
+            }
+
+            PreparedStatement statement = conn.prepareStatement("UPDATE CONDOMINIOS SET Status=? WHERE Id=?");
+            statement.setInt(1, 0);
+            statement.setInt(2, Id);
+
+            int statusprocess = statement.executeUpdate();
+
+            if (statusprocess == 1) {
+                System.out.println("Status condominio actualizado a 0");
+                return;
+            }
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el status del condominio Codigo de Error 0", "Error", 0);
+            statement.close();
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     @Override
     boolean IniciarSesion(String correo_electronico, String contraseña) {
@@ -146,6 +216,13 @@ public class Condominio extends Querys {
     @Override
     String[] Recuperar_Contraseña_Usuario(String correo_electronico) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static String toString(Condominio condominio) {
+
+        return "Id: " + condominio.Id
+                + "Ubicacion: " + condominio.Ubicacion
+                + "Nombre: " + condominio.nombre;
     }
 
 }

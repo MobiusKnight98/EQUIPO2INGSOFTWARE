@@ -96,6 +96,7 @@ public class Registrar_Usuario extends javax.swing.JFrame {
     public Registrar_Usuario() {
 
         initComponents();
+        this.setLocationRelativeTo(null);
         jLabel20.setHorizontalAlignment(SwingConstants.LEFT); // left-align the text
         jLabel20.setVerticalAlignment(SwingConstants.TOP); // 
         jLabel2.requestFocusInWindow();

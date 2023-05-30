@@ -131,6 +131,13 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
         jLabel10.setForeground(Color.black);
         jLabel21.setVisible(false);
 
+        jTextArea1.setForeground(Color.black);
+        jTextField1.setForeground(Color.black);
+        jTextField2.setForeground(Color.black);
+        jTextField3.setForeground(Color.black);
+        jPasswordField1.setForeground(Color.black);
+        jPasswordField2.setForeground(Color.black);
+
     }
 
     void updateUserObject(int ubicacion_usuario) {
@@ -158,6 +165,7 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
     public ActualizarDatos_Usuario() {
 
         initComponents();
+        this.setLocationRelativeTo(null);
         jButton4.setVisible(false);
         jLabel20.setHorizontalAlignment(SwingConstants.LEFT); // left-align the text
         jLabel20.setVerticalAlignment(SwingConstants.TOP); // 
@@ -237,6 +245,7 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
                 if (statusprocess == 1) {
                     JOptionPane.showMessageDialog(null, "Usuario Actualizado Satisfactoriamente Codigo de Salida 1", "Sucess", 1);
                     jButton4.setVisible(false);
+                    jButton4.setEnabled(true);
                     updateUserObject(ubicacion_usuario);
                     //FillData();
                     disableFields();
@@ -1155,8 +1164,6 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
 
         if (jButton1.getText().equals("Salvar Datos")) {
 
-            jButton4.setEnabled(false);
-
             // creamos las estructuras de datos para gestionar los textfields y los checkboxes
             List<Boolean> passedstatuses = new ArrayList<Boolean>();
 
@@ -1193,13 +1200,12 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
 
             // checar que se haya hecho al menos un cambio
             if (verificar_autenticidad_usuario(key) == 0) {
+                jButton4.setEnabled(true);
                 return;
             }
             // handle method actualizar usuario
             actualizar_usuario(key);
         }
-
-        jButton4.setEnabled(true);
 
         if (!jTextField1.isEditable()) {
             jButton1.setText("Actualizar Datos");
@@ -1222,13 +1228,12 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
         flag_checker.add(String.valueOf(Usuario.Id_Ubicacion).equals(String.valueOf(key)));
         flag_checker.add(Usuario.sexo.equals((String) jComboBox2.getSelectedItem()));
 
-        
         SimpleDateFormat test = new SimpleDateFormat("yyyy-MM-dd");
         String date1 = test.format(Usuario.fecha_nacimiento);
         String date2 = test.format(jDateChooser1.getDate());
         System.out.println("La fecha del usuario:" + date1);
         System.out.println("La fecha del textfield:" + date2);
-        
+
         flag_checker.add(date1.equals(date2));
 
         System.out.println(flag_checker);
@@ -1401,6 +1406,7 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
         jButton1.setText("Actualizar Datos");
         FillData();
         disableFields();
+        resetFields();
     }//GEN-LAST:event_jButton4MousePressed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

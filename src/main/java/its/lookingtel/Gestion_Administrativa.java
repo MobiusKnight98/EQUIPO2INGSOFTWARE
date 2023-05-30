@@ -73,6 +73,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     public Gestion_Administrativa() {
         initComponents();
+        this.setLocationRelativeTo(null);
         KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
 
         // Get the content pane of the frame
@@ -713,12 +714,14 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
         List<Boolean> flag_checker = new ArrayList<Boolean>();
 
+        if(cond != null){
+        
         flag_checker.add(cond.nombre.equals(jTextField10.getText()));
         flag_checker.add(String.valueOf(cond.precio_x_noche).equals(jTextField11.getText()));
         flag_checker.add(String.valueOf(cond.Ubicacion).equals(String.valueOf(key)));
         flag_checker.add(String.valueOf(cond.Status).equals(String.valueOf(jComboBox9.getSelectedIndex())));
 
-        System.out.println("El status de disponibilidad del condominio es: " + cond.Status);
+        System.out.println("El status de disponibilidad del condominio es:  " + cond.Status);
         System.out.println("El status de disponibilidad del combobox es: " + jComboBox9.getSelectedIndex());
 
         // checar el simbolo +
@@ -733,6 +736,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         List<String> listservices2 = new ArrayList<String>(Arrays.asList(cond.servicios.split(",")));
 
         flag_checker.add(listservices2.equals(listservices1));
+        
+        flag_checker.add(picturepath.isEmpty());
 
         System.out.println(flag_checker);
         if (flag_checker.contains(false)) {
@@ -740,8 +745,10 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             //Actualizamos Condominio
             return 1;
         }
+        }
         JOptionPane.showMessageDialog(null, "No se han modificados cambios, porfavor cambia alguna informacion", "Error", 0);
         return 0;
+        
     }
 
     void displaylogos() {
@@ -1114,7 +1121,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField16.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField16.setForeground(new java.awt.Color(0, 0, 0));
         jTextField16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jTextField16.setCaretPosition(0);
         jTextField16.setEnabled(false);
         jTextField16.setPreferredSize(new java.awt.Dimension(182, 24));
         jTextField16.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1361,7 +1367,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(0, 0, 0));
         jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jTextField3.setCaretPosition(0);
         jTextField3.setEnabled(false);
         jTextField3.setPreferredSize(new java.awt.Dimension(182, 24));
         jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -1448,7 +1453,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jLayeredPane9.add(jLabel17, gridBagConstraints);
 
         jDateChooser1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jDateChooser1.setDateFormatString("yyyy/MM/dd");
+        jDateChooser1.setDateFormatString("yyyy-MM-dd");
         jDateChooser1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
         jDateChooser1.setEnabled(false);
         jDateChooser1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -3267,6 +3272,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     private void LlenarCamposUsuario() {
 
+        
+        if(usuario != null){
         jTextField3.setCaretPosition(0);
         jTextField17.setText(String.valueOf(usuario.Id_user_get()));
         jTextField16.setText(usuario.Nombre_user_get());
@@ -3281,6 +3288,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
         jComboBox1.setSelectedItem(Ubicacion.get(usuario.Ubicacion_user_get()));
         jComboBox123.setSelectedItem(usuario.Sexo_user_get());
+        }
     }
 
     private void ValidarIdEmail() {
@@ -3299,6 +3307,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
         if (evt.getKeyChar() == KeyEvent.VK_ENTER && !jTextField1.getText().isEmpty() && !jTextField1.getText().equals(jTextField17.getText()) && !jTextField1.getText().equals(jTextField3.getText())) {
             System.out.println("Entro en key typed");
+            LimpiarCamposUsuario();
             ValidarIdEmail();
 
         }
@@ -3568,12 +3577,14 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         usuario.Direccion_user_set(jTextArea1.getText());
         usuario.Ubicacion_user_set(key);
         usuario.Sexo_user_set((String) jComboBox123.getSelectedItem());
+        jTextField1.setText(usuario.correo_electronico_user_get());
         Usuario.Actualizar_Usuario(usuario);
 
     }
 
     private void Mostrar_Usuario() {
-
+        
+        
         usuario = Usuario.Consultar_Usuario(jTextField1.getText());
         if (usuario != null) {
             //Popular campos

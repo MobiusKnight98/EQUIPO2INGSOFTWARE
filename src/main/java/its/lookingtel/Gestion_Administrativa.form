@@ -2331,7 +2331,7 @@
                         <LineBorder roundedCorners="true" thickness="3"/>
                       </Border>
                     </Property>
-                    <Property name="dateFormatString" type="java.lang.String" value="yyyy/MM/dd"/>
+                    <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
                     <Property name="debugGraphicsOptions" type="int" value="4"/>
                     <Property name="enabled" type="boolean" value="false"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">

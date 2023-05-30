@@ -60,6 +60,7 @@ public class Registrar_Condominio extends javax.swing.JFrame {
     public Registrar_Condominio() {
 
         initComponents();
+        this.setLocationRelativeTo(null);
         jLabel2.requestFocus();
         jLabel14.setVisible(false);
         jLabel18.setVisible(false);
