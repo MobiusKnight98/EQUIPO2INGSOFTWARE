@@ -20,7 +20,6 @@ import javax.swing.ImageIcon;
 public class Login_Usuario extends javax.swing.JFrame {
 
     Usuario user;
-    Menu_Principal menu;
     Registrar_Usuario regusu;
     Recuperar_Contraseña ad;
     Condominios_Usuario pantalla_condominios_usuario;
@@ -30,8 +29,9 @@ public class Login_Usuario extends javax.swing.JFrame {
      * Creates new form Login_Administrador
      */
     public Login_Usuario() {
+
         pantalla_condominios_usuario = new Condominios_Usuario();
-        menu = new Menu_Principal();
+
         regusu = new Registrar_Usuario();
         ad = new Recuperar_Contraseña();
         initComponents();
@@ -41,6 +41,7 @@ public class Login_Usuario extends javax.swing.JFrame {
         jPanel2.setBackground(Color.white);
         jButton1.setBackground(Color.white);
         jButton3.setBackground(Color.white);
+        this.setLocationRelativeTo(null);
         displaylogos();
     }
 
@@ -90,7 +91,7 @@ public class Login_Usuario extends javax.swing.JFrame {
         ad.setVisible(false);
         jTextField1.setText("example@something.com");
         jTextField1.setForeground(Color.gray);
-        jPasswordField1.setText(""); 
+        jPasswordField1.setText("");
         pantalla_condominios_usuario.setVisible(true);
     }
 
@@ -349,7 +350,8 @@ public class Login_Usuario extends javax.swing.JFrame {
         this.setVisible(false);
         ad.setVisible(false);
         regusu.setVisible(false);
-        menu.setVisible(true);
+        pantalla_menu_principal.setVisible(true);
+        //menu.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
@@ -409,22 +411,25 @@ public class Login_Usuario extends javax.swing.JFrame {
         this.setVisible(false);
         ad.setVisible(false);
         regusu.setVisible(false);
-        menu.setVisible(true);
+
+        pantalla_menu_principal.setVisible(true);
+
+        // menu.setVisible(true);
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void jPasswordField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyTyped
         // TODO add your handling code here:
-   
-        if(evt.getKeyChar() == KeyEvent.VK_ENTER){
-             ShowMenu();
+
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            ShowMenu();
         }
 
     }//GEN-LAST:event_jPasswordField1KeyTyped
 
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         // TODO add your handling code here:
-          if(evt.getKeyChar() == KeyEvent.VK_ENTER){
-             ShowMenu();
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER) {
+            ShowMenu();
         }
     }//GEN-LAST:event_jTextField1KeyTyped
 

@@ -29,6 +29,7 @@ public class Recuperar_Contraseña extends javax.swing.JFrame {
 
         user = new Usuario();
         initComponents();
+        this.setLocationRelativeTo(null);
         Correo_Electronico.setName("Correo Electronico");
         Confirmar_Correo_Electronico.setName("Confirmar Correo Electronico");
         jLabel3.requestFocusInWindow();

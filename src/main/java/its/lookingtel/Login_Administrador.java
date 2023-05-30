@@ -28,6 +28,7 @@ public class Login_Administrador extends javax.swing.JFrame {
      * Creates new form Login_Administrador
      */
     public Login_Administrador() {
+        
         initComponents();
         admin = new Administrador();
         pantalla_gestion = new Gestion_Administrativa();
@@ -36,6 +37,7 @@ public class Login_Administrador extends javax.swing.JFrame {
         jPanel1.setBackground(Color.white);
         jPanel2.setBackground(Color.white);
         jButton1.setBackground(Color.white);
+        this.setLocationRelativeTo(null);
         displaylogos();
     }
 
