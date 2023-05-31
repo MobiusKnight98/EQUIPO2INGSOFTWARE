@@ -178,7 +178,7 @@ public class Condominio extends Querys {
 
     }
 
-    public static void Actualizar_Status_Condominio(int Id) {
+    public static void Actualizar_Status_Condominio(int Id,int status) {
 
         // Creamos el query
         try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
@@ -189,7 +189,7 @@ public class Condominio extends Querys {
             }
 
             PreparedStatement statement = conn.prepareStatement("UPDATE CONDOMINIOS SET Status=? WHERE Id=?");
-            statement.setInt(1, 0);
+            statement.setInt(1, status);
             statement.setInt(2, Id);
 
             int statusprocess = statement.executeUpdate();

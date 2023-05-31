@@ -12,7 +12,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -26,6 +28,8 @@ import javax.swing.table.DefaultTableModel;
 public class Reservaciones_Usuario extends javax.swing.JFrame {
 
     private static Condominios_Usuario pantalla_condominios_usuario;
+    private boolean flag = false;
+    private HashMap<Integer, Integer> reservacion_condominio = new HashMap<Integer, Integer>();
 
     public Reservaciones_Usuario() {
         initComponents();
@@ -64,7 +68,6 @@ public class Reservaciones_Usuario extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -111,8 +114,8 @@ public class Reservaciones_Usuario extends javax.swing.JFrame {
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(755, 20));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(755, 412));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(755, 400));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(755, 400));
 
         jTable1.setBackground(new java.awt.Color(255, 255, 255));
         jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
@@ -143,8 +146,9 @@ public class Reservaciones_Usuario extends javax.swing.JFrame {
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jTable1.setDoubleBuffered(true);
         jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setMinimumSize(new java.awt.Dimension(3000, 80));
-        jTable1.setPreferredSize(new java.awt.Dimension(3000, 80));
+        jTable1.setMinimumSize(new java.awt.Dimension(3000, 400));
+        jTable1.setPreferredSize(new java.awt.Dimension(3000, 400));
+        jTable1.setRowHeight(40);
         jTable1.setSelectionBackground(new java.awt.Color(0, 0, 0));
         jTable1.setSelectionForeground(new java.awt.Color(204, 204, 204));
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -160,16 +164,15 @@ public class Reservaciones_Usuario extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(142, 142, 142))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(271, 271, 271))))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(142, 142, 142))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(272, 272, 272)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,10 +180,10 @@ public class Reservaciones_Usuario extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,7 +194,9 @@ public class Reservaciones_Usuario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         pack();
@@ -204,7 +209,23 @@ public class Reservaciones_Usuario extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        this.dispose();
+
+        
+
+        // verificar si hubo reservaciones eliminadas
+        if (flag) {
+            flag = false;
+            
+             SwingUtilities.invokeLater(() -> {
+                pantalla_condominios_usuario.resetPanel();
+
+            });
+            SwingUtilities.invokeLater(() -> {
+                pantalla_condominios_usuario.dynamicRender();
+
+            });
+        }
+
         pantalla_condominios_usuario.setEnabled(true);
         pantalla_condominios_usuario.requestFocus();
 
@@ -219,24 +240,49 @@ public class Reservaciones_Usuario extends javax.swing.JFrame {
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
+
+        // eliminar reservacion
+        int status = 0;
+        int id_reservacion=0;
+        if (jTable1.isRowSelected(jTable1.getSelectedRow())) {
+            id_reservacion = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+            status = Reservacion.Eliminar_Reservacion(id_reservacion);
+
+        }
+
+        if (status == 1) {
+                 // actualizar status del condominio
+            Condominio.Actualizar_Status_Condominio(reservacion_condominio.get(id_reservacion), 1);
+            populateData();
+            flag = true;
+       
+ 
+        }
+
+
     }//GEN-LAST:event_jButton1MousePressed
 
     private void populateData() {
-
+        
+           reservacion_condominio.clear();
+           DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+           tableModel.setRowCount(0);
+           
         try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
 
-            PreparedStatement statement = conn.prepareStatement("SELECT RESERVACIONES.Id, CONDOMINIOS.Nombre, ( SELECT CONCAT(UBICATION.Pais,'/ ',UBICATION.Estado,'/',UBICATION.Ciudad) FROM UBICATION WHERE UBICATION.Id = CONDOMINIOS.Id_Ubicacion ) AS Ubicacion, CONDOMINIOS.Direccion, CONDOMINIOS.Precio_x_Noche, CONDOMINIOS.Servicios_Incluidos, CONDOMINIOS.No_Habitaciones, RESERVACIONES.Dias_Estadia, RESERVACIONES.No_Personas, RESERVACIONES.Fecha_Reservacion, RESERVACIONES.Fecha_Llegada, RESERVACIONES.Fecha_Partida, RESERVACIONES.Costo_Total FROM RESERVACIONES, CONDOMINIOS,USERS WHERE RESERVACIONES.Id_Condominio = CONDOMINIOS.Id AND RESERVACIONES.Id_Usuario=USERS.Id AND USERS.Id=?");
+            PreparedStatement statement = conn.prepareStatement("SELECT RESERVACIONES.Id, CONDOMINIOS.Id, CONDOMINIOS.Nombre, ( SELECT CONCAT(UBICATION.Pais,'/ ',UBICATION.Estado,'/',UBICATION.Ciudad) FROM UBICATION WHERE UBICATION.Id = CONDOMINIOS.Id_Ubicacion ) AS Ubicacion, CONDOMINIOS.Direccion, CONDOMINIOS.Precio_x_Noche, CONDOMINIOS.Servicios_Incluidos, CONDOMINIOS.No_Habitaciones, RESERVACIONES.Dias_Estadia, RESERVACIONES.No_Personas, RESERVACIONES.Fecha_Reservacion, RESERVACIONES.Fecha_Llegada, RESERVACIONES.Fecha_Partida, RESERVACIONES.Costo_Total FROM RESERVACIONES, CONDOMINIOS,USERS WHERE RESERVACIONES.Id_Condominio = CONDOMINIOS.Id AND RESERVACIONES.Id_Usuario=USERS.Id AND USERS.Id=?");
             statement.setInt(1, Usuario.Id);
             System.out.println("Statement ejecutado");
             ResultSet rs = statement.executeQuery();
             DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
             while (rs.next()) {
                 // populate data
-
-                m.addRow(new Object[]{rs.getInt(1), rs.getString(2),
-                    rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6),
-                    rs.getInt(7), rs.getInt(8), rs.getInt(9), rs.getDate(10), rs.getDate(11), rs.getDate(12), rs.getInt(13)});
+                reservacion_condominio.put(rs.getInt(1), rs.getInt(2));
+                m.addRow(new Object[]{rs.getInt(1), rs.getString(3),
+                    rs.getString(4), rs.getString(5), rs.getInt(6), rs.getString(7),
+                    rs.getInt(8), rs.getInt(9), rs.getInt(10), rs.getDate(11), rs.getDate(12), rs.getDate(13), rs.getInt(14)});
             }
+            System.out.println(reservacion_condominio);
             statement.close();
             rs.close();
             conn.close();
