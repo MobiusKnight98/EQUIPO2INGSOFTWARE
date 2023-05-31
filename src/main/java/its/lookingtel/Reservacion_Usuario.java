@@ -866,7 +866,7 @@ public class Reservacion_Usuario extends javax.swing.JFrame {
         // actualizar condominio a no disponible
         if (status == 1) {
             this.setEnabled(false);
-            Condominio.Actualizar_Status_Condominio(condominio.Id);
+            Condominio.Actualizar_Status_Condominio(condominio.Id,0);
             this.dispose();
             pantalla_condominios_usuario.setEnabled(true);
             pantalla_condominios_usuario.requestFocus();

@@ -79,6 +79,37 @@ public class Reservacion extends Querys {
         return 0;
     }
 
+    public static int Eliminar_Reservacion(int id) {
+
+        int status = 0;
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
+
+            PreparedStatement statement = null;
+
+            try {
+
+                statement = conn.prepareStatement("DELETE FROM RESERVACIONES WHERE Id=?");
+                statement.setInt(1, id);
+                status = statement.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Reservacion eliminada satisfactoriamente", "Exito", 1);
+
+            } catch (Exception ex) {
+
+                JOptionPane.showMessageDialog(null, "No se pudo eliminar la reservacion", "Error", 0);
+
+            }
+
+            statement.close();
+            conn.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Cannot establish connection");
+        }
+
+        return status;
+
+    }
+
     @Override
     boolean IniciarSesion(String correo_electronico, String contraseña) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
