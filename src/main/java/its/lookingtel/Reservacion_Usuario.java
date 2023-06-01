@@ -791,9 +791,10 @@ public class Reservacion_Usuario extends javax.swing.JFrame {
     }
     private void jSpinner2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner2StateChanged
         // TODO add your handling code here:
-        jLabel23.setText(String.valueOf("$ " + (int) jSpinner2.getValue() * this.condominio.precio_x_noche));
 
+        jLabel23.setText(String.valueOf("$ " + (int) jSpinner2.getValue() * this.condominio.precio_x_noche));
         setFecha_Partida();
+
 
     }//GEN-LAST:event_jSpinner2StateChanged
 
@@ -842,44 +843,50 @@ public class Reservacion_Usuario extends javax.swing.JFrame {
         // asignar fecha en tiempo de salida si no se refleja
         setFecha_Partida();
 
-        // crear reservacion
-        int choice = JOptionPane.showConfirmDialog(null, "Desea realizar la reservacion por un monto de: " + jLabel23.getText(), "Reservacion Condominio", JOptionPane.YES_NO_OPTION);
+        SwingUtilities.invokeLater(() -> {
+            int choice = JOptionPane.showConfirmDialog(null, "Desea realizar la reservacion por un monto de: " + jLabel23.getText(), "Reservacion Condominio", JOptionPane.YES_NO_OPTION);
 
-        if (choice == JOptionPane.NO_OPTION) {
-            return;
-        }
+            if (choice == JOptionPane.NO_OPTION) {
+                return;
+            }
 
-        SimpleDateFormat format_date = new SimpleDateFormat("yyyy-MM-dd");
-        String d = format_date.format(jDateChooser1.getDate());
-        String d2 = format_date.format(jDateChooser2.getDate());
-        java.sql.Date sqld = java.sql.Date.valueOf(d);
-        java.sql.Date sqld2 = java.sql.Date.valueOf(d2);
+            if (choice == JOptionPane.CLOSED_OPTION) {
+                return;
+            }
 
-        int status = 0;
-        int costo_total = Integer.valueOf(jLabel23.getText().replaceAll("\\s+", "").substring(1, jLabel23.getText().length() - 1));
+            SimpleDateFormat format_date = new SimpleDateFormat("yyyy-MM-dd");
+            String d = format_date.format(jDateChooser1.getDate());
+            String d2 = format_date.format(jDateChooser2.getDate());
+            java.sql.Date sqld = java.sql.Date.valueOf(d);
+            java.sql.Date sqld2 = java.sql.Date.valueOf(d2);
 
-        Reservacion reservacion = new Reservacion(condominio.Id, Usuario.Id,
-                (int) jSpinner1.getValue(), (int) jSpinner2.getValue(), sqld,
-                sqld2, costo_total);
-        status = Reservacion.Realizar_Reservacion(reservacion);
+            int status = 0;
+            int costo_total = Integer.valueOf(jLabel23.getText().replaceAll("\\s+", "").substring(1, jLabel23.getText().length() - 1));
 
-        // actualizar condominio a no disponible
-        if (status == 1) {
-            this.setEnabled(false);
-            Condominio.Actualizar_Status_Condominio(condominio.Id,0);
-            this.dispose();
-            pantalla_condominios_usuario.setEnabled(true);
-            pantalla_condominios_usuario.requestFocus();
-            SwingUtilities.invokeLater(() -> {
-                pantalla_condominios_usuario.resetPanel();
+            Reservacion reservacion = new Reservacion(condominio.Id, Usuario.Id,
+                    (int) jSpinner1.getValue(), (int) jSpinner2.getValue(), sqld,
+                    sqld2, costo_total);
+            status = Reservacion.Realizar_Reservacion(reservacion);
 
-            });
-            SwingUtilities.invokeLater(() -> {
-                pantalla_condominios_usuario.dynamicRender();
+            // actualizar condominio a no disponible
+            if (status == 1) {
+                this.setEnabled(false);
+                Condominio.Actualizar_Status_Condominio(condominio.Id, 0);
+                this.dispose();
+                pantalla_condominios_usuario.setEnabled(true);
+                pantalla_condominios_usuario.requestFocus();
+                SwingUtilities.invokeLater(() -> {
+                    pantalla_condominios_usuario.resetPanel();
 
-            });
+                });
+                SwingUtilities.invokeLater(() -> {
+                    pantalla_condominios_usuario.dynamicRender();
 
-        }
+                });
+
+            }
+
+        });
 
 
     }//GEN-LAST:event_jButton2MousePressed
