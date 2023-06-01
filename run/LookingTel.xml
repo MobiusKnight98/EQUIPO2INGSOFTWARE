@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>C:\Users\Guest Mode\Documents\NetBeansProjects\LookingTel\target\LookingTel-1.0-jar-with-dependencies.jar</jar>
-  <outfile>C:\Users\Guest Mode\Documents\NetBeansProjects\LookingTel\run\LookingTel.exe</outfile>
+  <outfile>C:\Users\Guest Mode\Desktop\LookingTel.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
