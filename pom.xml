@@ -38,6 +38,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        
     </properties>
     <build>
         <plugins>
@@ -106,7 +107,7 @@
                             <executable>java</executable>
                             <arguments>
                                 <argument>-jar</argument>
-                                <argument>C:/Program Files (x86)/Launch4j/launch4j.jar</argument>
+                                <argument>${env.LAUNCH4J_JAR}</argument>
                                 <argument>${project.basedir}/run/LookingTel.xml</argument>
                             </arguments>
                         </configuration>
