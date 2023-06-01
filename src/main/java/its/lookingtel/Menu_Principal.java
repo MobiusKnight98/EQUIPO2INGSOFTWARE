@@ -135,7 +135,7 @@ public class Menu_Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("sssss");
+        jButton3.setText("Ricardo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
