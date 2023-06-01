@@ -2432,7 +2432,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jLabel50.setText("________________________");
 
         jLabel51.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel51.setText("E-mail Usuario:");
+        jLabel51.setText("E-mail Usuari");
 
         jLabel52.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
         jLabel52.setText("________________________");
