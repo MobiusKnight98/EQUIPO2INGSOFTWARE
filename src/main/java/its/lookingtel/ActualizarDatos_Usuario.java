@@ -907,7 +907,7 @@ public class ActualizarDatos_Usuario extends javax.swing.JFrame {
 
         jDateChooser1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jDateChooser1.setDateFormatString("yyyy/MM/dd");
-        jDateChooser1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
+        jDateChooser1.setDoubleBuffered(false);
         jDateChooser1.setEnabled(false);
         jDateChooser1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jDateChooser1.setMaxSelectableDate(new java.util.Date(1136098909000L));
