@@ -6,6 +6,8 @@
 package its.lookingtel;
 
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -39,10 +41,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.Container;
-import java.awt.Graphics2D;
+
+
 import java.sql.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -827,6 +828,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     }
 
     void InsertPictureAtCellar(String picture) throws IOException {
+        
 
         // scale image
         File initialpicture = new File(picturepath);
@@ -873,6 +875,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+     
 
     }
 
@@ -1071,11 +1075,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         });
 
         jPanel1.setPreferredSize(new java.awt.Dimension(850, 500));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jLabel1.setText("Filtrar Por:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, -1, 24));
 
         jButton1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton1.setText("Actualizar Usuario");
@@ -1086,7 +1088,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                 jButton1MousePressed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 182, 35));
 
         jTextField1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(102, 102, 102));
@@ -1108,8 +1109,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                 jTextField1KeyTyped(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, 245, -1));
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 840, 10));
 
         jLayeredPane1.setPreferredSize(new java.awt.Dimension(197, 87));
         java.awt.GridBagLayout jLayeredPane1Layout = new java.awt.GridBagLayout();
@@ -1158,8 +1157,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jLayeredPane1.add(jLabel14, gridBagConstraints);
-
-        jPanel1.add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 152, 239, 69));
 
         jLayeredPane2.setPreferredSize(new java.awt.Dimension(200, 93));
         java.awt.GridBagLayout jLayeredPane2Layout = new java.awt.GridBagLayout();
@@ -1216,8 +1213,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jLayeredPane2.add(jScrollPane1, gridBagConstraints);
 
-        jPanel1.add(jLayeredPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 245, 131));
-
         jLayeredPane3.setPreferredSize(new java.awt.Dimension(76, 23));
         java.awt.GridBagLayout jLayeredPane3Layout = new java.awt.GridBagLayout();
         jLayeredPane3Layout.columnWidths = new int[] {0};
@@ -1247,8 +1242,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 12);
         jLayeredPane3.add(jComboBox123, gridBagConstraints);
-
-        jPanel1.add(jLayeredPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 330, 80, 70));
 
         java.awt.GridBagLayout jLayeredPane4Layout = new java.awt.GridBagLayout();
         jLayeredPane4Layout.columnWidths = new int[] {239};
@@ -1295,8 +1288,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         jLayeredPane4.add(jLabel16, gridBagConstraints);
-
-        jPanel1.add(jLayeredPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
         java.awt.GridBagLayout jLayeredPane5Layout = new java.awt.GridBagLayout();
         jLayeredPane5Layout.columnWidths = new int[] {100, 35};
@@ -1359,8 +1350,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jLayeredPane5.add(jLabel70, gridBagConstraints);
 
-        jPanel1.add(jLayeredPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, -1, -1));
-
         jLayeredPane7.setLayout(new java.awt.GridBagLayout());
 
         jTextField3.setEditable(false);
@@ -1404,8 +1393,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
         jLayeredPane7.add(jLabel19, gridBagConstraints);
 
-        jPanel1.add(jLayeredPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
-
         jLayeredPane8.setLayout(new java.awt.GridBagLayout());
 
         jLabel72.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
@@ -1427,8 +1414,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jLayeredPane8.add(jComboBox1, gridBagConstraints);
-
-        jPanel1.add(jLayeredPane8, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, -1, 62));
 
         java.awt.GridBagLayout jLayeredPane9Layout = new java.awt.GridBagLayout();
         jLayeredPane9Layout.columnWidths = new int[] {150};
@@ -1454,7 +1439,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
         jDateChooser1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         jDateChooser1.setDateFormatString("yyyy-MM-dd");
-        jDateChooser1.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
+        jDateChooser1.setDoubleBuffered(false);
         jDateChooser1.setEnabled(false);
         jDateChooser1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jDateChooser1.setMaxSelectableDate(new java.util.Date(1136098909000L));
@@ -1466,8 +1451,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jLayeredPane9.add(jDateChooser1, gridBagConstraints);
-
-        jPanel1.add(jLayeredPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 394, -1, 102));
 
         java.awt.GridBagLayout jLayeredPane10Layout = new java.awt.GridBagLayout();
         jLayeredPane10Layout.columnWidths = new int[] {100, 35};
@@ -1538,8 +1521,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jLayeredPane10.add(jLabel20, gridBagConstraints);
 
-        jPanel1.add(jLayeredPane10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, -1, -1));
-
         java.awt.GridBagLayout jLayeredPane6Layout = new java.awt.GridBagLayout();
         jLayeredPane6Layout.columnWidths = new int[] {239};
         jLayeredPane6Layout.rowHeights = new int[] {0, 0, 0};
@@ -1575,8 +1556,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jLayeredPane6.add(jTextField17, gridBagConstraints);
 
-        jPanel1.add(jLayeredPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 77, -1, -1));
-
         jLayeredPane12.setEnabled(false);
         java.awt.GridBagLayout jLayeredPane12Layout = new java.awt.GridBagLayout();
         jLayeredPane12Layout.columnWidths = new int[] {150};
@@ -1593,7 +1572,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
         jDateChooser2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         jDateChooser2.setDateFormatString("yyyy/MM/dd");
-        jDateChooser2.setDebugGraphicsOptions(javax.swing.DebugGraphics.BUFFERED_OPTION);
+        jDateChooser2.setDoubleBuffered(false);
         jDateChooser2.setEnabled(false);
         jDateChooser2.setFocusable(false);
         jDateChooser2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -1606,8 +1585,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jLayeredPane12.add(jDateChooser2, gridBagConstraints);
-
-        jPanel1.add(jLayeredPane12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, 62));
 
         java.awt.GridBagLayout jLayeredPane11Layout = new java.awt.GridBagLayout();
         jLayeredPane11Layout.columnWidths = new int[] {239};
@@ -1644,8 +1621,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         jLayeredPane11.add(jTextField18, gridBagConstraints);
 
-        jPanel1.add(jLayeredPane11, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
-
         jButton11.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton11.setText("Borrar Usuario");
         jButton11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
@@ -1655,7 +1630,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                 jButton11MousePressed(evt);
             }
         });
-        jPanel1.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 182, 35));
 
         jButton12.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton12.setText("Cancelar");
@@ -1666,7 +1640,103 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                 jButton12MousePressed(evt);
             }
         });
-        jPanel1.add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 182, 35));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLayeredPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(75, 75, 75)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLayeredPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLayeredPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLayeredPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLayeredPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLayeredPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLayeredPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(95, 95, 95)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLayeredPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(9, 9, 9)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLayeredPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLayeredPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)
+                                .addComponent(jLayeredPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLayeredPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(74, 74, 74)
+                                .addComponent(jLayeredPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLayeredPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLayeredPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jLayeredPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLayeredPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLayeredPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
 
         jTabbedPane1.addTab("Usuarios", jPanel1);
 
