@@ -48,6 +48,9 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -70,6 +73,12 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     static final String direccion = "^[A-Z][#,a-záéíóúñA-Z.()/0-9 ]+$";
     static final String email = "^[\\w!#$%&'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}$";
     Usuario usuario, usuario2;
+
+    int no_personas_reservacion;
+    int dias_estadia_reservacion_reservacion;
+    Date fecha_llegada_reservacion;
+    Date fecha_partida_reservacion;
+    int costo_total_reservacion;
 
     public Gestion_Administrativa() {
         initComponents();
@@ -1083,6 +1092,11 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         setTitle("Gestion Administrativa");
         setPreferredSize(new java.awt.Dimension(950, 640));
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -2401,9 +2415,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jButton7.setText("Actualizar Reservación");
         jButton7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton7MousePressed(evt);
             }
         });
 
@@ -3095,6 +3109,11 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jButton10.setText("Cancelar");
         jButton10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
         jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton10MousePressed(evt);
+            }
+        });
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -3259,63 +3278,53 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
         jLabel4.setText("Gestionar" + " " + jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()));
-        
-        
-        
-        if(jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Usuarios")){
-       
-        
-        // clear usuario
-        disableFieldsUsuario();
-        LimpiarCamposUsuario();
-        resetFieldsUser();
-        jButton12.setVisible(false);
-        jButton12.setEnabled(true);
-        jButton11.setEnabled(true);
-        jButton1.setText("Actualizar Usuario");
-        jButton1.setForeground(Color.black);
-        jTextField1.setEnabled(true);
-        return;
-        }
-        
-        
-        if(jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Condominios")){
-        
-        // clear condominio
-        ClearChanges();
-        resetFields();
-        jButton4.setText("Actualizar Condominio");
-        jButton4.setForeground(Color.black);
-        jTextField9.setEnabled(true);
-        return;
-        }
-      
-        if(jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Reservaciones")){
-       
-        // clear reservacion
-        ClearChangesReservacion();
 
-        jButton7.setText("Actualizar Reservación");
-        jButton7.setForeground(Color.black);
-        jTextField14.setEnabled(true);
+        if (jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Usuarios")) {
 
-        jSpinner2.setEnabled(false);
-        jSpinner1.setEnabled(false);
-        jDateChooser4.setEnabled(false);
-
-        jButton10.setVisible(false);
-        jButton10.setEnabled(true);
-        jButton8.setEnabled(true);
-        
+            // clear usuario
+            disableFieldsUsuario();
+            LimpiarCamposUsuario();
+            resetFieldsUser();
+            jButton12.setVisible(false);
+            jButton12.setEnabled(true);
+            jButton11.setEnabled(true);
+            jButton1.setText("Actualizar Usuario");
+            jButton1.setForeground(Color.black);
+            jTextField1.setEnabled(true);
+            return;
         }
-        
+
+        if (jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Condominios")) {
+
+            // clear condominio
+            ClearChanges();
+            resetFields();
+            jButton4.setText("Actualizar Condominio");
+            jButton4.setForeground(Color.black);
+            jTextField9.setEnabled(true);
+            return;
+        }
+
+        if (jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Reservaciones")) {
+
+            // clear reservacion
+            ClearChangesReservacion();
+
+            jButton7.setText("Actualizar Reservación");
+            jButton7.setForeground(Color.black);
+            jTextField14.setEnabled(true);
+
+            jSpinner2.setEnabled(false);
+            jSpinner1.setEnabled(false);
+            jDateChooser4.setEnabled(false);
+
+            jButton10.setVisible(false);
+            jButton8.setEnabled(true);
+
+        }
 
 
     }//GEN-LAST:event_jTabbedPane1StateChanged
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
@@ -3394,17 +3403,14 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         pantalla_login_administrador.setVisible(true);
         pantalla_registrar_condominio.dispose();
 
-        
         // clear condominio
-        
         ClearChanges();
         resetFields();
         jButton4.setText("Actualizar Condominio");
         jButton4.setForeground(Color.black);
         jTextField9.setEnabled(true);
-        
-        // clear usuario
 
+        // clear usuario
         disableFieldsUsuario();
         LimpiarCamposUsuario();
         resetFieldsUser();
@@ -3414,10 +3420,8 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jButton1.setText("Actualizar Usuario");
         jButton1.setForeground(Color.black);
         jTextField1.setEnabled(true);
-        
-        
-        
-          // clear reservacion
+
+        // clear reservacion
         ClearChangesReservacion();
 
         jButton7.setText("Actualizar Reservación");
@@ -3429,7 +3433,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jDateChooser4.setEnabled(false);
 
         jButton10.setVisible(false);
-        jButton10.setEnabled(true);
         jButton8.setEnabled(true);
 
 
@@ -4158,10 +4161,40 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField1.setEnabled(false);
         jButton12.setVisible(true);
     }//GEN-LAST:event_jButton1MousePressed
+    private void setFecha_Partida() {
 
+        if (jDateChooser4.getDate() != null) {
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(jDateChooser4.getDate());
+            calendar.add(Calendar.DAY_OF_MONTH, (int) jSpinner2.getValue());
+            java.util.Date finaldate = calendar.getTime();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            String convertedDate = dateFormat.format(finaldate);
+
+            try {
+                java.util.Date formattedDate = dateFormat.parse(convertedDate);
+                jDateChooser5.setDate(formattedDate);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private void jspinner_constraints(JSpinner spinner, int maxvalue) {
+
+        spinner.setModel(new SpinnerNumberModel(1, 1, maxvalue, 1));
+
+    }
     private void jSpinner2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner2StateChanged
         // TODO add your handling code here:
 
+        if (!jLabel86.getText().equals("-")) {
+            int costo_total = Integer.valueOf(jLabel86.getText().replaceAll("\\s+", "").substring(1, jLabel86.getText().length() - 1));
+            jLabel112.setText("$ " + String.valueOf((int) jSpinner2.getValue() * costo_total));
+            setFecha_Partida();
+        }
 
     }//GEN-LAST:event_jSpinner2StateChanged
 
@@ -4172,6 +4205,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     private void jDateChooser4PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser4PropertyChange
         // TODO add your handling code here:
+        setFecha_Partida();
     }//GEN-LAST:event_jDateChooser4PropertyChange
 
     private void jDateChooser5PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser5PropertyChange
@@ -4217,6 +4251,14 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jLabel112.setText("$ " + String.valueOf((int) reservacion.get(13)));
         jLabel92.setText(String.valueOf((int) reservacion.get(14)));
         jLabel89.setText((String) reservacion.get(15));
+
+        // actualizar variables globales reservacion
+        no_personas_reservacion = (int) jSpinner1.getValue();
+        dias_estadia_reservacion_reservacion = (int) jSpinner2.getValue();
+        costo_total_reservacion = Integer.valueOf(jLabel112.getText().replaceAll("\\s+", "").substring(1, jLabel112.getText().length() - 1));
+        fecha_llegada_reservacion = new java.sql.Date(jDateChooser4.getDate().getTime());
+        fecha_partida_reservacion = new java.sql.Date(jDateChooser5.getDate().getTime());
+
     }
     private void jTextField14KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField14KeyTyped
         // TODO add your handling code here:
@@ -4273,6 +4315,171 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton8MousePressed
+    private void validarReservacion() {
+
+        //logs
+        System.out.println("Numero de dias: " + jSpinner2.getValue());
+        System.out.println("Numero de personas: " + jSpinner1.getValue());
+        System.out.println("Fecha de Lleda: " + jDateChooser4.getDate());
+        System.out.println("Fecha de Partida: " + jDateChooser5.getDate());
+
+        // verificar fecha de llegada
+        if (jDateChooser4.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "La fecha de llegada es nula o incorrecta, porfavor corregir", "Error", 0);
+            return;
+        }
+
+        java.util.Calendar minDate = java.util.Calendar.getInstance();
+        minDate.setTime(new java.util.Date());
+        minDate.add(java.util.Calendar.DAY_OF_MONTH, 1);
+
+        long timeInMillis1 = jDateChooser4.getDate().getTime();
+        long timeInMillis2 = minDate.getTimeInMillis();
+        long difference = (timeInMillis1 - timeInMillis2) / (1000 * 60 * 60 * 24);
+
+        System.out.println("The difference is: " + difference);
+
+        if (difference < 0) {
+            JOptionPane.showMessageDialog(null, "La fecha de llegada introducida no esta en el rango de disponibilidad, favor de corregir", "Error", 0);
+            return;
+        }
+        
+        SwingUtilities.invokeLater(() -> {
+
+        // verificar que los campos no sean iguales
+        ArrayList<Boolean> fields = new ArrayList<Boolean>();
+
+        if ((int) jSpinner1.getValue() != no_personas_reservacion) {
+            fields.add(true);
+        }
+        if ((int) jSpinner2.getValue() != dias_estadia_reservacion_reservacion) {
+            fields.add(true);
+        }
+
+        if (Integer.valueOf(jLabel112.getText().replaceAll("\\s+", "").substring(1, jLabel112.getText().length() - 1)) != costo_total_reservacion) {
+            fields.add(true);
+        }
+
+        if (!new java.sql.Date(jDateChooser4.getDate().getTime()).equals(fecha_llegada_reservacion)) {
+            fields.add(true);
+        }
+
+        if (!new java.sql.Date(jDateChooser5.getDate().getTime()).equals(fecha_partida_reservacion)) {
+            fields.add(true);
+        }
+
+        if (fields.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor al menos realizar un cambio", "Error", 0);
+            return;
+        }
+        
+        System.out.print(fields);
+        
+        
+
+        // asignar fecha en tiempo de salida si no se refleja
+        setFecha_Partida();
+
+        SimpleDateFormat format_date = new SimpleDateFormat("yyyy-MM-dd");
+        String d = format_date.format(jDateChooser4.getDate());
+        String d2 = format_date.format(jDateChooser5.getDate());
+        java.sql.Date sqld = java.sql.Date.valueOf(d);
+        java.sql.Date sqld2 = java.sql.Date.valueOf(d2);
+
+        
+
+            int costo_total = Integer.valueOf(jLabel112.getText().replaceAll("\\s+", "").substring(1, jLabel112.getText().length() - 1));
+
+            int status = Reservacion.Actualizar_Reservacion_Admin(Integer.parseInt(jLabel104.getText()),
+                    (int) jSpinner1.getValue(), (int) jSpinner2.getValue(),
+                    sqld, sqld2, costo_total);
+
+            if (status == 1) {
+                jButton8.setEnabled(true);
+                jButton10.setVisible(false);
+                jSpinner1.setEnabled(false);
+                jSpinner2.setEnabled(false);
+                jDateChooser4.setEnabled(false);
+                jButton7.setText("Actualizar Reservación");
+                jButton7.setForeground(Color.black);
+                jTextField14.setEnabled(true);
+
+                // actualizar variables globales
+                no_personas_reservacion = (int) jSpinner1.getValue();
+                dias_estadia_reservacion_reservacion = (int) jSpinner2.getValue();
+                fecha_llegada_reservacion = new java.sql.Date(jDateChooser4.getDate().getTime());
+                fecha_partida_reservacion = new java.sql.Date(jDateChooser5.getDate().getTime());
+                costo_total_reservacion = Integer.valueOf(jLabel112.getText().replaceAll("\\s+", "").substring(1, jLabel112.getText().length() - 1));
+
+            }
+
+        });
+
+    }
+
+    private void enableFieldsReservacion() {
+        jDateChooser4.setEnabled(true);
+        jSpinner1.setEnabled(true);
+        jSpinner2.setEnabled(true);
+    }
+    private void jButton7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MousePressed
+
+        if (jLabel104.getText().equals("-")) {
+            JOptionPane.showMessageDialog(null, "No se ha consultado una reservacion para actualizar", "Error", 0);
+            return;
+        }
+
+        if (jButton7.getText().equals("Actualizar Reservación")) {
+            jButton7.setForeground(Color.blue);
+            jButton7.setText("Guardar Datos");
+            jTextField14.setEnabled(false);
+            jButton8.setEnabled(false);
+            jButton10.setVisible(true);
+            enableFieldsReservacion();
+            return;
+        }
+
+        if (jButton7.getText().equals("Guardar Datos")) {
+
+            // validar datos
+            validarReservacion();
+
+        }
+    }//GEN-LAST:event_jButton7MousePressed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        jspinner_constraints(jSpinner1, 10);
+        jspinner_constraints(jSpinner2, 100);
+
+        java.util.Calendar minDate = java.util.Calendar.getInstance();
+        minDate.setTime(new java.util.Date());
+        minDate.add(java.util.Calendar.DAY_OF_MONTH, 1);
+        jDateChooser4.setMinSelectableDate(minDate.getTime());
+    }//GEN-LAST:event_formComponentShown
+
+    private void jButton10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton10MousePressed
+        // TODO add your handling code here:
+
+        // asignar variables globales reservacion a campos
+        jSpinner1.setValue(no_personas_reservacion);
+        jSpinner2.setValue(dias_estadia_reservacion_reservacion);
+        jLabel112.setText("$ " + String.valueOf(costo_total_reservacion));
+        jDateChooser4.setDate(fecha_llegada_reservacion);
+        jDateChooser5.setDate(fecha_partida_reservacion);
+
+        // restaurar campos
+        jButton10.setVisible(false);
+        jSpinner1.setEnabled(false);
+        jSpinner2.setEnabled(false);
+        jDateChooser4.setEnabled(false);
+        jButton8.setEnabled(true);
+        jButton7.setText("Actualizar Reservación");
+        jButton7.setForeground(Color.black);
+        jTextField14.setEnabled(true);
+
+
+    }//GEN-LAST:event_jButton10MousePressed
 
     private void ClearChangesReservacion() {
 
