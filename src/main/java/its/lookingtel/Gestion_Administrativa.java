@@ -594,8 +594,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     void enableFields() {
 
         jTextField10.setEditable(true);
-        jTextField11.setEditable(true);
-        jComboBox9.setEnabled(true);
         jTextField13.setEditable(true);
         jComboBox14.setEnabled(true);
         jComboBox13.setEnabled(true);
@@ -607,6 +605,16 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jCheckBox7.setEnabled(true);
         jCheckBox3.setEnabled(true);
         jLabel36.setEnabled(true);
+
+        if (Reservacion.Verificar_Condominio_En_Reservacion_Admin(Integer.valueOf(jTextField6.getText()))) {
+            jTextField11.setEditable(false);
+            jComboBox9.setEnabled(false);
+            JOptionPane.showMessageDialog(null,"Este condominio pertence a una reservacion por lo que el precio por noche y status no seran editables","Nota",1);
+            return;
+        }
+
+        jTextField11.setEditable(true);
+        jComboBox9.setEnabled(true);
 
     }
 
@@ -4343,50 +4351,46 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La fecha de llegada introducida no esta en el rango de disponibilidad, favor de corregir", "Error", 0);
             return;
         }
-        
+
         SwingUtilities.invokeLater(() -> {
 
-        // verificar que los campos no sean iguales
-        ArrayList<Boolean> fields = new ArrayList<Boolean>();
+            // verificar que los campos no sean iguales
+            ArrayList<Boolean> fields = new ArrayList<Boolean>();
 
-        if ((int) jSpinner1.getValue() != no_personas_reservacion) {
-            fields.add(true);
-        }
-        if ((int) jSpinner2.getValue() != dias_estadia_reservacion_reservacion) {
-            fields.add(true);
-        }
+            if ((int) jSpinner1.getValue() != no_personas_reservacion) {
+                fields.add(true);
+            }
+            if ((int) jSpinner2.getValue() != dias_estadia_reservacion_reservacion) {
+                fields.add(true);
+            }
 
-        if (Integer.valueOf(jLabel112.getText().replaceAll("\\s+", "").substring(1, jLabel112.getText().length() - 1)) != costo_total_reservacion) {
-            fields.add(true);
-        }
+            if (Integer.valueOf(jLabel112.getText().replaceAll("\\s+", "").substring(1, jLabel112.getText().length() - 1)) != costo_total_reservacion) {
+                fields.add(true);
+            }
 
-        if (!new java.sql.Date(jDateChooser4.getDate().getTime()).equals(fecha_llegada_reservacion)) {
-            fields.add(true);
-        }
+            if (!new java.sql.Date(jDateChooser4.getDate().getTime()).equals(fecha_llegada_reservacion)) {
+                fields.add(true);
+            }
 
-        if (!new java.sql.Date(jDateChooser5.getDate().getTime()).equals(fecha_partida_reservacion)) {
-            fields.add(true);
-        }
+            if (!new java.sql.Date(jDateChooser5.getDate().getTime()).equals(fecha_partida_reservacion)) {
+                fields.add(true);
+            }
 
-        if (fields.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor al menos realizar un cambio", "Error", 0);
-            return;
-        }
-        
-        System.out.print(fields);
-        
-        
+            if (fields.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Por favor al menos realizar un cambio", "Error", 0);
+                return;
+            }
 
-        // asignar fecha en tiempo de salida si no se refleja
-        setFecha_Partida();
+            System.out.print(fields);
 
-        SimpleDateFormat format_date = new SimpleDateFormat("yyyy-MM-dd");
-        String d = format_date.format(jDateChooser4.getDate());
-        String d2 = format_date.format(jDateChooser5.getDate());
-        java.sql.Date sqld = java.sql.Date.valueOf(d);
-        java.sql.Date sqld2 = java.sql.Date.valueOf(d2);
+            // asignar fecha en tiempo de salida si no se refleja
+            setFecha_Partida();
 
-        
+            SimpleDateFormat format_date = new SimpleDateFormat("yyyy-MM-dd");
+            String d = format_date.format(jDateChooser4.getDate());
+            String d2 = format_date.format(jDateChooser5.getDate());
+            java.sql.Date sqld = java.sql.Date.valueOf(d);
+            java.sql.Date sqld2 = java.sql.Date.valueOf(d2);
 
             int costo_total = Integer.valueOf(jLabel112.getText().replaceAll("\\s+", "").substring(1, jLabel112.getText().length() - 1));
 
