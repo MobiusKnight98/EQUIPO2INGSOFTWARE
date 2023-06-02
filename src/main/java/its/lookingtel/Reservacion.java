@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -81,6 +82,42 @@ public class Reservacion extends Querys {
         return 0;
     }
 
+    public static int Actualizar_Reservacion_Admin(int id, int no_personas, int dias_estadia, Date fecha_llegada, Date fecha_partida, int costo_total) {
+
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
+
+            if (conn == null) {
+                JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
+                return 0;
+            }
+
+            PreparedStatement statement = conn.prepareStatement("UPDATE RESERVACIONES SET No_Personas=?,Dias_Estadia=?,Fecha_Llegada=?,Fecha_Partida=?,Costo_Total=? WHERE Id=?");
+
+            statement.setInt(1, no_personas);
+            statement.setInt(2, dias_estadia);
+            statement.setDate(3, fecha_llegada);
+            statement.setDate(4, fecha_partida);
+            statement.setInt(5, costo_total);
+            statement.setInt(6, id);
+
+            int statusprocess = statement.executeUpdate();
+            statement.close();
+            conn.close();
+
+            if (statusprocess == 1) {
+                JOptionPane.showMessageDialog(null, "Reservacion Actualizada Satisfactoriamente Codigo de Salida 1", "Success", 1);
+                return 1;
+            }
+
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar la Reservacion Codigo de Error 0", "Error", 0);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+
+    }
+
     public static int Eliminar_Reservacion(int id) {
 
         int status = 0;
@@ -111,8 +148,8 @@ public class Reservacion extends Querys {
         return status;
 
     }
-    
-     public static void Eliminar_Reservacion_Admin(int id,String CIF) {
+
+    public static void Eliminar_Reservacion_Admin(int id, String CIF) {
 
         try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
 
@@ -138,11 +175,7 @@ public class Reservacion extends Querys {
             System.out.println("Cannot establish connection");
         }
 
-      
-
     }
-    
-    
 
     public static ArrayList<Object> Consultar_Reservacion_Admin(String CIF) {
 
@@ -179,8 +212,7 @@ public class Reservacion extends Querys {
                 reservacion.add(rs.getInt(14));
                 reservacion.add(rs.getInt(15));
                 reservacion.add(rs.getString(16));
-          
-                
+
                 return reservacion;
             }
 
