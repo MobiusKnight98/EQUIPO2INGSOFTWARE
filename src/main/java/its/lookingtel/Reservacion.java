@@ -82,6 +82,41 @@ public class Reservacion extends Querys {
         return 0;
     }
 
+    public static boolean Verificar_Condominio_En_Reservacion_Admin(int id) {
+
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
+
+            if (conn == null) {
+                JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
+                return false;
+            }
+
+            PreparedStatement statement = conn.prepareStatement("SELECT Id_Condominio FROM RESERVACIONES WHERE RESERVACIONES.Id_Condominio=?");
+            statement.setInt(1, id);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+
+                System.out.println("Reservacion existente en base al Id del condominio: " + rs.getInt(1));
+                rs.close();
+                statement.close();
+                conn.close();
+                return true;
+            }
+
+            System.out.println("Este condominio no esta ligado a ninguna reservacion");
+            rs.close();
+            statement.close();
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Reservacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+
+    }
+
     public static int Actualizar_Reservacion_Admin(int id, int no_personas, int dias_estadia, Date fecha_llegada, Date fecha_partida, int costo_total) {
 
         try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {

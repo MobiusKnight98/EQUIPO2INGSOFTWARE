@@ -45,6 +45,7 @@ public class Condominios_Usuario extends javax.swing.JFrame {
         Reservacion_Usuario.captureScreen(this);
         Reservaciones_Usuario.captureScreen(this);
         Condominio_Component.captureScreen(this);
+        jLabel3.setVisible(false);
         displaylogos();
 
     }
