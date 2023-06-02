@@ -22,6 +22,7 @@ its\lookingtel\Reservacion_Usuario$3.class
 its\lookingtel\Reservacion_Usuario$6.class
 its\lookingtel\ActualizarDatos_Usuario$13.class
 its\lookingtel\ActualizarDatos_Usuario$4.class
+its\lookingtel\Gestion_Administrativa$40.class
 its\lookingtel\Menu_Principal$2.class
 its\lookingtel\Gestion_Administrativa$20.class
 its\lookingtel\Gestion_Administrativa$26.class
@@ -32,9 +33,11 @@ its\lookingtel\Gestion_Administrativa$18.class
 its\lookingtel\Registrar_Condominio$16.class
 its\lookingtel\Registrar_Usuario$8.class
 its\lookingtel\Gestion_Administrativa$23.class
+its\lookingtel\Gestion_Administrativa$43.class
 its\lookingtel\Registrar_Condominio$2.class
 its\lookingtel\Menu_Principal$5.class
 its\lookingtel\Condominios_Usuario$7.class
+its\lookingtel\Gestion_Administrativa$38.class
 its\lookingtel\Gestion_Administrativa$28.class
 its\lookingtel\Gestion_Administrativa$21.class
 its\lookingtel\Recuperar_Contraseña$3.class
@@ -49,6 +52,7 @@ its\lookingtel\Registrar_Usuario$12.class
 its\lookingtel\Login_Usuario$9.class
 its\lookingtel\SendEmail$1.class
 its\lookingtel\Administrador.class
+its\lookingtel\Gestion_Administrativa$44.class
 its\lookingtel\Registrar_Condominio$10.class
 its\lookingtel\Reservaciones_Usuario$2.class
 its\lookingtel\Gestion_Administrativa$34.class
@@ -69,8 +73,10 @@ its\lookingtel\Login_Administrador$4.class
 its\lookingtel\Login_Usuario$8.class
 its\lookingtel\Condominio_Component.class
 its\lookingtel\Menu_Principal$4.class
+its\lookingtel\Gestion_Administrativa$39.class
 its\lookingtel\Login_Administrador.class
 its\lookingtel\Condominios_Usuario$8.class
+its\lookingtel\Gestion_Administrativa$45.class
 its\lookingtel\Reservaciones_Usuario$1.class
 its\lookingtel\Gestion_Administrativa$10.class
 its\lookingtel\Gestion_Administrativa$16.class
@@ -128,6 +134,7 @@ its\lookingtel\Gestion_Administrativa$31.class
 its\lookingtel\Registrar_Condominio$9.class
 its\lookingtel\Login_Usuario$10.class
 its\lookingtel\Registrar_Condominio$13.class
+its\lookingtel\Gestion_Administrativa$41.class
 its\lookingtel\Login_Administrador$1.class
 its\lookingtel\Login_Usuario.class
 its\lookingtel\Gestion_Administrativa$25.class
@@ -138,6 +145,7 @@ its\lookingtel\Menu_Principal$1.class
 its\lookingtel\ActualizarDatos_Usuario$14.class
 its\lookingtel\Registrar_Usuario$4.class
 its\lookingtel\Usuario.class
+its\lookingtel\Gestion_Administrativa$42.class
 its\lookingtel\Reservacion_Usuario$1.class
 its\lookingtel\Gestion_Administrativa$19.class
 its\lookingtel\Reservaciones_Usuario$4.class
