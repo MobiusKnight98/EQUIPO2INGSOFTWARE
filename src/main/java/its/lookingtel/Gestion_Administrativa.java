@@ -42,7 +42,6 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -58,7 +57,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     Condominio cond;
     HashMap<Integer, String> Ubicacion = new HashMap<Integer, String>();
-    String tracktab = "Usuarios";
+
     Registrar_Condominio pantalla_registrar_condominio;
     Login_Administrador pantalla_login_administrador;
     URL imagen_condominio;
@@ -113,25 +112,18 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jPanel7.setBackground(Color.white);
         jButton1.setBackground(Color.white);
         jButton11.setBackground(Color.white);
+        jButton10.setVisible(false);
         jButton3.setBackground(Color.white);
         jButton4.setBackground(Color.white);
         jButton5.setBackground(Color.white);
         jButton7.setBackground(Color.white);
         jButton8.setBackground(Color.white);
+        jButton10.setBackground(Color.white);
         jButton12.setBackground(Color.white);
         jComboBox123.setBackground(Color.white);
         jComboBox9.setBackground(Color.white);
         jComboBox14.setBackground(Color.white);
         jComboBox13.setBackground(Color.white);
-        jComboBox16.setBackground(Color.white);
-        jComboBox17.setBackground(Color.white);
-        jComboBox18.setBackground(Color.white);
-        jComboBox19.setBackground(Color.white);
-        jComboBox20.setBackground(Color.white);
-        jComboBox21.setBackground(Color.white);
-        jComboBox22.setBackground(Color.white);
-        jComboBox23.setBackground(Color.white);
-        jComboBox24.setBackground(Color.white);
         jPanel5.setBackground(Color.white);
         jPanel6.setBackground(Color.white);
         jPanel9.setBackground(Color.white);
@@ -141,6 +133,23 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jPanel13.setBackground(Color.white);
         jPanel14.setBackground(Color.white);
         jPanel15.setBackground(Color.white);
+        jPanel16.setBackground(Color.white);
+        jPanel17.setBackground(Color.white);
+        jPanel18.setBackground(Color.white);
+        jPanel19.setBackground(Color.white);
+        jPanel20.setBackground(Color.white);
+        jPanel21.setBackground(Color.white);
+        jPanel22.setBackground(Color.white);
+        jPanel23.setBackground(Color.white);
+        jPanel24.setBackground(Color.white);
+        jPanel25.setBackground(Color.white);
+        jPanel26.setBackground(Color.white);
+        jPanel27.setBackground(Color.white);
+        jPanel28.setBackground(Color.white);
+        jPanel29.setBackground(Color.white);
+        jPanel30.setBackground(Color.white);
+        jPanel31.setBackground(Color.white);
+        jPanel32.setBackground(Color.white);
         jPanel8.setBackground(Color.white);
         jSpinner1.setBackground(Color.white);
         jSpinner2.setBackground(Color.white);
@@ -715,41 +724,41 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
         List<Boolean> flag_checker = new ArrayList<Boolean>();
 
-        if(cond != null){
-        
-        flag_checker.add(cond.nombre.equals(jTextField10.getText()));
-        flag_checker.add(String.valueOf(cond.precio_x_noche).equals(jTextField11.getText()));
-        flag_checker.add(String.valueOf(cond.Ubicacion).equals(String.valueOf(key)));
-        flag_checker.add(String.valueOf(cond.Status).equals(String.valueOf(jComboBox9.getSelectedIndex())));
+        if (cond != null) {
 
-        System.out.println("El status de disponibilidad del condominio es:  " + cond.Status);
-        System.out.println("El status de disponibilidad del combobox es: " + jComboBox9.getSelectedIndex());
+            flag_checker.add(cond.nombre.equals(jTextField10.getText()));
+            flag_checker.add(String.valueOf(cond.precio_x_noche).equals(jTextField11.getText()));
+            flag_checker.add(String.valueOf(cond.Ubicacion).equals(String.valueOf(key)));
+            flag_checker.add(String.valueOf(cond.Status).equals(String.valueOf(jComboBox9.getSelectedIndex())));
 
-        // checar el simbolo +
-        String habitaciones_condominio = (String) jComboBox13.getSelectedItem();
-        if (habitaciones_condominio.contains("+")) {
-            habitaciones_condominio = habitaciones_condominio.substring(0, habitaciones_condominio.length() - 1);
-        }
-        flag_checker.add(String.valueOf(cond.No_Habitaciones).equals(habitaciones_condominio));
-        flag_checker.add(cond.direccion.equals(jTextArea2.getText()));
+            System.out.println("El status de disponibilidad del condominio es:  " + cond.Status);
+            System.out.println("El status de disponibilidad del combobox es: " + jComboBox9.getSelectedIndex());
 
-        List<String> listservices1 = services;
-        List<String> listservices2 = new ArrayList<String>(Arrays.asList(cond.servicios.split(",")));
+            // checar el simbolo +
+            String habitaciones_condominio = (String) jComboBox13.getSelectedItem();
+            if (habitaciones_condominio.contains("+")) {
+                habitaciones_condominio = habitaciones_condominio.substring(0, habitaciones_condominio.length() - 1);
+            }
+            flag_checker.add(String.valueOf(cond.No_Habitaciones).equals(habitaciones_condominio));
+            flag_checker.add(cond.direccion.equals(jTextArea2.getText()));
 
-        flag_checker.add(listservices2.equals(listservices1));
-        
-        flag_checker.add(picturepath.isEmpty());
+            List<String> listservices1 = services;
+            List<String> listservices2 = new ArrayList<String>(Arrays.asList(cond.servicios.split(",")));
 
-        System.out.println(flag_checker);
-        if (flag_checker.contains(false)) {
+            flag_checker.add(listservices2.equals(listservices1));
 
-            //Actualizamos Condominio
-            return 1;
-        }
+            flag_checker.add(picturepath.isEmpty());
+
+            System.out.println(flag_checker);
+            if (flag_checker.contains(false)) {
+
+                //Actualizamos Condominio
+                return 1;
+            }
         }
         JOptionPane.showMessageDialog(null, "No se han modificados cambios, porfavor cambia alguna informacion", "Error", 0);
         return 0;
-        
+
     }
 
     void displaylogos() {
@@ -828,7 +837,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     }
 
     void InsertPictureAtCellar(String picture) throws IOException {
-        
 
         // scale image
         File initialpicture = new File(picturepath);
@@ -875,8 +883,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-     
 
     }
 
@@ -1006,42 +1012,67 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
         jLabel37 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
-        jLabel49 = new javax.swing.JLabel();
-        jLabel50 = new javax.swing.JLabel();
-        jLabel51 = new javax.swing.JLabel();
-        jLabel52 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jLabel54 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
-        jLabel55 = new javax.swing.JLabel();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jLabel76 = new javax.swing.JLabel();
+        jLabel77 = new javax.swing.JLabel();
+        jLabel78 = new javax.swing.JLabel();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel79 = new javax.swing.JLabel();
+        jLabel80 = new javax.swing.JLabel();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel81 = new javax.swing.JLabel();
+        jLabel82 = new javax.swing.JLabel();
+        jLabel83 = new javax.swing.JLabel();
+        jPanel20 = new javax.swing.JPanel();
+        jLabel84 = new javax.swing.JLabel();
+        jLabel85 = new javax.swing.JLabel();
+        jLabel86 = new javax.swing.JLabel();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel87 = new javax.swing.JLabel();
+        jLabel88 = new javax.swing.JLabel();
+        jLabel89 = new javax.swing.JLabel();
+        jPanel22 = new javax.swing.JPanel();
+        jLabel90 = new javax.swing.JLabel();
+        jLabel91 = new javax.swing.JLabel();
+        jLabel92 = new javax.swing.JLabel();
+        jPanel23 = new javax.swing.JPanel();
+        jLabel93 = new javax.swing.JLabel();
+        jLabel94 = new javax.swing.JLabel();
+        jLabel95 = new javax.swing.JLabel();
+        jPanel24 = new javax.swing.JPanel();
+        jLabel96 = new javax.swing.JLabel();
+        jLabel97 = new javax.swing.JLabel();
+        jLabel98 = new javax.swing.JLabel();
+        jPanel25 = new javax.swing.JPanel();
+        jLabel99 = new javax.swing.JLabel();
+        jLabel100 = new javax.swing.JLabel();
+        jLabel101 = new javax.swing.JLabel();
+        jPanel26 = new javax.swing.JPanel();
+        jLabel102 = new javax.swing.JLabel();
+        jLabel103 = new javax.swing.JLabel();
+        jLabel104 = new javax.swing.JLabel();
+        jPanel27 = new javax.swing.JPanel();
+        jLabel105 = new javax.swing.JLabel();
         jSpinner1 = new javax.swing.JSpinner();
-        jLabel56 = new javax.swing.JLabel();
+        jPanel28 = new javax.swing.JPanel();
+        jLabel106 = new javax.swing.JLabel();
         jSpinner2 = new javax.swing.JSpinner();
-        jLabel57 = new javax.swing.JLabel();
-        jComboBox16 = new javax.swing.JComboBox<>();
-        jComboBox17 = new javax.swing.JComboBox<>();
-        jComboBox18 = new javax.swing.JComboBox<>();
-        jLabel58 = new javax.swing.JLabel();
-        jComboBox19 = new javax.swing.JComboBox<>();
-        jComboBox20 = new javax.swing.JComboBox<>();
-        jComboBox21 = new javax.swing.JComboBox<>();
-        jLabel59 = new javax.swing.JLabel();
-        jComboBox22 = new javax.swing.JComboBox<>();
-        jComboBox23 = new javax.swing.JComboBox<>();
-        jComboBox24 = new javax.swing.JComboBox<>();
-        jLabel60 = new javax.swing.JLabel();
-        jLabel61 = new javax.swing.JLabel();
+        jPanel29 = new javax.swing.JPanel();
+        jDateChooser3 = new com.toedter.calendar.JDateChooser();
+        jLabel107 = new javax.swing.JLabel();
+        jPanel30 = new javax.swing.JPanel();
+        jDateChooser4 = new com.toedter.calendar.JDateChooser();
+        jLabel108 = new javax.swing.JLabel();
+        jPanel31 = new javax.swing.JPanel();
+        jDateChooser5 = new com.toedter.calendar.JDateChooser();
+        jLabel109 = new javax.swing.JLabel();
+        jPanel32 = new javax.swing.JPanel();
+        jLabel110 = new javax.swing.JLabel();
+        jLabel111 = new javax.swing.JLabel();
+        jLabel112 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -2369,6 +2400,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jButton7.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton7.setText("Actualizar Reservación");
         jButton7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -2378,6 +2410,12 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jButton8.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jButton8.setText("Eliminar Reservación");
         jButton8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton8MousePressed(evt);
+            }
+        });
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -2394,152 +2432,674 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField14.setAlignmentX(0.9F);
         jTextField14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         jTextField14.setMargin(new java.awt.Insets(12, 6, 2, 6));
+        jTextField14.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField14FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField14FocusLost(evt);
+            }
+        });
+        jTextField14.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField14KeyTyped(evt);
+            }
+        });
 
-        jLabel39.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jLabel39.setText("_______________________");
+        jPanel17.setLayout(new java.awt.GridBagLayout());
 
-        jLabel40.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel40.setText("Nombre del Condominio:");
+        jLabel76.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel76.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel76.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel76.setText("Nombre Condominio:");
+        jLabel76.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel76.setMaximumSize(new java.awt.Dimension(130, 21));
+        jLabel76.setMinimumSize(new java.awt.Dimension(130, 21));
+        jLabel76.setPreferredSize(new java.awt.Dimension(130, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel17.add(jLabel76, gridBagConstraints);
 
-        jLabel41.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel41.setText("Dirección del Condominio:");
+        jLabel77.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel77.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel77.setText("_______________________________");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(-12, 0, 0, 0);
+        jPanel17.add(jLabel77, gridBagConstraints);
 
-        jLabel42.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jLabel42.setText("________________________");
+        jLabel78.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel78.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel78.setText("-");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel17.add(jLabel78, gridBagConstraints);
 
-        jLabel43.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel43.setText("Precio x Noche del Condominio:");
+        jPanel18.setLayout(new java.awt.GridBagLayout());
 
-        jLabel44.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jLabel44.setText("________________________");
+        jLabel13.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel13.setText("Direccion Condominio:");
+        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel13.setMaximumSize(new java.awt.Dimension(130, 21));
+        jLabel13.setMinimumSize(new java.awt.Dimension(130, 21));
+        jLabel13.setPreferredSize(new java.awt.Dimension(130, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 120;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel18.add(jLabel13, gridBagConstraints);
 
-        jLabel45.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel45.setText("CIF:");
+        jLabel79.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel79.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel79.setText("__________________________________________________");
+        jLabel79.setToolTipText("");
+        jLabel79.setMinimumSize(new java.awt.Dimension(400, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(-12, 0, 0, 0);
+        jPanel18.add(jLabel79, gridBagConstraints);
 
-        jLabel46.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jLabel46.setText("________________________");
+        jLabel80.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel80.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel80.setText("-");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel18.add(jLabel80, gridBagConstraints);
 
-        jLabel47.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel47.setText("Ubicación:");
+        jPanel19.setLayout(new java.awt.GridBagLayout());
 
-        jLabel48.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jLabel48.setText("________________________");
+        jLabel81.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel81.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel81.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel81.setText("Ubicacion Condominio:");
+        jLabel81.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel81.setMaximumSize(new java.awt.Dimension(130, 21));
+        jLabel81.setMinimumSize(new java.awt.Dimension(130, 21));
+        jLabel81.setPreferredSize(new java.awt.Dimension(130, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel19.add(jLabel81, gridBagConstraints);
 
-        jLabel49.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel49.setText("Nombre Usuario:");
+        jLabel82.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel82.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel82.setText("_______________________________");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(-12, 0, 0, 0);
+        jPanel19.add(jLabel82, gridBagConstraints);
 
-        jLabel50.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jLabel50.setText("________________________");
+        jLabel83.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel83.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel83.setText("-");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel19.add(jLabel83, gridBagConstraints);
 
-        jLabel51.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel51.setText("E-mail Usuari");
+        jPanel20.setLayout(new java.awt.GridBagLayout());
 
-        jLabel52.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jLabel52.setText("________________________");
+        jLabel84.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel84.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel84.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel84.setText("Precio x Noche Condominio:");
+        jLabel84.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel84.setMaximumSize(new java.awt.Dimension(130, 21));
+        jLabel84.setMinimumSize(new java.awt.Dimension(130, 21));
+        jLabel84.setPreferredSize(new java.awt.Dimension(130, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel20.add(jLabel84, gridBagConstraints);
 
-        jLabel53.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel53.setText("Telefóno Usuario:");
+        jLabel85.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel85.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel85.setText("_______");
+        jLabel85.setToolTipText("");
+        jLabel85.setPreferredSize(new java.awt.Dimension(269, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(-12, 0, 0, 0);
+        jPanel20.add(jLabel85, gridBagConstraints);
 
-        jLabel54.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jLabel54.setText("________________________");
+        jLabel86.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel86.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel86.setText("-");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel20.add(jLabel86, gridBagConstraints);
 
-        jLabel38.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel38.setText("Id:");
+        jPanel21.setLayout(new java.awt.GridBagLayout());
 
-        jTextField15.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jTextField15.setForeground(new java.awt.Color(102, 102, 102));
-        jTextField15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField15.setAlignmentX(0.9F);
-        jTextField15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jTextField15.setEnabled(false);
-        jTextField15.setMargin(new java.awt.Insets(12, 6, 2, 6));
+        jLabel87.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel87.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel87.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel87.setText("CIF del Condominio:");
+        jLabel87.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel87.setMaximumSize(new java.awt.Dimension(130, 21));
+        jLabel87.setMinimumSize(new java.awt.Dimension(130, 21));
+        jLabel87.setPreferredSize(new java.awt.Dimension(50, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel21.add(jLabel87, gridBagConstraints);
 
-        jLabel55.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel55.setText("No.Personas:");
+        jLabel88.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel88.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel88.setText("_______________");
+        jLabel88.setPreferredSize(new java.awt.Dimension(50, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(-12, 0, 0, 0);
+        jPanel21.add(jLabel88, gridBagConstraints);
+
+        jLabel89.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel89.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel89.setText("-");
+        jLabel89.setPreferredSize(new java.awt.Dimension(50, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel21.add(jLabel89, gridBagConstraints);
+
+        jPanel22.setLayout(new java.awt.GridBagLayout());
+
+        jLabel90.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel90.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel90.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel90.setText("No.Habitaciones Condominio:");
+        jLabel90.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel90.setMaximumSize(new java.awt.Dimension(130, 21));
+        jLabel90.setMinimumSize(new java.awt.Dimension(130, 21));
+        jLabel90.setPreferredSize(new java.awt.Dimension(130, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel22.add(jLabel90, gridBagConstraints);
+
+        jLabel91.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel91.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel91.setText("_______");
+        jLabel91.setToolTipText("");
+        jLabel91.setPreferredSize(new java.awt.Dimension(269, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(-12, 0, 0, 0);
+        jPanel22.add(jLabel91, gridBagConstraints);
+
+        jLabel92.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel92.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel92.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel92.setText("-");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel22.add(jLabel92, gridBagConstraints);
+
+        jPanel23.setLayout(new java.awt.GridBagLayout());
+
+        jLabel93.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel93.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel93.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel93.setText("Nombre Usuario:");
+        jLabel93.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel93.setMaximumSize(new java.awt.Dimension(130, 21));
+        jLabel93.setMinimumSize(new java.awt.Dimension(130, 21));
+        jLabel93.setPreferredSize(new java.awt.Dimension(130, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel23.add(jLabel93, gridBagConstraints);
+
+        jLabel94.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel94.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel94.setText("_______________________________");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(-12, 0, 0, 0);
+        jPanel23.add(jLabel94, gridBagConstraints);
+
+        jLabel95.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel95.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel95.setText("-");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel23.add(jLabel95, gridBagConstraints);
+
+        jPanel24.setLayout(new java.awt.GridBagLayout());
+
+        jLabel96.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel96.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel96.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel96.setText("Email Usuario:");
+        jLabel96.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel96.setMaximumSize(new java.awt.Dimension(130, 21));
+        jLabel96.setMinimumSize(new java.awt.Dimension(130, 21));
+        jLabel96.setPreferredSize(new java.awt.Dimension(130, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel24.add(jLabel96, gridBagConstraints);
+
+        jLabel97.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel97.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel97.setText("_______________________________");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(-12, 0, 0, 0);
+        jPanel24.add(jLabel97, gridBagConstraints);
+
+        jLabel98.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel98.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel98.setText("-");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel24.add(jLabel98, gridBagConstraints);
+
+        jPanel25.setLayout(new java.awt.GridBagLayout());
+
+        jLabel99.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel99.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel99.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel99.setText("Telefono Usuario:");
+        jLabel99.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel99.setMaximumSize(new java.awt.Dimension(130, 21));
+        jLabel99.setMinimumSize(new java.awt.Dimension(130, 21));
+        jLabel99.setPreferredSize(new java.awt.Dimension(50, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel25.add(jLabel99, gridBagConstraints);
+
+        jLabel100.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel100.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel100.setText("_______________");
+        jLabel100.setPreferredSize(new java.awt.Dimension(50, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.insets = new java.awt.Insets(-12, 0, 0, 0);
+        jPanel25.add(jLabel100, gridBagConstraints);
+
+        jLabel101.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel101.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel101.setText("-");
+        jLabel101.setPreferredSize(new java.awt.Dimension(50, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel25.add(jLabel101, gridBagConstraints);
+
+        jPanel26.setLayout(new java.awt.GridBagLayout());
+
+        jLabel102.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel102.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel102.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel102.setText("Id Reservacion:");
+        jLabel102.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel102.setMaximumSize(new java.awt.Dimension(130, 21));
+        jLabel102.setMinimumSize(new java.awt.Dimension(130, 21));
+        jLabel102.setPreferredSize(new java.awt.Dimension(130, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        jPanel26.add(jLabel102, gridBagConstraints);
+
+        jLabel103.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel103.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel103.setText("_______");
+        jLabel103.setToolTipText("");
+        jLabel103.setPreferredSize(new java.awt.Dimension(269, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.ipadx = 100;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(-12, 0, 0, 0);
+        jPanel26.add(jLabel103, gridBagConstraints);
+
+        jLabel104.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel104.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel104.setText("-");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel26.add(jLabel104, gridBagConstraints);
+
+        jPanel27.setLayout(new java.awt.GridBagLayout());
+
+        jLabel105.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel105.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel105.setText("No. Personas: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel27.add(jLabel105, gridBagConstraints);
 
         jSpinner1.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jSpinner1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jSpinner1.setPreferredSize(new java.awt.Dimension(75, 35));
+        jPanel27.add(jSpinner1, new java.awt.GridBagConstraints());
 
-        jLabel56.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel56.setText("Dias.Estadía:");
+        jPanel28.setLayout(new java.awt.GridBagLayout());
+
+        jLabel106.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel106.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel106.setText("Dias de Estadia: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        jPanel28.add(jLabel106, gridBagConstraints);
 
         jSpinner2.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
         jSpinner2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jSpinner2.setPreferredSize(new java.awt.Dimension(75, 35));
+        jSpinner2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinner2StateChanged(evt);
+            }
+        });
+        jPanel28.add(jSpinner2, new java.awt.GridBagConstraints());
 
-        jLabel57.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel57.setText("Fecha Reservación:");
+        jPanel29.setLayout(new java.awt.GridBagLayout());
 
-        jComboBox16.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox16.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jComboBox16.setAutoscrolls(true);
-        jComboBox16.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox16.setEnabled(false);
-        jComboBox16.setPreferredSize(new java.awt.Dimension(57, 28));
+        jDateChooser3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jDateChooser3.setForeground(new java.awt.Color(0, 0, 0));
+        jDateChooser3.setDateFormatString("yyyy/MM/dd");
+        jDateChooser3.setDoubleBuffered(false);
+        jDateChooser3.setEnabled(false);
+        jDateChooser3.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jDateChooser3.setMaxSelectableDate(new java.util.Date(253370790082000L));
+        jDateChooser3.setMinSelectableDate(new java.util.Date(-62135744318000L));
+        jDateChooser3.setMinimumSize(new java.awt.Dimension(150, 33));
+        jDateChooser3.setPreferredSize(new java.awt.Dimension(150, 50));
+        jDateChooser3.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser3PropertyChange(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel29.add(jDateChooser3, gridBagConstraints);
 
-        jComboBox17.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox17.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        jComboBox17.setAutoscrolls(true);
-        jComboBox17.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox17.setEnabled(false);
-        jComboBox17.setPreferredSize(new java.awt.Dimension(57, 28));
+        jLabel107.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel107.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel107.setText("Fecha Reservacion: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel29.add(jLabel107, gridBagConstraints);
 
-        jComboBox18.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox18.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1923", "1924", "1925", "1926", "1927" }));
-        jComboBox18.setAutoscrolls(true);
-        jComboBox18.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox18.setEnabled(false);
-        jComboBox18.setPreferredSize(new java.awt.Dimension(57, 28));
+        jPanel30.setLayout(new java.awt.GridBagLayout());
 
-        jLabel58.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel58.setText("Fecha Llegada:");
+        jDateChooser4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jDateChooser4.setForeground(new java.awt.Color(0, 0, 0));
+        jDateChooser4.setDateFormatString("yyyy/MM/dd");
+        jDateChooser4.setDoubleBuffered(false);
+        jDateChooser4.setEnabled(false);
+        jDateChooser4.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jDateChooser4.setMaxSelectableDate(new java.util.Date(253370790082000L));
+        jDateChooser4.setMinSelectableDate(new java.util.Date(-62135744318000L));
+        jDateChooser4.setMinimumSize(new java.awt.Dimension(150, 33));
+        jDateChooser4.setPreferredSize(new java.awt.Dimension(150, 50));
+        jDateChooser4.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser4PropertyChange(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel30.add(jDateChooser4, gridBagConstraints);
 
-        jComboBox19.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox19.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jComboBox19.setAutoscrolls(true);
-        jComboBox19.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox19.setPreferredSize(new java.awt.Dimension(57, 28));
+        jLabel108.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel108.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel108.setText("Fecha Llegada: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel30.add(jLabel108, gridBagConstraints);
 
-        jComboBox20.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox20.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        jComboBox20.setAutoscrolls(true);
-        jComboBox20.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox20.setPreferredSize(new java.awt.Dimension(57, 28));
+        jPanel31.setLayout(new java.awt.GridBagLayout());
 
-        jComboBox21.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox21.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1923", "1924", "1925", "1926", "1927" }));
-        jComboBox21.setAutoscrolls(true);
-        jComboBox21.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox21.setPreferredSize(new java.awt.Dimension(57, 28));
+        jDateChooser5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jDateChooser5.setForeground(new java.awt.Color(0, 0, 0));
+        jDateChooser5.setDateFormatString("yyyy/MM/dd");
+        jDateChooser5.setDoubleBuffered(false);
+        jDateChooser5.setEnabled(false);
+        jDateChooser5.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jDateChooser5.setMaxSelectableDate(new java.util.Date(253370790082000L));
+        jDateChooser5.setMinSelectableDate(new java.util.Date(-62135744318000L));
+        jDateChooser5.setMinimumSize(new java.awt.Dimension(150, 33));
+        jDateChooser5.setPreferredSize(new java.awt.Dimension(150, 50));
+        jDateChooser5.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jDateChooser5PropertyChange(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel31.add(jDateChooser5, gridBagConstraints);
 
-        jLabel59.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel59.setText("Fecha Partida:");
+        jLabel109.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel109.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel109.setText("Fecha Partida: ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel31.add(jLabel109, gridBagConstraints);
 
-        jComboBox22.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox22.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jComboBox22.setAutoscrolls(true);
-        jComboBox22.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox22.setEnabled(false);
-        jComboBox22.setPreferredSize(new java.awt.Dimension(57, 28));
+        jPanel32.setLayout(new java.awt.GridBagLayout());
 
-        jComboBox23.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox23.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        jComboBox23.setAutoscrolls(true);
-        jComboBox23.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox23.setEnabled(false);
-        jComboBox23.setPreferredSize(new java.awt.Dimension(57, 28));
+        jLabel110.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel110.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel110.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel110.setText("Costo Total:");
+        jLabel110.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jLabel110.setMaximumSize(new java.awt.Dimension(130, 21));
+        jLabel110.setMinimumSize(new java.awt.Dimension(130, 21));
+        jLabel110.setPreferredSize(new java.awt.Dimension(130, 21));
+        jPanel32.add(jLabel110, new java.awt.GridBagConstraints());
 
-        jComboBox24.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jComboBox24.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1923", "1924", "1925", "1926", "1927" }));
-        jComboBox24.setAutoscrolls(true);
-        jComboBox24.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
-        jComboBox24.setEnabled(false);
-        jComboBox24.setPreferredSize(new java.awt.Dimension(57, 28));
+        jLabel111.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel111.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel111.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel111.setText("_____________");
+        jLabel111.setToolTipText("");
+        jLabel111.setPreferredSize(new java.awt.Dimension(269, 21));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(-12, 0, 0, 0);
+        jPanel32.add(jLabel111, gridBagConstraints);
 
-        jLabel60.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
-        jLabel60.setText("Costo Total:");
+        jLabel112.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel112.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel112.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel112.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel112.setText("-");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+        jPanel32.add(jLabel112, gridBagConstraints);
 
-        jLabel61.setFont(new java.awt.Font("Comic Sans MS", 1, 12)); // NOI18N
-        jLabel61.setText("_______________");
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(120, 120, 120)
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                                        .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(40, 40, 40))))
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel16Layout.createSequentialGroup()
+                                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(193, 193, 193)
+                                    .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel16Layout.createSequentialGroup()
+                                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel27, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel28, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel31, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel16Layout.createSequentialGroup()
+                            .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addComponent(jPanel32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jButton10.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        jButton10.setText("Cancelar");
+        jButton10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 3, true));
+        jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -2548,93 +3108,20 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel35)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel41)
-                                        .addComponent(jLabel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel42, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE))
-                                    .addComponent(jLabel40))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel51)
-                                    .addComponent(jLabel49)
-                                    .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel43)
-                                    .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel53)
-                                    .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel47)
-                            .addComponent(jLabel45)
-                            .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(87, 87, 87)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel38)
-                                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel55, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jSpinner1))
-                                .addGap(31, 31, 31)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel56, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jSpinner2))
-                                .addContainerGap())
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel58)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addComponent(jComboBox19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jComboBox20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jComboBox21, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel57)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addComponent(jComboBox16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jComboBox17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jComboBox18, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel59)
-                                        .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addComponent(jComboBox22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jComboBox23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jComboBox24, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel60)
-                                        .addGap(41, 41, 41))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel61)
-                                        .addGap(15, 15, 15))))))
                     .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
@@ -2645,92 +3132,13 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel55, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel60, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel61, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(63, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                            .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                            .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jLabel41, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLabel42, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel43, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel44, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Reservaciones", jPanel3);
@@ -2851,24 +3259,57 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
         jLabel4.setText("Gestionar" + " " + jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()));
-
-        if (!jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals(tracktab)) {
-            ClearChanges();
-            resetFields();
-            jButton4.setText("Actualizar Condominio");
-            jButton4.setForeground(Color.black);
-            jTextField9.setEnabled(true);
-
-            disableFieldsUsuario();
-            LimpiarCamposUsuario();
-            resetFieldsUser();
-            jButton12.setVisible(false);
-            jButton12.setEnabled(true);
-            jButton11.setEnabled(true);
-            jButton1.setText("Actualizar Usuario");
-            jButton1.setForeground(Color.black);
-            jTextField1.setEnabled(true);
+        
+        
+        
+        if(jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Usuarios")){
+       
+        
+        // clear usuario
+        disableFieldsUsuario();
+        LimpiarCamposUsuario();
+        resetFieldsUser();
+        jButton12.setVisible(false);
+        jButton12.setEnabled(true);
+        jButton11.setEnabled(true);
+        jButton1.setText("Actualizar Usuario");
+        jButton1.setForeground(Color.black);
+        jTextField1.setEnabled(true);
+        return;
         }
+        
+        
+        if(jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Condominios")){
+        
+        // clear condominio
+        ClearChanges();
+        resetFields();
+        jButton4.setText("Actualizar Condominio");
+        jButton4.setForeground(Color.black);
+        jTextField9.setEnabled(true);
+        return;
+        }
+      
+        if(jTabbedPane1.getTitleAt(jTabbedPane1.getSelectedIndex()).equals("Reservaciones")){
+       
+        // clear reservacion
+        ClearChangesReservacion();
+
+        jButton7.setText("Actualizar Reservación");
+        jButton7.setForeground(Color.black);
+        jTextField14.setEnabled(true);
+
+        jSpinner2.setEnabled(false);
+        jSpinner1.setEnabled(false);
+        jDateChooser4.setEnabled(false);
+
+        jButton10.setVisible(false);
+        jButton10.setEnabled(true);
+        jButton8.setEnabled(true);
+        
+        }
+        
+
 
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
@@ -2893,6 +3334,11 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         return !(jtxt.getText().equals(("Id Condominio o CIF")) || jtxt.getText().isEmpty());
     }
 
+    boolean ValidatePlaceHolderReservacion(JTextField jtxt
+    ) {
+        return !(jtxt.getText().equals(("CIF Condominio")) || jtxt.getText().isEmpty());
+    }
+
     boolean ValidateCIFOrID(JTextField jtxt
     ) {
 
@@ -2905,6 +3351,13 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         } catch (Exception ex) {
             return HandleCIF(jtxt.getText());
         }
+
+    }
+
+    boolean ValidateCIF(JTextField jtxt
+    ) {
+
+        return HandleCIF(jtxt.getText());
 
     }
 
@@ -2941,11 +3394,16 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         pantalla_login_administrador.setVisible(true);
         pantalla_registrar_condominio.dispose();
 
+        
+        // clear condominio
+        
         ClearChanges();
         resetFields();
         jButton4.setText("Actualizar Condominio");
         jButton4.setForeground(Color.black);
         jTextField9.setEnabled(true);
+        
+        // clear usuario
 
         disableFieldsUsuario();
         LimpiarCamposUsuario();
@@ -2956,6 +3414,23 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jButton1.setText("Actualizar Usuario");
         jButton1.setForeground(Color.black);
         jTextField1.setEnabled(true);
+        
+        
+        
+          // clear reservacion
+        ClearChangesReservacion();
+
+        jButton7.setText("Actualizar Reservación");
+        jButton7.setForeground(Color.black);
+        jTextField14.setEnabled(true);
+
+        jSpinner2.setEnabled(false);
+        jSpinner1.setEnabled(false);
+        jDateChooser4.setEnabled(false);
+
+        jButton10.setVisible(false);
+        jButton10.setEnabled(true);
+        jButton8.setEnabled(true);
 
 
     }//GEN-LAST:event_formWindowClosed
@@ -3342,22 +3817,21 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     private void LlenarCamposUsuario() {
 
-        
-        if(usuario != null){
-        jTextField3.setCaretPosition(0);
-        jTextField17.setText(String.valueOf(usuario.Id_user_get()));
-        jTextField16.setText(usuario.Nombre_user_get());
-        jDateChooser2.setDate(usuario.Fecha_Registro_user_get());
-        jTextField2.setText(usuario.Telefono_user_get());
-        jDateChooser1.setDate(usuario.Fecha_Nacimiento_user_get());
-        jTextField18.setText(String.valueOf(usuario.Edad_user_get()));
-        jTextField3.setText(usuario.correo_electronico_user_get());
-        jPasswordField1.setText(usuario.Contraseña_user_get());
-        jPasswordField2.setText(usuario.Contraseña_user_get());
-        jTextArea1.setText(usuario.Direccion_user_get());
+        if (usuario != null) {
+            jTextField3.setCaretPosition(0);
+            jTextField17.setText(String.valueOf(usuario.Id_user_get()));
+            jTextField16.setText(usuario.Nombre_user_get());
+            jDateChooser2.setDate(usuario.Fecha_Registro_user_get());
+            jTextField2.setText(usuario.Telefono_user_get());
+            jDateChooser1.setDate(usuario.Fecha_Nacimiento_user_get());
+            jTextField18.setText(String.valueOf(usuario.Edad_user_get()));
+            jTextField3.setText(usuario.correo_electronico_user_get());
+            jPasswordField1.setText(usuario.Contraseña_user_get());
+            jPasswordField2.setText(usuario.Contraseña_user_get());
+            jTextArea1.setText(usuario.Direccion_user_get());
 
-        jComboBox1.setSelectedItem(Ubicacion.get(usuario.Ubicacion_user_get()));
-        jComboBox123.setSelectedItem(usuario.Sexo_user_get());
+            jComboBox1.setSelectedItem(Ubicacion.get(usuario.Ubicacion_user_get()));
+            jComboBox123.setSelectedItem(usuario.Sexo_user_get());
         }
     }
 
@@ -3653,8 +4127,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     }
 
     private void Mostrar_Usuario() {
-        
-        
+
         usuario = Usuario.Consultar_Usuario(jTextField1.getText());
         if (usuario != null) {
             //Popular campos
@@ -3685,6 +4158,143 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
         jTextField1.setEnabled(false);
         jButton12.setVisible(true);
     }//GEN-LAST:event_jButton1MousePressed
+
+    private void jSpinner2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner2StateChanged
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_jSpinner2StateChanged
+
+    private void jDateChooser3PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser3PropertyChange
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jDateChooser3PropertyChange
+
+    private void jDateChooser4PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser4PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooser4PropertyChange
+
+    private void jDateChooser5PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jDateChooser5PropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDateChooser5PropertyChange
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jTextField14FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField14FocusGained
+        // TODO add your handling code here:
+        if (jTextField14.getText().equals("CIF Condominio")) {
+            jTextField14.setText("");
+            jTextField14.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_jTextField14FocusGained
+
+    private void jTextField14FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField14FocusLost
+        // TODO add your handling code here:
+
+        if (jTextField14.getText().isEmpty()) {
+            jTextField14.setText("CIF Condominio");
+            jTextField9.setForeground(Color.gray);
+        }
+        jTextField14.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
+    }//GEN-LAST:event_jTextField14FocusLost
+    private void MostrarReservacion(ArrayList<Object> reservacion) {
+
+        jLabel104.setText((String) reservacion.get(0));
+        jLabel78.setText((String) reservacion.get(1));
+        jLabel83.setText((String) reservacion.get(2));
+        jLabel80.setText((String) reservacion.get(3));
+        jLabel86.setText("$ " + String.valueOf((int) reservacion.get(4)));
+        jLabel95.setText((String) reservacion.get(5));
+        jLabel98.setText((String) reservacion.get(6));
+        jLabel101.setText((String) reservacion.get(7));
+        jSpinner2.setValue(reservacion.get(8));
+        jSpinner1.setValue(reservacion.get(9));
+        jDateChooser3.setDate((Date) reservacion.get(10));
+        jDateChooser4.setDate((Date) reservacion.get(11));
+        jDateChooser5.setDate((Date) reservacion.get(12));
+        jLabel112.setText("$ " + String.valueOf((int) reservacion.get(13)));
+        jLabel92.setText(String.valueOf((int) reservacion.get(14)));
+        jLabel89.setText((String) reservacion.get(15));
+    }
+    private void jTextField14KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField14KeyTyped
+        // TODO add your handling code here:
+
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER && !jLabel89.getText().equals(jTextField14.getText())) {
+
+            //validate que el CIF o Id no sea el place holder
+            List<Boolean> statuses = new ArrayList<Boolean>();
+
+            statuses.add(ValidatePlaceHolderReservacion(jTextField14));
+
+            if (statuses.contains(false)) {
+                jTextField14.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
+
+                return;
+            }
+
+            // validar que el CIF sea Valido
+            statuses.add(ValidateCIF(jTextField14));
+
+            if (statuses.contains(false)) {
+                jTextField14.setBorder(BorderFactory.createLineBorder(Color.red, 3, false));
+
+                return;
+            }
+
+            jTextField14.setBorder(BorderFactory.createLineBorder(Color.black, 3, false));
+
+            //validar que el CIF exista en la BD
+            ArrayList<Object> reservacion = null;
+            reservacion = Reservacion.Consultar_Reservacion_Admin(jTextField14.getText());
+            if (reservacion != null) {
+                System.out.println("El id de la reservacion es:" + reservacion.get(0));
+                MostrarReservacion(reservacion);
+            }
+
+        }
+    }//GEN-LAST:event_jTextField14KeyTyped
+
+    private void jButton8MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MousePressed
+        // TODO add your handling code here:
+        //check if textfield have reference id in order to delete
+        if (jLabel104.getText().equals("-")) {
+            JOptionPane.showMessageDialog(null, "No se ha consultado una reservacion previamente para borrar", "Error", 0);
+            return;
+        }
+        //check that button is enable to avoid deletion if not
+        if (!jButton8.isEnabled()) {
+            return;
+        }
+        // eliminar reservacion
+        Reservacion.Eliminar_Reservacion_Admin(Integer.valueOf(jLabel104.getText()), jLabel89.getText());
+        ClearChangesReservacion();
+
+
+    }//GEN-LAST:event_jButton8MousePressed
+
+    private void ClearChangesReservacion() {
+
+        jLabel104.setText("-");
+        jLabel78.setText("-");
+        jLabel83.setText("-");
+        jLabel80.setText("-");
+        jLabel86.setText("-");
+        jLabel95.setText("-");
+        jLabel98.setText("-");
+        jLabel101.setText("-");
+        jSpinner2.setValue(0);
+        jSpinner1.setValue(0);
+        jDateChooser3.setDate(null);
+        jDateChooser4.setDate(null);
+        jDateChooser5.setDate(null);
+        jLabel112.setText("-");
+        jLabel92.setText("-");
+        jLabel89.setText("-");
+
+    }
+
     private void LimpiarCamposUsuario() {
 
         jTextField17.setText("");
@@ -3745,6 +4355,7 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton3;
@@ -3764,23 +4375,31 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox123;
     private javax.swing.JComboBox<String> jComboBox13;
     private javax.swing.JComboBox<String> jComboBox14;
-    private javax.swing.JComboBox<String> jComboBox16;
-    private javax.swing.JComboBox<String> jComboBox17;
-    private javax.swing.JComboBox<String> jComboBox18;
-    private javax.swing.JComboBox<String> jComboBox19;
-    private javax.swing.JComboBox<String> jComboBox20;
-    private javax.swing.JComboBox<String> jComboBox21;
-    private javax.swing.JComboBox<String> jComboBox22;
-    private javax.swing.JComboBox<String> jComboBox23;
-    private javax.swing.JComboBox<String> jComboBox24;
     private javax.swing.JComboBox<String> jComboBox9;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jDateChooser3;
+    private com.toedter.calendar.JDateChooser jDateChooser4;
+    private com.toedter.calendar.JDateChooser jDateChooser5;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel100;
+    private javax.swing.JLabel jLabel101;
+    private javax.swing.JLabel jLabel102;
+    private javax.swing.JLabel jLabel103;
+    private javax.swing.JLabel jLabel104;
+    private javax.swing.JLabel jLabel105;
+    private javax.swing.JLabel jLabel106;
+    private javax.swing.JLabel jLabel107;
+    private javax.swing.JLabel jLabel108;
+    private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel110;
+    private javax.swing.JLabel jLabel111;
+    private javax.swing.JLabel jLabel112;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -3807,33 +4426,9 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel54;
-    private javax.swing.JLabel jLabel55;
-    private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel57;
-    private javax.swing.JLabel jLabel58;
-    private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
     private javax.swing.JLabel jLabel64;
@@ -3849,8 +4444,32 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
+    private javax.swing.JLabel jLabel77;
+    private javax.swing.JLabel jLabel78;
+    private javax.swing.JLabel jLabel79;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel80;
+    private javax.swing.JLabel jLabel81;
+    private javax.swing.JLabel jLabel82;
+    private javax.swing.JLabel jLabel83;
+    private javax.swing.JLabel jLabel84;
+    private javax.swing.JLabel jLabel85;
+    private javax.swing.JLabel jLabel86;
+    private javax.swing.JLabel jLabel87;
+    private javax.swing.JLabel jLabel88;
+    private javax.swing.JLabel jLabel89;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabel90;
+    private javax.swing.JLabel jLabel91;
+    private javax.swing.JLabel jLabel92;
+    private javax.swing.JLabel jLabel93;
+    private javax.swing.JLabel jLabel94;
+    private javax.swing.JLabel jLabel95;
+    private javax.swing.JLabel jLabel96;
+    private javax.swing.JLabel jLabel97;
+    private javax.swing.JLabel jLabel98;
+    private javax.swing.JLabel jLabel99;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane10;
     private javax.swing.JLayeredPane jLayeredPane11;
@@ -3870,8 +4489,25 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel30;
+    private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -3893,7 +4529,6 @@ public class Gestion_Administrativa extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;

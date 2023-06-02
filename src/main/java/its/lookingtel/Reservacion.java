@@ -8,7 +8,9 @@ package its.lookingtel;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -107,6 +109,90 @@ public class Reservacion extends Querys {
         }
 
         return status;
+
+    }
+    
+     public static void Eliminar_Reservacion_Admin(int id,String CIF) {
+
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
+
+            PreparedStatement statement = null;
+
+            try {
+
+                statement = conn.prepareStatement("DELETE FROM RESERVACIONES WHERE Id=?");
+                statement.setInt(1, id);
+                statement.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Reservacion eliminada satisfactoriamente", "Exito", 1);
+                Condominio.Actualizar_Status_Condominio_CIF(CIF, 1);
+            } catch (Exception ex) {
+
+                JOptionPane.showMessageDialog(null, "No se pudo eliminar la reservacion", "Error", 0);
+
+            }
+
+            statement.close();
+            conn.close();
+
+        } catch (SQLException ex) {
+            System.out.println("Cannot establish connection");
+        }
+
+      
+
+    }
+    
+    
+
+    public static ArrayList<Object> Consultar_Reservacion_Admin(String CIF) {
+
+        ArrayList<Object> reservacion = new ArrayList<Object>();
+
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
+
+            if (conn == null) {
+                JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
+                return null;
+            }
+
+            PreparedStatement statement = conn.prepareStatement("SELECT RESERVACIONES.Id, CONDOMINIOS.Nombre, ( SELECT CONCAT( UBICATION.Pais, '/ ', UBICATION.Estado, '/', UBICATION.Ciudad ) FROM UBICATION WHERE UBICATION.Id = CONDOMINIOS.Id_Ubicacion ) AS Ubicacion, CONDOMINIOS.Direccion, CONDOMINIOS.Precio_x_Noche, USERS.Nombre, USERS.Email, USERS.Telefono, RESERVACIONES.Dias_Estadia, RESERVACIONES.No_Personas, RESERVACIONES.Fecha_Reservacion, RESERVACIONES.Fecha_Llegada, RESERVACIONES.Fecha_Partida, RESERVACIONES.Costo_Total, CONDOMINIOS.No_Habitaciones, CONDOMINIOS.CIF FROM RESERVACIONES, CONDOMINIOS, USERS WHERE RESERVACIONES.Id_Condominio = CONDOMINIOS.Id AND RESERVACIONES.Id_Usuario = USERS.Id AND CONDOMINIOS.CIF =?");
+            statement.setString(1, CIF);
+
+            ResultSet rs = statement.executeQuery();
+
+            if (rs.next()) {
+
+                System.out.println("Reservacion existente en base al CIF del condominio: " + CIF);
+                reservacion.add(rs.getString(1));
+                reservacion.add(rs.getString(2));
+                reservacion.add(rs.getString(3));
+                reservacion.add(rs.getString(4));
+                reservacion.add(rs.getInt(5));
+                reservacion.add(rs.getString(6));
+                reservacion.add(rs.getString(7));
+                reservacion.add(rs.getString(8));
+                reservacion.add(rs.getInt(9));
+                reservacion.add(rs.getInt(10));
+                reservacion.add(rs.getDate(11));
+                reservacion.add(rs.getDate(12));
+                reservacion.add(rs.getDate(13));
+                reservacion.add(rs.getInt(14));
+                reservacion.add(rs.getInt(15));
+                reservacion.add(rs.getString(16));
+          
+                
+                return reservacion;
+            }
+
+            JOptionPane.showMessageDialog(null, "No existe ninguna reservacion con el CIF de condominio proporcionado", "Error", 0);
+            statement.close();
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Reservacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
 
     }
 

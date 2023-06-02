@@ -5,8 +5,7 @@
  */
 package its.lookingtel;
 
-import java.awt.Color;
-import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -196,6 +195,37 @@ public class Condominio extends Querys {
 
             if (statusprocess == 1) {
                 System.out.println("Status condominio actualizado a 0");
+                return;
+            }
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar el status del condominio Codigo de Error 0", "Error", 0);
+            statement.close();
+            conn.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    
+      public static void Actualizar_Status_Condominio_CIF(String CIF,int status) {
+
+        // Creamos el query
+        try (Connection conn = Conexion_Remota.hikaridatasource.getConnection()) {
+
+            if (conn == null) {
+                JOptionPane.showMessageDialog(null, "La conexion es nula no se puede iniciar sesion", "Error", 0);
+                return;
+            }
+
+            PreparedStatement statement = conn.prepareStatement("UPDATE CONDOMINIOS SET Status=? WHERE CIF=?");
+            statement.setInt(1, status);
+            statement.setString(2, CIF);
+
+            int statusprocess = statement.executeUpdate();
+
+            if (statusprocess == 1) {
+                System.out.println("Status condominio actualizado a 1");
                 return;
             }
             JOptionPane.showMessageDialog(null, "No se pudo actualizar el status del condominio Codigo de Error 0", "Error", 0);
